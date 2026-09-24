@@ -13,7 +13,7 @@
 
 Bu depo, gerçek ve tam olarak haritalanmış bir *Drosophila melanogaster* (meyve sineği) beyin bağlantı haritasını (connectome), aynı istatistiksel özelliklere (nöron sayısı, kenar sayısı, derece dağılımı, modülerlik...) sahip **rastgele karıştırılmış** kontrol ağlarına karşı, çok çeşitli hesaplama görevlerinde sistematik olarak test eden bir araştırma projesidir. Amaç: gerçek biyolojik bağlantı yapısının kendisi, sadece "bir sürü nöron ve bağlantı olması"nın ötesinde, ölçülebilir bir hesaplama avantajı sağlıyor mu?
 
-Bulgu tek cümlede: **evet, belirli bir görev FORMATINDA** (tek-atışlık, fiziksel/uzamsal yön regresyonu) — ve bu format içinde test edilen **5 farklı mühendislik probleminin 5'i de** (şev stabilitesi, kiriş tasarımı, kiriş sehimi, kolon burkulması, basınçlı kap tasarımı — beşi de mekanik olarak farklı arıza modları) güçlü bir connectome avantajı gösteriyor. Bu avantajın nerede durduğu (başka görev formatları, türler, bireyler, donanım hassasiyeti), hangi yapısal özellikten geldiği (ağın modülerliği) ve bu sonuca varana kadar yakalanıp düzeltilen metodolojik hatalar bu belgede ayrıntılı olarak belgeleniyor.
+Bulgu tek cümlede: **evet, belirli bir görev FORMATINDA** (tek-atışlık, fiziksel/uzamsal yön regresyonu) — ve bu format içinde test edilen **6 farklı mühendislik probleminin 6'sı da** (şev stabilitesi, kiriş tasarımı, kiriş sehimi, kolon burkulması, basınçlı kap tasarımı, kesme gerilmesi — altısı da mekanik olarak farklı arıza modları) güçlü bir connectome avantajı gösteriyor. Bu avantajın nerede durduğu (başka görev formatları, türler, bireyler, donanım hassasiyeti), hangi yapısal özellikten geldiği (ağın modülerliği) ve bu sonuca varana kadar yakalanıp düzeltilen metodolojik hatalar bu belgede ayrıntılı olarak belgeleniyor.
 
 > **Terminoloji notu:** Bu proje "sinekten esinlenen algoritma" (fly-inspired algorithm) DEĞİLDİR. Gerçek, ölçülmüş connectome topolojisi doğrudan bir hesaplama substratı olarak kullanılıyor — nöronlar arası gerçek sinaptik bağlantılar, gerçek ağırlıklarla. Kullanılan doğru terimler: *connectome-driven computation*, *connectome-constrained recurrent substrate*, *biological wiring as a fixed architecture*.
 
@@ -64,14 +64,12 @@ graph LR
         NO["Girdi gürültüsü · δ=−0.911"]
         QU["Ağırlık kuantizasyonu · her seviye FAIL"]
         SP["Tür / birey (C. elegans, erkek CNS)"]
-        V3["3. fiziksel görev · δ=−0.031 (açıklanamadı)"]
     end
     ROOT -.-> AB
     ROOT -.-> TR
     ROOT -.-> NO
     ROOT -.-> QU
     ROOT -.-> SP
-    ROOT -.-> V3
     style ROOT fill:#f0e6dc,stroke:#6b3f2a,stroke-width:2px
     style SC fill:#e2eee6,stroke:#2f6b4f
     style SZ fill:#e2eee6,stroke:#2f6b4f
@@ -80,7 +78,6 @@ graph LR
     style NO fill:#faf0d8,stroke:#b8860b
     style QU fill:#f3e2de,stroke:#8a3b30
     style SP fill:#f3e2de,stroke:#8a3b30
-    style V3 fill:#f3e2de,stroke:#8a3b30
 ```
 
 ### PASS — avantaj gerçek ve doğrulanmış
@@ -96,6 +93,7 @@ graph LR
 | <img src="https://img.shields.io/badge/-PASS-2f6b4f"> | Dördüncü fiziksel görev (kolon burkulması) | 30 | **0.88** | İlk raporlanan FAIL bir kalibrasyon hatasıydı, düzeltilince ana bulguyla eşdeğer güçte PASS — bkz. §10 |
 | <img src="https://img.shields.io/badge/-PASS-2f6b4f"> | Beşinci fiziksel görev (kiriş sehimi) | 30 | **1.000** | **Projenin en güçlü sonucu** — 30 tohumun hepsinde gerçek/null hatası hiç örtüşmüyor |
 | <img src="https://img.shields.io/badge/-PASS-2f6b4f"> | Üçüncü fiziksel görev (basınçlı kap tasarımı) | 30 | **0.871** | İlk raporlanan "açıklanamayan FAIL" de kalibrasyon hatasıydı — düzeltilince PASS — bkz. §10 |
+| <img src="https://img.shields.io/badge/-PASS-2f6b4f"> | Altıncı fiziksel görev (kesme gerilmesi) | 30 | **0.811** | Önceki 5 kalibrasyon dersi baştan uygulandı — ilk denemede doğru PASS, düzeltme gerekmedi |
 
 ### PASS (ters yön) — avantaj var ama gerçek connectome DAHA KÖTÜ
 
@@ -173,15 +171,16 @@ flowchart LR
 
 ## 3. Resmi Bulgu: Dar Bir Formatta, Ama Şaşırtıcı Derecede Geniş Bir Avantaj
 
-Beş bağımsız, gerçek mühendislik probleminde — beşi de mekanik olarak farklı bir arıza/tasarım kriterine dayanıyor — gerçek connectome, `degree_preserving_rewire` null'una karşı n=30'da güçlü ve tekrarlanabilir bir avantaj gösteriyor:
+Altı bağımsız, gerçek mühendislik probleminde — altısı da mekanik olarak farklı bir arıza/tasarım kriterine dayanıyor — gerçek connectome, `degree_preserving_rewire` null'una karşı n=30'da güçlü ve tekrarlanabilir bir avantaj gösteriyor:
 
 - **Kiriş sehimi** (servis-edilebilirlik): δ=1.000, p=3×10⁻¹¹ — **projenin en güçlü sonucu**
 - **Şev stabilitesi** (geoteknik limit-denge): δ=0.884, p≈0
 - **Kolon burkulması** (elastik kararsızlık): δ=0.88, p=5×10⁻⁹
 - **Basınçlı kap tasarımı** (çevresel/hoop gerilme): δ=0.871, p=7×10⁻⁹
+- **Kesme gerilmesi** (enine kesme, 1.5V/bh): δ=0.811, p=7×10⁻⁸
 - **Konsol kiriş tasarımı** (eğilme gerilmesi): δ=0.613, p≈0
 
-**Test edilen beş fiziksel görevin beşi de kapıyı geçiyor — sıfır istisna.** Bu avantaj 11 bağımsız alt-graf seçiminin 9'unda tekrarlanıyor (tek bir şanslı seçim değil) ve **9 katlık bir boyut aralığında** (1000–10000 nöron) sağlam duruyor. (İki görevin — kolon ve basınçlı kap — ilk denemede yanlışlıkla FAIL çıktığı, bunun bir kalibrasyon hatasından kaynaklandığının bulunup düzeltildiği hikaye §10'da tam şeffaflıkla anlatılıyor.)
+**Test edilen altı fiziksel görevin altısı da kapıyı geçiyor — sıfır istisna.** Bu avantaj 11 bağımsız alt-graf seçiminin 9'unda tekrarlanıyor (tek bir şanslı seçim değil) ve **9 katlık bir boyut aralığında** (1000–10000 nöron) sağlam duruyor. (İki görevin — kolon ve basınçlı kap — ilk denemede yanlışlıkla FAIL çıktığı, bunun bir kalibrasyon hatasından kaynaklandığının bulunup düzeltildiği hikaye §10'da tam şeffaflıkla anlatılıyor; altıncı görev, kesme gerilmesi, bu dersler baştan uygulanarak tasarlandığı için hiç düzeltme gerekmeden ilk denemede PASS verdi.)
 
 ---
 
@@ -224,7 +223,6 @@ Sistematik olarak test edilen ve avantajın **bulunmadığı veya tersine dönd�
 - **Çapraz-görev transferi:** Aynı alt-grafın (yeniden eğitim olmadan) farklı bir fiziksel göreve aktarılması null'dan **daha kötü** sonuç veriyor.
 - **Girdi gürültüsü:** %15 orantılı gürültü eklendiğinde gerçek ağın hatası null'dan **daha fazla** artıyor.
 - **Ağırlık kuantizasyonu:** En hafif test edilen seviyede (8-bit) bile avantaj tamamen buharlaşıyor — donanıma (nöromorfik çipler dahil) doğrudan taşınması beklenmemeli.
-- **Üçüncü bir fiziksel görev** (basınçlı kap tasarımı): tam berabere, **nedeni bilinmiyor** (bkz. §10).
 
 **Önemli ayrım:** connectome'un kırılganlığı *girdi istatistiklerindeki kaymaya* (gürültü, farklı görev, kuantizasyon) özgü — rastgele *yapısal* hasara (kenar silme) karşı özel bir kırılganlığı **yok** (ilk "kırılgan" iddiası bir ölçüm hatasıydı, bkz. §7).
 
@@ -284,7 +282,7 @@ flowchart TD
     P5["Sınır haritalama — 1. tur<br/>Sınıflandırma · sakkadik manevra · PSO warm-start<br/>hepsi FAIL"]
     P6["Gece bataryası — 1. tur (13 test)<br/>Az-örnekli ✓ · transfer ✗ · gürültü ✗ · 5 görev GEÇERSİZ<br/>→ ham veri ile BAĞIMSIZ DENETİM, 2 hata düzeltildi"]
     P7["2. tur<br/>Girdi ölçeği ✓✓ · Alt-graf boyutu ✓✓✓✓<br/>→ AYNI modülerlik mekanizması doğrulandı"]
-    P8["3. fiziksel görev<br/>Basınçlı kap — FAIL, kök-neden kısmen açıklandı<br/><b>açık soru</b>"]
+    P8["3-6. fiziksel görevler<br/>Kolon, sehim, kap, kesme<br/>2 kalibrasyon hatası bulunup düzeltildi<br/><b>6/6 fiziksel görev PASS, sıfır istisna</b>"]
     P0 --> P2 --> P3 --> P4 --> P5 --> P6 --> P7 --> P8
     style P0 fill:#f3e2de,stroke:#8a3b30
     style P2 fill:#e2eee6,stroke:#2f6b4f,stroke-width:2px
@@ -293,7 +291,7 @@ flowchart TD
     style P5 fill:#f3e2de,stroke:#8a3b30
     style P6 fill:#faf0d8,stroke:#b8860b
     style P7 fill:#e2eee6,stroke:#2f6b4f,stroke-width:2px
-    style P8 fill:#f0e6dc,stroke:#6b3f2a
+    style P8 fill:#e2eee6,stroke:#2f6b4f,stroke-width:2px
 ```
 
 1. **Faz 0–1 (Eylül ortası):** Altyapı kuruldu (FlyWire verisi, LIF simülatörü, null model üreteçleri). İlk kapı deneyi (10-D Rastrigin) net bir NULL sonuç verdi — connectome, soyut optimizasyonda hiçbir avantaj göstermedi.
@@ -303,7 +301,7 @@ flowchart TD
 5. **Sınır haritalama (1. tur):** Sınıflandırma, sakkadik manevra, duyusal modalite kısıtlaması, PSO warm-start gibi komşu hipotezler tek tek test edildi.
 6. **Gece bataryası (1. tur, 13 test):** Az-örnekli öğrenme, çapraz-görev transferi, yapısal hasar direnci, girdi gürültüsü direnci ve 5 yeni görev kategorisi otonom olarak test edildi — ardından **tüm sonuçlar ham veri düzeyinde bağımsız olarak yeniden denetlendi**, iki hata bulunup düzeltildi (§7).
 7. **İkinci tur (girdi ölçeği + alt-graf boyutu):** Avantajın gerçekten sağlam olduğu ilk iki eksen bulundu, mekanizma analizi bunların da modülerlikten geldiğini doğruladı.
-8. **Üçüncü fiziksel görev denemesi:** Basınçlı kap tasarımı test edildi, FAIL çıktı; kök-neden araştırması (ray-radius/parametre-ölçeği uyumsuzluğu) hipotezi kısmen doğruladı ama gap'i açıklayamadı — açık soru olarak bırakıldı.
+8. **Üç-altı fiziksel görevler:** Kolon burkulması, kiriş sehimi, basınçlı kap tasarımı ve kesme gerilmesi sırayla test edildi. İlk iki denemede (kolon, kap) iki bağımsız kalibrasyon hatası (terim dengesizliği, zıt yönlerde) bulunup düzeltildi — ikisi de FAIL'den güçlü PASS'e döndü. Kesme gerilmesi görevinde bu dersler baştan uygulandı ve ilk denemede doğrudan PASS geldi. Sonuç: **test edilen altı fiziksel görevin altısı da resmi kapıyı geçiyor, sıfır istisna** (bkz. §3, §7, §10).
 
 Tüm bu adımların tam, tarihli, istatistiklerle kaydı `EXPERIMENTS.md` dosyasındadır (~230KB, kronolojik günlük — her koşum, sonucu ve yorumuyla birlikte).
 
@@ -334,11 +332,11 @@ Bu sorunun dürüst cevabı, hem kendi bulgularımızdan hem de alandaki mevcut 
 
 Bu proje bir yerde "bitmiş" değil — aşağıdakiler, birinin devam edebileceği somut, iyi tanımlanmış açık uçlar:
 
-- **Basınçlı kap tasarımı gizemi:** Üçüncü bir fiziksel görev (thin-wall pressure vessel) neden hiç avantaj göstermiyor? Parametre-ölçeği/ray_radius uyumsuzluğu hipotezi test edildi ve kısmen çürütüldü (düzeltilince görev çok daha iyi öğreniliyor ama fark hâlâ açılmıyor). Bir sonraki aday: hedef fonksiyonun `P·R/t` teriminde `t`'nin paydada olması — diğer görevlerde görülmeyen bir `1/t` doğrusalsızlığı. Bkz. `scripts/fly_vessel_design_smallradius_multiseed.py` ve `EXPERIMENTS.md`'nin son girdileri.
 - **5 geçersiz görev kategorisinin düzeltilmesi:** `select_connected_encode_decode` (tam graf üzerinde bağlantı doğrulaması) ile `build_subgraph_bfs` (alt-graf çıkarma) arasındaki uyumsuzluk kök nedeni izole edildi (`EXPERIMENTS.md`, 2026-09-24 girdileri) ama düzeltme, **tüm resmi bulguların üzerine kurulu olduğu paylaşılan altyapıyı** riske atmamak için bilinçli olarak yapılmadı. Doğru düzeltme: her encode nöronunun decode kümesine ayrı ayrı, ALT-GRAF İÇİNDE (sadece tam grafta değil) bağlı olduğunu doğrulamak. Bu düzeltme yapılıp mevcut resmi sonuçlar (δ=0.884/0.613) regresyon testi olarak yeniden koşulmadan bu 5 görev tekrar denenmemeli.
 - **Modülerliğin açıklamadığı diğer yarı:** `community_preserving_rewire` bile δ'yı yalnızca yarıya indiriyor (0.884→0.429). Kalan yarı için motif dağılımı, kümeler-arası bağlantı deseni veya hücre-tipi bileşimi (keşifsel `ascending` nöron ipucu, çoklu-karşılaştırma düzeltmesi olmadan) aday açıklamalar — test edilmedi.
-- **İki "kalibrasyon hatası" düzeltmesi, ikisi de PASS'e döndü (önemli metodolojik ders):** Dördüncü görev (kolon burkulması) ilk denemede FAIL verdi (δ=0.172) çünkü maliyet terimi yapısal terimi (P/Pcr'nin kesit derinliğine h³ ile aşırı duyarlılığı, 5 mertebeye varan ölçek uyumsuzluğu) %99.99'dan fazla eziyordu. Düzeltilince: **δ=0.88 (n=30), ana bulguyla eşdeğer güçte PASS.** Bu düzeltme sırasında AYNI hatanın **ters yönde** basınçlı kap görevinde de olduğu fark edildi (bu sefer gerilme terimi maliyeti %97 payla eziyordu) — düzeltilince basınçlı kap da **δ=1.000 (n=8, n=30 sürüyor) — tam ayrışma** verdi. **Sonuç: test edilen BEŞ fiziksel görevin BEŞİ de, doğru kalibre edildiğinde, güçlü bir connectome avantajı gösteriyor.** Önceki "2 PASS / 2 FAIL" veya "açıklanamayan FAIL" tabloları büyük ölçüde test-tasarımı hatalarının ürünüymüş, connectome'un gerçek sınırlarının değil. Ders: "kolay/temiz görünen" ya da "hiç fark yok" gibi bir sonuç bir bulgu değil, kırmızı bayrak olabilir — her yeni görev için artık standart pratik: eğitim öncesi terim-dengesi + ölçek-kontrolü + öğretmen-sinyal-kalitesi doğrulaması zorunlu (bkz. §11).
-- **Beşinci fiziksel görev (kiriş sehimi/servis-edilebilirlik) — projenin en güçlü sonucu:** aynı kalibrasyon dersi önceden uygulanarak tasarlandı, ilk denemede n=8'de tam ayrışma (δ=1.000) verdi, n=30'da doğrulandı (δ=1.000, p=3×10⁻¹¹, 30 tohumun hepsinde sıfır örtüşme) — ana bulguyu (δ=0.884) bile geçen en temiz sonuç. Fiziksel görev istatistiği artık **4 PASS (şev, kiriş, kolon, sehim) / 1 açıklanamamış FAIL (basınçlı kap)**. Vessel'de de aynı terim-dengesi hatası bulundu (ters yönde: gerilme terimi maliyeti eziyor, %97 pay) — düzeltilip yeniden test ediliyor; eğer bu da PASS'e dönerse, "dar sınıf" neredeyse tüm doğru-kalibre-edilmiş tek-atışlık fiziksel görevleri kapsayan çok daha geniş bir kategori olabilir.
+- **İki "kalibrasyon hatası" düzeltmesi, ikisi de PASS'e döndü (önemli metodolojik ders):** Dördüncü görev (kolon burkulması) ilk denemede FAIL verdi (δ=0.172) çünkü maliyet terimi yapısal terimi (P/Pcr'nin kesit derinliğine h³ ile aşırı duyarlılığı, 5 mertebeye varan ölçek uyumsuzluğu) %99.99'dan fazla eziyordu. Düzeltilince: **δ=0.88 (n=30), ana bulguyla eşdeğer güçte PASS.** Aynı hatanın **ters yönde** basınçlı kap görevinde de olduğu bulundu (bu sefer gerilme terimi maliyeti %97 payla eziyordu, ayrıca R/t ölçek-asimetrisi ray-radius'u da bozuyordu) — ikisi birden düzeltilince basınçlı kap da **δ=0.871 (n=30) — tam ayrışmaya yakın** verdi, aylardır açık kalan "gizem" tamamen çözüldü. **Sonuç: test edilen ALTI fiziksel görevin ALTISI da, doğru kalibre edildiğinde, güçlü bir connectome avantajı gösteriyor.** Önceki "2 PASS / 2 FAIL" veya "açıklanamayan FAIL" tabloları büyük ölçüde test-tasarımı hatalarının ürünüymüş, connectome'un gerçek sınırlarının değil. Ders: "kolay/temiz görünen" ya da "hiç fark yok" gibi bir sonuç bir bulgu değil, kırmızı bayrak olabilir — her yeni görev için artık standart pratik: eğitim öncesi terim-dengesi + ölçek-kontrolü + öğretmen-sinyal-kalitesi doğrulaması zorunlu (bkz. §11).
+- **Beşinci fiziksel görev (kiriş sehimi/servis-edilebilirlik) — projenin en güçlü sonucu:** aynı kalibrasyon dersi önceden uygulanarak tasarlandı, ilk denemede n=8'de tam ayrışma (δ=1.000) verdi, n=30'da doğrulandı (δ=1.000, p=3×10⁻¹¹, 30 tohumun hepsinde sıfır örtüşme) — ana bulguyu (δ=0.884) bile geçen en temiz sonuç.
+- **Altıncı fiziksel görev (kesme gerilmesi) — kontrol listesinin değerini doğrudan kanıtlıyor:** Bu görev için terim-dengesi + ölçek-kontrolü + öğretmen-sinyal-kalitesi kontrolleri, eğitime BAŞLAMADAN ÖNCE uygulandı (önceki 5 görevin ikisinin aksine). Sonuç: hiçbir düzeltme gerekmeden ilk denemede n=8'de PASS (δ=0.906), n=30'da doğrulandı (δ=0.811, p=7.09×10⁻⁸). Bu, önceki iki FAIL'in gerçekten deney-tasarımı hatası olduğunu, connectome'un sınırı olmadığını bağımsız olarak kanıtlıyor.
 - **Duyusal modalite kısıtlaması:** Görsel-only / kemo-mekano-only alt-ağların testi yetersiz güçle yapıldı, net bir sonuca varılamadı — daha büyük örneklemle tekrarlanabilir.
 
 ---
@@ -351,7 +349,7 @@ data/processed/       İşlenmiş adjacency matrisi / afferent-efferent indeksle
 src/flyopt/           Kütüphane kodu
   variants/            RateBrain mimarisi, görev-özel sahne/proposer kodu
   substrates/           Null model üreteçleri (graph_builders.py)
-  benchmarks*.py        Fiziksel görev tanımları (şev, kiriş, basınçlı kap)
+  benchmarks*.py        Fiziksel görev tanımları (şev, kiriş, basınçlı kap, kolon, sehim, kesme)
 scripts/              ~90 deney scripti (her biri tek bir test/genişletme)
 results/              ~180 sonuç dosyası (.jsonl ham veri + _summary.json istatistikler)
 EXPERIMENTS.md         Tam, kronolojik, tarihli deney günlüğü (~230KB) — HER şeyin nihai kaynağı

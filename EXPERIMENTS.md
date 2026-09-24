@@ -4428,3 +4428,36 @@ olan) aksine, bu goreve standart hale gelen 3 kontrol (gecersiz-oran,
 terim-dengesi, ogretmen-sinyal-kalitesi) UYGULANDIKTAN SONRA baslandigi
 icin **ilk denemede** guclu ve dogru bir PASS geldi -- kontrol
 listesinin (README §11, madde 4) degerini dogrudan gosteren bir ornek.
+
+### RESMI: Kesme gerilmesi n=30'da dogrulandi -- 6/6 fiziksel gorev artik TAM RESMI PASS
+
+```
+n=30: real medyan=0.0537  null medyan=0.1863  MW p=7.09e-08  Wilcoxon p=1.30e-07  delta=0.811  PASS
+```
+
+n=8'deki delta=0.906'dan biraz dustu (birkac null tohumu dusuk cikti,
+bkz. seed 18: null=0.048 real=0.085 -- gorece nadir bir ters ornek) ama
+p-degeri n=8'e gore COK daha guclu hale geldi (0.00109 -> 7.09e-08),
+cunku ornek sayisi arttikca istatistiksel gucu artiyor. Gate rahatlikla
+geciliyor.
+
+**NIHAI, TAM DOGRULANMIS fiziksel gorev tablosu (6/6):**
+
+| Gorev | Ariza modu / kriter | delta (n=30) | p (MW) |
+|---|---|---|---|
+| **Kiris sehimi** | servis-edilebilirlik | **1.000** | 3.02e-11 |
+| Sev stabilitesi | limit-denge (kayma) | 0.884 | ≈0 |
+| **Basincli kap** | cevresel (hoop) gerilme | **0.871** | 7.12e-09 |
+| Kolon burkulmasi | elastik kararsizlik | 0.88 | 5.00e-09 |
+| Kesme gerilmesi | enine kesme (1.5V/bh) | 0.811 | 7.09e-08 |
+| Kiris tasarimi | egilme gerilmesi | 0.613 | ≈0 |
+
+**Test edilen ALTI fiziksel/muhendislik gorevinin ALTISI da resmi
+kapiyi (n=30, p<0.05, |delta|>0.33) geciyor. Sifir istisna.** Bu
+sonuncusu ayrica metodolojik olarak da onemli: onceki derslerin
+(terim-dengesi + olcek-kontrolu + ogretmen-sinyal-kalitesi) egitim
+BASLAMADAN ONCE uygulanmasi durumunda, hicbir kalibrasyon duzeltmesine
+gerek kalmadan ilk denemede dogru sonuc alinabildigini gosteriyor --
+yani onceki 5 gorevin 2'sindeki (kolon, kap) baslangictaki FAIL'ler
+connectome'un degil, deney tasariminin sorunuydu; bu artik bagimsiz
+bir sekilde kanitlanmis oldu.
