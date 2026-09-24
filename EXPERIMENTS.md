@@ -4141,3 +4141,56 @@ yapisi, R ve t arasindaki cok farkli hassasiyet (P*R/t teriminde t'nin
 payda'da olmasi -- 1/t hassasiyeti diger gorevlerde gorulmeyen bir
 nonlineerlik), ya da basitce bu 3. gorevin sansli/sanssiz bir alt-graf
 etkilesimi. Spekulasyon yapmadan "acik soru" olarak birakiliyor.
+
+---
+
+## 2026-09-24 — Dorduncu fiziksel gorev: Euler kolon burkulmasi -- FAIL, ama muhtemel aciklamasi var
+
+Kullanici: "bir fiziksel problem ara onu da test edelim." Istatistiksel
+gucu artirmak icin (o ana kadar 2 PASS / 1 FAIL) yeni, mekanik olarak
+GERCEKTEN farkli bir ariza modu secildi: **Euler elastik burkulma
+kararsizligi** (eksenel basinc altinda ani stabilite kaybi -- egilme
+gerilmesi/kiris, cevresel gerilme/vessel, veya limit-denge/sev'den hicbiri
+degil). `benchmarks_column.py`, x=(b,h) dikdortgen kesit, kiris'in AYNI
+simetrik [0.03,0.6] kutusunu kullanarak vessel'in R/t olcek-uyumsuzlugu
+hatasini bilerek TEKRARLAMAMAK icin tasarlandi.
+
+**Egitim ONCESI dogrulama (vessel dersinin dogrudan uygulamasi):**
+```
+gecersiz-nokta orani: %0.0
+maliyet araligi: 2.3e4 - 1.0e7 (diger gorevlerle ayni mertebede)
+ogretmen-sinyal kalitesi (kosinus-benzerligi, tum adaylarda): 1.0000, std=0.0000
+```
+Ogretmen sinyali MUKEMMEL kalitede (vessel'deki 0.85/std=0.51 sorunuyla
+tam tersi) -- bu goreve guvenle gecildi.
+
+**n=8 sonucu:**
+```
+real medyan=0.0653  null medyan=0.0700  MW p=0.599  Wilcoxon p=0.125  delta=0.172  FAIL (esik altinda, n=30 GEREKMEZ)
+```
+
+**Ilginc bir yan-gozlem:** 8 tohumun 7'sinde gercek ve null agin MSE'si
+neredeyse BIREBIR ayni (ornek: seed=0, real=0.071810655 vs
+null=0.071810752 -- 7. ondalige kadar ozdes), sadece 1 tohumda (seed=3)
+belirgin fark var. Muhtemel aciklama: ogretmen sinyalinin mukemmel
+kalitesi (kosinus-benzerligi=1.0) bu gorevin COK KOLAY/iyi-kosullanmis
+oldugunu gosteriyor olabilir -- hemen hemen HER makul ag (yapisindan
+bagimsiz) neredeyse en iyi coze yakinsiyor, yapisal bir avantaja yer
+kalmiyor ("tavan etkisi"). Bu, vessel'in aciklanamayan gizeminden
+FARKLI bir durum -- burada makul, test edilebilir bir aday aciklama var
+(dogrulanmadi ama spekulasyon degil, dogrudan olcumden cikan bir
+gozlem).
+
+### Guncellenmis fiziksel-gorev istatistigi: 2 PASS / 2 FAIL (4 gorev)
+
+| Gorev | Ariza modu | DIM | delta | Durum |
+|---|---|---|---|---|
+| Sev stabilitesi | limit-denge (kayma) | 3 | 0.884 | PASS |
+| Kiris tasarimi | egilme gerilmesi | 2 | 0.613 | PASS |
+| Basincli kap | cevresel (hoop) gerilme | 2 | -0.031 | FAIL (aciklanamadi) |
+| Kolon burkulmasi | elastik kararsizlik | 2 | 0.172 | FAIL (muhtemelen "tavan etkisi") |
+
+4 fiziksel gorevden 2'si PASS -- "dar sinif" sadece 2 spesifik gorevin
+sansli bir rastlantisi degil ama her fiziksel muhendislik goreviyle de
+otomatik calismiyor. Ornek boyutu hala kucuk (n=4 gorev), kesin bir
+desen (orn. "hangi ariza modlari calisir") cikarmak icin yetersiz.
