@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "Bu çalışmayı kullanırsanız lütfen aşağıdaki şekilde alıntılayın."
+title: "FlyOpt: Task-Specific Computational Advantage of the Drosophila Connectome — A Null-Model-Controlled Study"
+authors:
+  - family-names: Özcan
+    given-names: Abdulkadir
+    email: a.kadir.ozcan@icloud.com
+version: 1.0
+date-released: 2026-09-24
+doi: 10.5281/zenodo.22937249
+url: "https://github.com/AutoPyloter/fly_op"
+license: CC-BY-4.0

@@ -1,0 +1,13 @@
+{
+  "title": "FlyOpt: Task-Specific Computational Advantage of the Drosophila Connectome — A Null-Model-Controlled Study",
+  "creators": [
+    {
+      "name": "Özcan, Abdulkadir",
+      "affiliation": "Independent Researcher"
+    }
+  ],
+  "description": "A null-model-controlled study testing whether the FlyWire Drosophila connectome provides measurable computational advantage over degree-preserving and related null models on single-shot physical/engineering regression tasks.",
+  "license": "CC-BY-4.0",
+  "upload_type": "software",
+  "access_right": "open"
+}

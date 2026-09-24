@@ -386,7 +386,9 @@ GPU'lu koşumlar için `.venv-gpu-test` (torch+cu121) ayrı bir sanal ortamdır 
 - Schlegel, P. ve ark. (2024). Whole-brain annotation and multi-connectome cell typing of Drosophila. *Nature*. [github.com/flyconnectome/flywire_annotations](https://github.com/flyconnectome/flywire_annotations)
 - Cook, S.J. ve ark. (2019). Whole-animal connectomes of both Caenorhabditis elegans sexes. *Nature*.
 
-**Bu çalışmayı alıntılamak için:** FlyOpt Research (2026). *Task-Specific Computational Advantage of the Drosophila Connectome: A Null-Model-Controlled Study* (v1.0). Zenodo. [doi.org/10.5281/zenodo.22937249](https://doi.org/10.5281/zenodo.22937249)
+**Bu çalışmayı alıntılamak için:** Özcan, A. (2026). *Task-Specific Computational Advantage of the Drosophila Connectome: A Null-Model-Controlled Study* (v1.0). Zenodo. [doi.org/10.5281/zenodo.22937249](https://doi.org/10.5281/zenodo.22937249)
+
+**Yazar:** Abdulkadir Özcan ([a.kadir.ozcan@icloud.com](mailto:a.kadir.ozcan@icloud.com))
 
 ---
 

@@ -25,7 +25,7 @@ durma kapısına git.
 
 ### 1.1 Nereden geldi
 
-Kullanıcı (geoteknik + optimizasyon araştırmacısı) FlyWire
+Abdulkadir Özcan (geoteknik + optimizasyon araştırmacısı) FlyWire
 projesinin yayınladığı tam yetişkin *Drosophila melanogaster* connectome'unu
 (~139.000 nöron, ~15M yönlü ağırlıklı bağlantı, ~50M sinaps) kullanan açık
 kaynak projeleri inceledi. Bunların bir kısmı ciddi bilimsel temele dayanıyor
