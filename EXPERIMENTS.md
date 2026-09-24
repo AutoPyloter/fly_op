@@ -4245,3 +4245,20 @@ karsilanmali. Bu sefer fark ILGISIZ bir gorevin (sehim) diagnostik
 ciktilarinin tesaduf-otesi benzerligi sayesinde yakalandi -- bagimsiz
 bir gorevi ayni sekilde insa etmek, ilkindeki gizli bir hatayi ortaya
 cikarmak icin beklenmedik bir capraz-kontrol oldu.
+
+### RESMI: Kolon burkulmasi n=30 dogrulandi
+
+```
+n=30: real medyan=0.2470  null medyan=0.4666  MW p=5.00e-09  Wilcoxon p=1.86e-08  delta=0.88  PASS
+```
+
+Neredeyse ana bulguyla (delta=0.884) ayni buyuklukte -- kolon burkulmasi
+artik ANA BULGUYLA ESDEGER GUCTE, tam anlamiyla resmi, dort-bagimsiz-
+seviyede dogrulanmis (n=8 -> kalibrasyon hatasi bulundu -> duzeltildi ->
+n=8 tekrar -> n=30) ucuncu fiziksel PASS. Fiziksel gorev istatistigi:
+**3 PASS (sev delta=0.884, kiris delta=0.613, kolon delta=0.88) / 1
+aciklanamamis FAIL (vessel delta=-0.031)**.
+
+Sirada: besinci gorev (kiris sehimi/servis-edilebilirlik,
+`fly_deflection_multiseed.py`, ayni kalibrasyon dersi ONCEDEN
+uygulanmis haliyle) test ediliyor.
