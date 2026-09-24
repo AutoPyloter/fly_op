@@ -1,8 +1,8 @@
-{"seed": 0, "real_test_mse": 0.07181065529584885, "null_test_mse": 0.0718107521533966}
-{"seed": 1, "real_test_mse": 0.07314345985651016, "null_test_mse": 0.07314412295818329}
-{"seed": 2, "real_test_mse": 0.058365605771541595, "null_test_mse": 0.05836562067270279}
-{"seed": 3, "real_test_mse": 0.06512126326560974, "null_test_mse": 0.11823325604200363}
-{"seed": 4, "real_test_mse": 0.05629603564739227, "null_test_mse": 0.056305963546037674}
-{"seed": 5, "real_test_mse": 0.06502776592969894, "null_test_mse": 0.06502775102853775}
-{"seed": 6, "real_test_mse": 0.06840024888515472, "null_test_mse": 0.06840024888515472}
-{"seed": 7, "real_test_mse": 0.0702797994017601, "null_test_mse": 0.07027977705001831}
+{"seed": 0, "real_test_mse": 0.22367072105407715, "null_test_mse": 0.5216699242591858}
+{"seed": 1, "real_test_mse": 0.46641409397125244, "null_test_mse": 0.531147301197052}
+{"seed": 2, "real_test_mse": 0.2877672612667084, "null_test_mse": 0.4930591881275177}
+{"seed": 3, "real_test_mse": 0.24507492780685425, "null_test_mse": 0.4086909890174866}
+{"seed": 4, "real_test_mse": 0.21339350938796997, "null_test_mse": 0.43756920099258423}
+{"seed": 5, "real_test_mse": 0.28483742475509644, "null_test_mse": 0.43315497040748596}
+{"seed": 6, "real_test_mse": 0.30815449357032776, "null_test_mse": 0.45869144797325134}
+{"seed": 7, "real_test_mse": 0.2013893723487854, "null_test_mse": 0.4659254848957062}

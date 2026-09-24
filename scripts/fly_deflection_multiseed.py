@@ -1,12 +1,18 @@
-"""Fourth independent single-shot physical/engineering task (2026-09-24,
-user: "bir fiziksel problem ara onu da test edelim"). Euler column
-buckling (benchmarks_column.py) -- mechanically distinct failure mode
-(elastic instability under axial compression) from slope stability
-(limit-equilibrium, official delta=0.884), beam design (bending stress,
-official delta=0.613), and vessel design (hoop stress, unexplained FAIL
-delta=-0.031). Deliberately uses beam's symmetric (b,h) box (avoiding
-vessel's R/t scale-mismatch confound, verified via a pre-training
-teacher-signal quality check: cosine-sim=1.0000 at all candidate radii).
+"""Fifth independent single-shot physical/engineering task (2026-09-24,
+user: "başka bir fiziksel problem bul"). Simply-supported beam deflection
+(serviceability) design (benchmarks_deflection.py) -- a distinct DESIGN
+CRITERION (stiffness/serviceability, not strength) from all four prior
+tasks: slope stability (limit-equilibrium), beam design (bending
+stress), vessel design (hoop stress), column buckling (elastic
+instability).
+
+Calibrated using the same lesson learned while building/fixing
+benchmarks_column.py in this same session: verified pre-training that
+(a) invalid rate is 0%, (b) the deflection-ratio term and the material-
+cost term both genuinely contribute to the objective (ratio-term share
+median ~28%, not <0.01%), and (c) the finite-difference teacher signal
+closely matches a near-exact local gradient reference (cosine-sim~1.0)
+at the chosen ray radius -- BEFORE spending any GPU time.
 
 Same architecture/training/null-model/stats protocol as every official
 single-shot task. n=8 pilot, degree_preserving_rewire null, extend to
@@ -21,7 +27,7 @@ import numpy as np
 import torch
 from scipy import sparse, stats
 
-from flyopt.benchmarks_column import DIM, column_cost, random_geometry, sample_valid_point
+from flyopt.benchmarks_deflection import DIM, deflection_cost, random_geometry, sample_valid_point
 from flyopt.substrates.graph_builders import degree_preserving_rewire
 from flyopt.variants.fly_proposer_scene import _rays, _teacher_delta
 from flyopt.variants.rate_brain import (
@@ -39,11 +45,7 @@ N_READOUT = 30
 SUBGRAPH_SIZE = 3000
 EPOCHS = 300
 LR = 3e-3
-RAY_RADIUS = 0.01  # 2026-09-24: benchmarks_column.py was recalibrated (box narrowed to
-                    # [0.1,0.3], load re-derived) after the original run's cost term was
-                    # found to dominate >99.99% of the objective -- see the module docstring.
-                    # 0.01 verified post-fix: mean cosine-sim to a near-exact local gradient
-                    # reference = 0.99, ratio-term objective share median = 36%.
+RAY_RADIUS = 0.01
 SEEDS = list(range(8))
 
 
@@ -52,7 +54,7 @@ def build_training_set(n_problems: int, n_starts: int, seed: int):
     X, Y = [], []
     for _ in range(n_problems):
         geo = random_geometry(rng)
-        f = lambda p, geo=geo: column_cost(p, geo)
+        f = lambda p, geo=geo: deflection_cost(p, geo)
         for _ in range(n_starts):
             x = sample_valid_point(geo, rng)
             fx = f(x)
@@ -78,7 +80,7 @@ def main():
 
     cfg = RateBrainConfig(dim=DIM, n_readout=len(decode_idx), T=8, ray_radius=RAY_RADIUS, decode_scale=0.5, train_gain=True)
 
-    log_path = "C:/projeler/fly_op/results/fly_column_buckling_multiseed.jsonl"
+    log_path = "C:/projeler/fly_op/results/fly_deflection_multiseed.jsonl"
     results = {"real": [], "null": []}
     with open(log_path, "w", encoding="utf-8") as f:
         for seed in SEEDS:
@@ -113,15 +115,15 @@ def main():
     cliffs_delta = float((gt - lt) / (len(real) * len(null)))
     gate = mw_p < 0.05 and abs(cliffs_delta) > 0.33
 
-    print("\n=== SONUC (kolon burkulmasi, n=8) ===")
+    print("\n=== SONUC (kiris sehimi/servis edilebilirlik, n=8) ===")
     print(f"real median={np.median(real):.6f}  null median={np.median(null):.6f}")
     print(f"Wilcoxon p={w_p:.5f}  Mann-Whitney p={mw_p:.5f}  Cliff's delta={cliffs_delta:.3f}")
     print(f"gate: {'PASS' if gate else 'FAIL'}")
 
-    with open("C:/projeler/fly_op/results/fly_column_buckling_summary.json", "w", encoding="utf-8") as f:
+    with open("C:/projeler/fly_op/results/fly_deflection_summary.json", "w", encoding="utf-8") as f:
         json.dump({"real": real.tolist(), "null": null.tolist(), "wilcoxon_p": float(w_p),
                    "mannwhitney_p": float(mw_p), "cliffs_delta": cliffs_delta, "gate_pass": bool(gate)}, f, indent=2)
-    print("wrote results/fly_column_buckling_summary.json")
+    print("wrote results/fly_deflection_summary.json")
 
 
 if __name__ == "__main__":

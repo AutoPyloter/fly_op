@@ -4194,3 +4194,54 @@ gozlem).
 sansli bir rastlantisi degil ama her fiziksel muhendislik goreviyle de
 otomatik calismiyor. Ornek boyutu hala kucuk (n=4 gorev), kesin bir
 desen (orn. "hangi ariza modlari calisir") cikarmak icin yetersiz.
+
+---
+
+## 2026-09-24 — DUZELTME: Kolon burkulmasi FAIL'i gecersizdi, kalibrasyon hatasi bulundu ve duzeltildi -- ASIL SONUC PASS
+
+Kullanici "başka bir fiziksel problem bul" dedi. Besinci gorevi
+(kiris SEHIMI/servis-edilebilirlik, benchmarks_deflection.py) egitim
+oncesi dogrulama sirasinda cok tanidik sayilar cikinca (kolon'un
+diagnostik cikisina neredeyse BIREBIR ayni: gecersiz-oran 0.000,
+maliyet araligi 5-6 basamaga kadar ozdes) supheleneip geri donup
+kolon'u yeniden inceledim.
+
+**Kok neden bulundu:** her iki gorevde de (kolon VE sehim) maliyet
+terimi (cost_weight*b*h) yapisal terimi (P/Pcr veya sehim/izin-verilen)
+TAMAMEN eziyordu -- oran payi tipik noktalarda **%0.00**. Sebep: Euler
+burkulma yuku (Pcr) ve sehim, kesit derinligine (h) KUP ile orantili
+hassasiyet gosteriyor (I~h^3), ve orijinal [0.03,0.6] kutusu bu terimi
+5 mertebeye varan bir araliga yayiyordu -- sabit bir yuk/maliyet-agirligi
+araligi bu genislikte asla dengelenemedi. Sonuc: ag sadece "b,h'yi
+kuculte" gibi trivial, yapisal hesap gerektirmeyen bir yonu ogreniyordu
+-- **kolon'un ilk raporlanan FAIL'i (delta=0.172) GECERSIZDI**, connectome
+hakkinda hicbir sey soylemiyordu (5 gecersiz gorevle ayni ailede bir
+hata, ama farkli kok neden: bu sefer BFS-baglanti degil, terim-olcegi
+dengesizligi).
+
+**Duzeltme:** (b,h) kutusu [0.1,0.3]'e daraltildi (h^3 araligi 8000x'ten
+27x'e indi) VE yuk, sabit bir aralik yerine REFERANS kesitin kapasitesinin
+bir orani olarak turetildi. Dogrulama: oran-payi medyani %0.00 -> %36
+(kolon) / %28 (sehim), ogretmen-sinyal kalitesi (kosinus-benzerligi)
+~0.99-1.00 korundu.
+
+**Duzeltilmis kolon burkulmasi sonucu (n=8):**
+```
+real medyan=0.2643  null medyan=0.4589  MW p=0.00295  Wilcoxon p=0.00781  delta=0.844  PASS (esigi asti, n=30'a genisletiliyor)
+```
+
+**Bu, ilk raporlanan FAIL'in tam tersi -- kolon burkulmasi ASLINDA
+GUCLU bir PASS.** Fiziksel gorev istatistigi yeniden degisti: **3 PASS
+(sev, kiris, kolon) / 1 aciklanamamis FAIL (vessel)**, n=30 kesinlesirse.
+
+### Ders: kendi kurdugum bir gorevin "kolay" gorunmesi bir bulgu degil, bir kirmizi bayrak olabilir
+
+Onceki kolon FAIL'i icin verdigim "tavan etkisi" aciklamasi (gorev cok
+kolay, her ag yakinsıyor) KULAGA MAKUL geliyordu ama YANLISTI -- gercek
+sebep cok daha sikici (bir terim digerini trivial sekilde eziyordu).
+Bu, projenin er_null/PSO-butce derslerinin bir kez daha teyidi: her
+"kolay/temiz" gorunen sonuc, dogru aciklamayi bulana kadar supheyle
+karsilanmali. Bu sefer fark ILGISIZ bir gorevin (sehim) diagnostik
+ciktilarinin tesaduf-otesi benzerligi sayesinde yakalandi -- bagimsiz
+bir gorevi ayni sekilde insa etmek, ilkindeki gizli bir hatayi ortaya
+cikarmak icin beklenmedik bir capraz-kontrol oldu.

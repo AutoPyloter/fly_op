@@ -37,15 +37,44 @@ class ColumnGeometry:
     cost_weight: float   # lambda, material-cost coefficient
 
     def param_bounds(self) -> tuple[np.ndarray, np.ndarray]:
-        lo = np.array([0.03, 0.03])
-        hi = np.array([0.6, 0.6])
+        # 2026-09-24 recalibration (see random_geometry docstring): narrowed from the
+        # original [0.03, 0.6] (an 8000x range in h^3, the buckling term's sensitivity)
+        # to a 27x range in h^3, where a balanced load/cost_weight choice actually exists.
+        lo = np.array([0.1, 0.1])
+        hi = np.array([0.3, 0.3])
         return lo, hi
 
 
+_REF_SIDE = 0.173  # geometric mean of the [0.1, 0.3] box -- a "typical" cross-section, used only to
+                    # calibrate the load range below, not a hidden default answer
+
+
 def random_geometry(rng: np.random.Generator) -> ColumnGeometry:
+    """2026-09-24 recalibration: Euler critical load Pcr is extremely
+    sensitive to (b,h,L) (varies by ~5 orders of magnitude across the
+    ORIGINAL [0.03,0.6] box), so a fixed load range made the load
+    negligible next to Pcr for most sampled cross-sections -- the
+    material-cost term then dominated the objective almost completely
+    (ratio-term share <0.01% at typical points, verified numerically),
+    making the task trivial (just "minimize b*h", a linear/bilinear term
+    with an exact finite-difference gradient regardless of step size)
+    independent of connectome structure. This produced the FAIL initially
+    reported for this task -- retracted as an invalid/degenerate test,
+    not a genuine negative result (see EXPERIMENTS.md 2026-09-24).
+
+    Fixed in two parts: (1) the (b,h) box was narrowed (see param_bounds)
+    to keep h^3's range tractable, and (2) load is now derived as a
+    FRACTION of the critical load of a REFERENCE cross-section (_REF_SIDE,
+    the box's geometric mean) at the sampled length, rather than an
+    independent fixed range -- ties load magnitude to what's structurally
+    meaningful for that span. Verified numerically post-fix: median
+    ratio-term share of the objective ~39% (was <0.01%), i.e. both terms
+    now genuinely compete across most of the training distribution."""
     length = float(rng.uniform(1.5, 6.0))
-    load = float(rng.uniform(5_000.0, 200_000.0))
-    cost_weight = float(rng.uniform(4e6, 3e7))
+    i_ref = _REF_SIDE ** 4 / 12.0
+    p_ref = float(np.pi ** 2 * E_MODULUS * i_ref / length ** 2)
+    load = float(rng.uniform(0.15, 0.85)) * p_ref
+    cost_weight = float(rng.uniform(5.0, 40.0))
     return ColumnGeometry(length=length, load=load, cost_weight=cost_weight)
 
 
