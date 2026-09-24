@@ -1,0 +1,48 @@
+C:\projeler\fly_op\src\flyopt\sim\lif_vectorized.py:54: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\aten\src\ATen\Context.cpp:855.)
+  coo = torch.sparse_coo_tensor(
+C:\projeler\fly_op\src\flyopt\sim\lif_vectorized.py:54: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\aten\src\ATen\Context.cpp:855.)
+  coo = torch.sparse_coo_tensor(
+C:\projeler\fly_op\src\flyopt\sim\lif_vectorized.py:57: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\aten\src\ATen\SparseCsrTensorImpl.cpp:51.)
+  self.weights = coo.to_sparse_csr()
+C:\projeler\fly_op\src\flyopt\sim\lif_vectorized.py:57: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\aten\src\ATen\SparseCsrTensorImpl.cpp:51.)
+  self.weights = coo.to_sparse_csr()
+C:\projeler\fly_op\src\flyopt\sim\lif_vectorized.py:54: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\aten\src\ATen\Context.cpp:855.)
+  coo = torch.sparse_coo_tensor(
+C:\projeler\fly_op\src\flyopt\sim\lif_vectorized.py:54: UserWarning: Sparse invariant checks are implicitly disabled. Memory errors (e.g. SEGFAULT) will occur when operating on a sparse tensor which violates the invariants, but checks incur performance overhead. To silence this warning, explicitly opt in or out. See `torch.sparse.check_sparse_tensor_invariants.__doc__` for guidance.  (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\aten\src\ATen\Context.cpp:855.)
+  coo = torch.sparse_coo_tensor(
+C:\projeler\fly_op\src\flyopt\sim\lif_vectorized.py:57: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\aten\src\ATen\SparseCsrTensorImpl.cpp:51.)
+  self.weights = coo.to_sparse_csr()
+C:\projeler\fly_op\src\flyopt\sim\lif_vectorized.py:57: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\aten\src\ATen\SparseCsrTensorImpl.cpp:51.)
+  self.weights = coo.to_sparse_csr()
+{
+  "gate": {
+    "test": "wilcoxon_signed_rank",
+    "p_value": 0.009765625,
+    "effect_size": -0.16,
+    "passes_falsification_gate": false,
+    "flywire_mean": 117.82993811539431,
+    "degree_preserving_null_mean": 125.48132626237604
+  },
+  "secondary": {
+    "flywire_vs_er_null": {
+      "p_value": 0.76953125,
+      "effect_size": -0.08,
+      "holm_reject": false
+    },
+    "flywire_vs_weight_shuffle_null": {
+      "p_value": 0.4921875,
+      "effect_size": -0.14,
+      "holm_reject": false
+    }
+  },
+  "medians": {
+    "flywire": 120.17960798981585,
+    "degree_preserving_null": 126.39754437809007,
+    "er_null": 116.48432811997773,
+    "weight_shuffle_null": 124.76191117261621
+  }
+}
+
+Wrote C:\projeler\fly_op\results\negative\20260916T130806_62ddbaa3af42f0af_seed0.json
+
+GATE FAILED (degree_preserving_null vs flywire, PROTOCOL.md section 2, phase=faz_s1)

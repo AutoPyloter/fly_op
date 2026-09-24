@@ -1,0 +1,16 @@
+{"seed": 0, "substrate": "real_connectome", "eval_cost": 3.5565130710601807}
+{"seed": 0, "substrate": "er_null", "eval_cost": 3.816899061203003}
+{"seed": 1, "substrate": "real_connectome", "eval_cost": 3.992729902267456}
+{"seed": 1, "substrate": "er_null", "eval_cost": 2.702345848083496}
+{"seed": 2, "substrate": "real_connectome", "eval_cost": 1.0342445373535156}
+{"seed": 2, "substrate": "er_null", "eval_cost": 4.83262825012207}
+{"seed": 3, "substrate": "real_connectome", "eval_cost": 1.2412405014038086}
+{"seed": 3, "substrate": "er_null", "eval_cost": 1.8692724704742432}
+{"seed": 4, "substrate": "real_connectome", "eval_cost": 1.9094734191894531}
+{"seed": 4, "substrate": "er_null", "eval_cost": 3.2419447898864746}
+{"seed": 5, "substrate": "real_connectome", "eval_cost": 2.938920259475708}
+{"seed": 5, "substrate": "er_null", "eval_cost": 4.1313066482543945}
+{"seed": 6, "substrate": "real_connectome", "eval_cost": 2.442404270172119}
+{"seed": 6, "substrate": "er_null", "eval_cost": 2.0102555751800537}
+{"seed": 7, "substrate": "real_connectome", "eval_cost": 7.330263137817383}
+{"seed": 7, "substrate": "er_null", "eval_cost": 13.698740005493164}

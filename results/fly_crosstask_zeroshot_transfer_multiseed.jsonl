@@ -1,0 +1,8 @@
+{"seed": 0, "real_zeroshot_beam_mse": 0.7235838770866394, "null_zeroshot_beam_mse": 0.641368567943573}
+{"seed": 1, "real_zeroshot_beam_mse": 0.9641914367675781, "null_zeroshot_beam_mse": 0.5625886917114258}
+{"seed": 2, "real_zeroshot_beam_mse": 0.4401896595954895, "null_zeroshot_beam_mse": 0.4854040741920471}
+{"seed": 3, "real_zeroshot_beam_mse": 0.7147060036659241, "null_zeroshot_beam_mse": 0.5123714804649353}
+{"seed": 4, "real_zeroshot_beam_mse": 0.5042815804481506, "null_zeroshot_beam_mse": 0.36035460233688354}
+{"seed": 5, "real_zeroshot_beam_mse": 0.8405294418334961, "null_zeroshot_beam_mse": 0.7443608045578003}
+{"seed": 6, "real_zeroshot_beam_mse": 0.835103452205658, "null_zeroshot_beam_mse": 0.777294933795929}
+{"seed": 7, "real_zeroshot_beam_mse": 0.8847108483314514, "null_zeroshot_beam_mse": 0.746508777141571}

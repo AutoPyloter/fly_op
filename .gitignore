@@ -1,0 +1,16 @@
+.venv/
+.venv-gpu-test/
+.claude/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+
+# Large / license-gated raw data and derived artifacts — never committed
+data/raw/*.csv.gz
+data/raw/*.feather
+data/raw/*.npy
+data/raw/*.tsv
+data/processed/*.npz
+data/processed/*.npy

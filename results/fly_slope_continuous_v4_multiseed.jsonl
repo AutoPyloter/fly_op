@@ -1,0 +1,16 @@
+{"seed": 0, "substrate": "real_connectome", "eval_fs": 4.156576364681064}
+{"seed": 0, "substrate": "er_null", "eval_fs": 3.6903844303627635}
+{"seed": 1, "substrate": "real_connectome", "eval_fs": 3.0028417617492047}
+{"seed": 1, "substrate": "er_null", "eval_fs": 3.156172805099334}
+{"seed": 2, "substrate": "real_connectome", "eval_fs": 4.051821689777111}
+{"seed": 2, "substrate": "er_null", "eval_fs": 3.859110203225668}
+{"seed": 3, "substrate": "real_connectome", "eval_fs": 3.068241240857475}
+{"seed": 3, "substrate": "er_null", "eval_fs": 2.633882554000216}
+{"seed": 4, "substrate": "real_connectome", "eval_fs": 2.579515480746911}
+{"seed": 4, "substrate": "er_null", "eval_fs": 2.3993656853855274}
+{"seed": 5, "substrate": "real_connectome", "eval_fs": 3.6460657121279993}
+{"seed": 5, "substrate": "er_null", "eval_fs": 3.0955165489266037}
+{"seed": 6, "substrate": "real_connectome", "eval_fs": 5.495187873477122}
+{"seed": 6, "substrate": "er_null", "eval_fs": 4.511929575853737}
+{"seed": 7, "substrate": "real_connectome", "eval_fs": 2.5135705430678708}
+{"seed": 7, "substrate": "er_null", "eval_fs": 2.4779665378533866}

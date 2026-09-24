@@ -1,0 +1,547 @@
+{
+  "run_id": "20260916T130806_62ddbaa3af42f0af_seed0",
+  "config": {
+    "phase": "faz_s1",
+    "smoke": false,
+    "best_hparams": {
+      "flywire": [
+        0.5,
+        0.5
+      ],
+      "er_null": [
+        0.5,
+        0.5
+      ],
+      "degree_preserving_null": [
+        1.0,
+        0.5
+      ],
+      "weight_shuffle_null": [
+        2.0,
+        0.5
+      ]
+    },
+    "main_budget": 1500
+  },
+  "config_hash": "62ddbaa3af42f0af",
+  "git_commit": "818d07ab876ec3cc1f5036d66bcf6413a21a8980-dirty",
+  "seed": 0,
+  "started_at": "2026-09-16T13:08:06.900903+00:00",
+  "env": {
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "metrics": {
+    "analysis": {
+      "gate": {
+        "test": "wilcoxon_signed_rank",
+        "p_value": 0.009765625,
+        "effect_size": -0.16,
+        "passes_falsification_gate": false,
+        "flywire_mean": 117.82993811539431,
+        "degree_preserving_null_mean": 125.48132626237604
+      },
+      "secondary": {
+        "flywire_vs_er_null": {
+          "p_value": 0.76953125,
+          "effect_size": -0.08,
+          "holm_reject": false
+        },
+        "flywire_vs_weight_shuffle_null": {
+          "p_value": 0.4921875,
+          "effect_size": -0.14,
+          "holm_reject": false
+        }
+      },
+      "medians": {
+        "flywire": 120.17960798981585,
+        "degree_preserving_null": 126.39754437809007,
+        "er_null": 116.48432811997773,
+        "weight_shuffle_null": 124.76191117261621
+      }
+    },
+    "raw_results": [
+      {
+        "kind": "flywire",
+        "seed": 1,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 94.85720368249548,
+        "sphere_best_fx": 64.4153500646169,
+        "null_gen_time_s": 0.5898680686950684,
+        "calib_time_s": 35.847150564193726,
+        "rastrigin_time_s": 528.3681085109711,
+        "sphere_time_s": 103.94891047477722
+      },
+      {
+        "kind": "flywire",
+        "seed": 0,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 147.8281231981937,
+        "sphere_best_fx": 103.99439172291012,
+        "null_gen_time_s": 0.5898680686950684,
+        "calib_time_s": 35.655561685562134,
+        "rastrigin_time_s": 527.89031457901,
+        "sphere_time_s": 111.23416781425476
+      },
+      {
+        "kind": "flywire",
+        "seed": 3,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 121.8410927601146,
+        "sphere_best_fx": 82.81679933311824,
+        "null_gen_time_s": 0.5587542057037354,
+        "calib_time_s": 35.65647530555725,
+        "rastrigin_time_s": 528.4975197315216,
+        "sphere_time_s": 106.81594157218933
+      },
+      {
+        "kind": "flywire",
+        "seed": 2,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 127.27923982375322,
+        "sphere_best_fx": 79.56892406025975,
+        "null_gen_time_s": 0.5430059432983398,
+        "calib_time_s": 34.816383361816406,
+        "rastrigin_time_s": 528.9930143356323,
+        "sphere_time_s": 114.75386619567871
+      },
+      {
+        "kind": "flywire",
+        "seed": 4,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 133.70222063415957,
+        "sphere_best_fx": 2.009908386325575,
+        "null_gen_time_s": 0.5444035530090332,
+        "calib_time_s": 36.886887073516846,
+        "rastrigin_time_s": 531.4686605930328,
+        "sphere_time_s": 106.29498052597046
+      },
+      {
+        "kind": "flywire",
+        "seed": 5,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 146.02704237450553,
+        "sphere_best_fx": 111.4499072203304,
+        "null_gen_time_s": 0.5247929096221924,
+        "calib_time_s": 37.103538036346436,
+        "rastrigin_time_s": 531.4920382499695,
+        "sphere_time_s": 106.37433528900146
+      },
+      {
+        "kind": "flywire",
+        "seed": 6,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 79.79577589981304,
+        "sphere_best_fx": 45.53877500242073,
+        "null_gen_time_s": 0.5580093860626221,
+        "calib_time_s": 35.03243350982666,
+        "rastrigin_time_s": 528.9196515083313,
+        "sphere_time_s": 104.34968733787537
+      },
+      {
+        "kind": "flywire",
+        "seed": 7,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 111.83179821281848,
+        "sphere_best_fx": 94.16455863296603,
+        "null_gen_time_s": 0.5461175441741943,
+        "calib_time_s": 35.35067558288574,
+        "rastrigin_time_s": 528.4551787376404,
+        "sphere_time_s": 112.34627175331116
+      },
+      {
+        "kind": "flywire",
+        "seed": 8,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 96.61876134857242,
+        "sphere_best_fx": 70.7168825809587,
+        "null_gen_time_s": 0.538618803024292,
+        "calib_time_s": 35.48891019821167,
+        "rastrigin_time_s": 530.5170614719391,
+        "sphere_time_s": 106.29836750030518
+      },
+      {
+        "kind": "flywire",
+        "seed": 9,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 118.5181232195171,
+        "sphere_best_fx": 102.22882568480858,
+        "null_gen_time_s": 0.5582394599914551,
+        "calib_time_s": 36.38276815414429,
+        "rastrigin_time_s": 530.0957334041595,
+        "sphere_time_s": 112.4622745513916
+      },
+      {
+        "kind": "er_null",
+        "seed": 0,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 149.44222802342153,
+        "sphere_best_fx": 94.91568258321027,
+        "null_gen_time_s": 19.076330184936523,
+        "calib_time_s": 33.471405267715454,
+        "rastrigin_time_s": 532.0500936508179,
+        "sphere_time_s": 105.31470036506653
+      },
+      {
+        "kind": "er_null",
+        "seed": 1,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 151.0696043953145,
+        "sphere_best_fx": 84.81279471443891,
+        "null_gen_time_s": 19.370091438293457,
+        "calib_time_s": 37.05768704414368,
+        "rastrigin_time_s": 530.6938071250916,
+        "sphere_time_s": 101.9102942943573
+      },
+      {
+        "kind": "er_null",
+        "seed": 2,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 136.96710701003911,
+        "sphere_best_fx": 79.56892406025975,
+        "null_gen_time_s": 19.01459288597107,
+        "calib_time_s": 32.548325061798096,
+        "rastrigin_time_s": 531.8975057601929,
+        "sphere_time_s": 109.88627815246582
+      },
+      {
+        "kind": "er_null",
+        "seed": 3,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 105.75578864273695,
+        "sphere_best_fx": 82.81679933311824,
+        "null_gen_time_s": 18.96032428741455,
+        "calib_time_s": 37.01328635215759,
+        "rastrigin_time_s": 531.7382397651672,
+        "sphere_time_s": 105.92168974876404
+      },
+      {
+        "kind": "er_null",
+        "seed": 4,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 114.41167600260853,
+        "sphere_best_fx": 28.427439789656304,
+        "null_gen_time_s": 19.49223256111145,
+        "calib_time_s": 33.694939851760864,
+        "rastrigin_time_s": 532.8278844356537,
+        "sphere_time_s": 105.83424878120422
+      },
+      {
+        "kind": "er_null",
+        "seed": 5,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 152.58782989644203,
+        "sphere_best_fx": 34.72542713459067,
+        "null_gen_time_s": 19.127241134643555,
+        "calib_time_s": 37.05527949333191,
+        "rastrigin_time_s": 532.454404592514,
+        "sphere_time_s": 101.52147102355957
+      },
+      {
+        "kind": "er_null",
+        "seed": 6,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 77.54181315193466,
+        "sphere_best_fx": 54.79631737927415,
+        "null_gen_time_s": 18.905004501342773,
+        "calib_time_s": 32.56082844734192,
+        "rastrigin_time_s": 531.5840294361115,
+        "sphere_time_s": 108.52632975578308
+      },
+      {
+        "kind": "er_null",
+        "seed": 7,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 107.05771349837936,
+        "sphere_best_fx": 94.16454570687151,
+        "null_gen_time_s": 18.636422872543335,
+        "calib_time_s": 36.63052201271057,
+        "rastrigin_time_s": 531.1698153018951,
+        "sphere_time_s": 105.31182622909546
+      },
+      {
+        "kind": "er_null",
+        "seed": 8,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 81.23639652021711,
+        "sphere_best_fx": 70.71688692932052,
+        "null_gen_time_s": 19.131069898605347,
+        "calib_time_s": 34.30733251571655,
+        "rastrigin_time_s": 535.2059478759766,
+        "sphere_time_s": 107.23352527618408
+      },
+      {
+        "kind": "er_null",
+        "seed": 9,
+        "ray_scale": 0.5,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 118.55698023734693,
+        "sphere_best_fx": 102.22882568480858,
+        "null_gen_time_s": 18.907724618911743,
+        "calib_time_s": 38.330862045288086,
+        "rastrigin_time_s": 534.0060932636261,
+        "sphere_time_s": 104.4724931716919
+      },
+      {
+        "kind": "degree_preserving_null",
+        "seed": 0,
+        "ray_scale": 1.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 160.8325756682088,
+        "sphere_best_fx": 11.26169520242235,
+        "null_gen_time_s": 239.63141322135925,
+        "calib_time_s": 34.06967043876648,
+        "rastrigin_time_s": 539.8154253959656,
+        "sphere_time_s": 108.32345843315125
+      },
+      {
+        "kind": "degree_preserving_null",
+        "seed": 1,
+        "ray_scale": 1.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 118.85692940653969,
+        "sphere_best_fx": 0.0490225834520086,
+        "null_gen_time_s": 245.24828171730042,
+        "calib_time_s": 38.031763792037964,
+        "rastrigin_time_s": 538.711119890213,
+        "sphere_time_s": 105.49303603172302
+      },
+      {
+        "kind": "degree_preserving_null",
+        "seed": 2,
+        "ray_scale": 1.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 131.16923145429718,
+        "sphere_best_fx": 1.219997107992693,
+        "null_gen_time_s": 248.63788104057312,
+        "calib_time_s": 36.53310227394104,
+        "rastrigin_time_s": 540.5454528331757,
+        "sphere_time_s": 109.13363528251648
+      },
+      {
+        "kind": "degree_preserving_null",
+        "seed": 3,
+        "ray_scale": 1.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 135.71583279298287,
+        "sphere_best_fx": 15.888916544397272,
+        "null_gen_time_s": 234.33762621879578,
+        "calib_time_s": 37.406906604766846,
+        "rastrigin_time_s": 540.2375867366791,
+        "sphere_time_s": 108.38514041900635
+      },
+      {
+        "kind": "degree_preserving_null",
+        "seed": 4,
+        "ray_scale": 1.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 137.0141275160976,
+        "sphere_best_fx": 0.00036201186958399886,
+        "null_gen_time_s": 238.94470262527466,
+        "calib_time_s": 35.921456813812256,
+        "rastrigin_time_s": 538.6094903945923,
+        "sphere_time_s": 109.66479587554932
+      },
+      {
+        "kind": "degree_preserving_null",
+        "seed": 5,
+        "ray_scale": 1.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 160.2213883395905,
+        "sphere_best_fx": 0.12491844714678035,
+        "null_gen_time_s": 243.2828643321991,
+        "calib_time_s": 37.52535104751587,
+        "rastrigin_time_s": 538.0267434120178,
+        "sphere_time_s": 108.87911176681519
+      },
+      {
+        "kind": "degree_preserving_null",
+        "seed": 6,
+        "ray_scale": 1.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 86.2157586388229,
+        "sphere_best_fx": 0.00035769427478901357,
+        "null_gen_time_s": 245.167307138443,
+        "calib_time_s": 35.23852205276489,
+        "rastrigin_time_s": 335.68210673332214,
+        "sphere_time_s": 52.492350578308105
+      },
+      {
+        "kind": "degree_preserving_null",
+        "seed": 7,
+        "ray_scale": 1.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 109.14854414118682,
+        "sphere_best_fx": 5.101841765854982e-05,
+        "null_gen_time_s": 243.84844422340393,
+        "calib_time_s": 36.88102054595947,
+        "rastrigin_time_s": 330.77774477005005,
+        "sphere_time_s": 51.53398108482361
+      },
+      {
+        "kind": "degree_preserving_null",
+        "seed": 8,
+        "ray_scale": 1.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 94.01301736415111,
+        "sphere_best_fx": 5.180837510227783,
+        "null_gen_time_s": 105.65720391273499,
+        "calib_time_s": 15.942162036895752,
+        "rastrigin_time_s": 439.59156703948975,
+        "sphere_time_s": 108.67522430419922
+      },
+      {
+        "kind": "degree_preserving_null",
+        "seed": 9,
+        "ray_scale": 1.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 121.62585730188297,
+        "sphere_best_fx": 72.34389239800636,
+        "null_gen_time_s": 110.42971110343933,
+        "calib_time_s": 18.25814175605774,
+        "rastrigin_time_s": 450.2772614955902,
+        "sphere_time_s": 108.26722598075867
+      },
+      {
+        "kind": "weight_shuffle_null",
+        "seed": 0,
+        "ray_scale": 2.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 154.34344420306184,
+        "sphere_best_fx": 0.0001365927623236324,
+        "null_gen_time_s": 1.6136724948883057,
+        "calib_time_s": 36.23289942741394,
+        "rastrigin_time_s": 444.9216136932373,
+        "sphere_time_s": 55.640196323394775
+      },
+      {
+        "kind": "weight_shuffle_null",
+        "seed": 1,
+        "ray_scale": 2.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 164.954563776918,
+        "sphere_best_fx": 0.0005852236941885274,
+        "null_gen_time_s": 1.6562061309814453,
+        "calib_time_s": 36.808210372924805,
+        "rastrigin_time_s": 433.50035285949707,
+        "sphere_time_s": 53.3194317817688
+      },
+      {
+        "kind": "weight_shuffle_null",
+        "seed": 2,
+        "ray_scale": 2.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 146.37988394205826,
+        "sphere_best_fx": 0.000949978160973407,
+        "null_gen_time_s": 1.1114048957824707,
+        "calib_time_s": 18.701276302337646,
+        "rastrigin_time_s": 293.25818967819214,
+        "sphere_time_s": 58.709442138671875
+      },
+      {
+        "kind": "weight_shuffle_null",
+        "seed": 3,
+        "ray_scale": 2.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 108.18366646967837,
+        "sphere_best_fx": 2.0282432198134405e-05,
+        "null_gen_time_s": 1.1189405918121338,
+        "calib_time_s": 19.317626237869263,
+        "rastrigin_time_s": 292.622878074646,
+        "sphere_time_s": 57.62516784667969
+      },
+      {
+        "kind": "weight_shuffle_null",
+        "seed": 4,
+        "ray_scale": 2.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 140.62058080818332,
+        "sphere_best_fx": 0.00028398481003523733,
+        "null_gen_time_s": 1.1201512813568115,
+        "calib_time_s": 20.919639110565186,
+        "rastrigin_time_s": 269.7118034362793,
+        "sphere_time_s": 51.55664324760437
+      },
+      {
+        "kind": "weight_shuffle_null",
+        "seed": 5,
+        "ray_scale": 2.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 124.50489104068959,
+        "sphere_best_fx": 0.00024483363306338407,
+        "null_gen_time_s": 1.131981372833252,
+        "calib_time_s": 21.895429134368896,
+        "rastrigin_time_s": 269.92872190475464,
+        "sphere_time_s": 50.785115480422974
+      },
+      {
+        "kind": "weight_shuffle_null",
+        "seed": 6,
+        "ray_scale": 2.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 85.47519270971154,
+        "sphere_best_fx": 2.9336712276338723e-06,
+        "null_gen_time_s": 1.0956978797912598,
+        "calib_time_s": 17.590312957763672,
+        "rastrigin_time_s": 253.75947761535645,
+        "sphere_time_s": 51.59753966331482
+      },
+      {
+        "kind": "weight_shuffle_null",
+        "seed": 7,
+        "ray_scale": 2.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 110.27745443669163,
+        "sphere_best_fx": 6.414401968370358e-06,
+        "null_gen_time_s": 1.1070191860198975,
+        "calib_time_s": 18.157530784606934,
+        "rastrigin_time_s": 253.2451148033142,
+        "sphere_time_s": 50.86798405647278
+      },
+      {
+        "kind": "weight_shuffle_null",
+        "seed": 8,
+        "ray_scale": 2.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 90.8613487146123,
+        "sphere_best_fx": 4.943308588791828,
+        "null_gen_time_s": 1.1194396018981934,
+        "calib_time_s": 17.516103982925415,
+        "rastrigin_time_s": 252.41770243644714,
+        "sphere_time_s": 51.36165809631348
+      },
+      {
+        "kind": "weight_shuffle_null",
+        "seed": 9,
+        "ray_scale": 2.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 125.01893130454283,
+        "sphere_best_fx": 0.00010561451709117624,
+        "null_gen_time_s": 1.0881726741790771,
+        "calib_time_s": 17.988126039505005,
+        "rastrigin_time_s": 252.60786056518555,
+        "sphere_time_s": 49.54745030403137
+      }
+    ]
+  },
+  "finished_at": "2026-09-16T13:08:06.933402+00:00"
+}

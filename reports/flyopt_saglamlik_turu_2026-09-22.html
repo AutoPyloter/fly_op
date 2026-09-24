@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>FlyOpt Sağlamlık Turu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f5f2;
+    --paper:#ffffff;
+    --ink:#1c1a16;
+    --ink-dim:#6b6558;
+    --line:#e2ddd1;
+    --line-strong:#c9c2b2;
+    --accent:#7a4a2b;
+    --accent-soft:#f0e4d8;
+    --pass:#2f6b4f;
+    --pass-soft:#e2eee6;
+    --fail:#8a3b30;
+    --fail-soft:#f3e2de;
+    --mark:#c98a2c;
+    --info:#2f5f7a;
+    --info-soft:#e2ecf0;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#16140f; --paper:#1e1b15; --ink:#ece7dc; --ink-dim:#a89f8c;
+      --line:#3a3527; --line-strong:#4d4632; --accent:#d9a06b; --accent-soft:#3a2c1c;
+      --pass:#6fbe95; --pass-soft:#1e3327; --fail:#e08a7a; --fail-soft:#3a2420;
+      --mark:#e0b45f; --info:#7fb0cf; --info-soft:#1c2c34;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#16140f; --paper:#1e1b15; --ink:#ece7dc; --ink-dim:#a89f8c;
+    --line:#3a3527; --line-strong:#4d4632; --accent:#d9a06b; --accent-soft:#3a2c1c;
+    --pass:#6fbe95; --pass-soft:#1e3327; --fail:#e08a7a; --fail-soft:#3a2420;
+    --mark:#e0b45f; --info:#7fb0cf; --info-soft:#1c2c34;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    padding:0 16px; padding-block:40px 80px;
+  }
+  .sheet{
+    max-width:800px; margin:0 auto; background:var(--paper);
+    border:1px solid var(--line); border-radius:4px;
+    padding:clamp(24px,6vw,64px);
+  }
+  h1,h2,h3{font-family:'Newsreader', Georgia, serif; text-wrap:balance; margin:0;}
+  p{margin:0 0 1em; line-height:1.7; font-size:15.5px;}
+  p:last-child{margin-bottom:0;}
+  .lede{font-size:17px; line-height:1.7; color:var(--ink-dim);}
+
+  .masthead{display:flex; flex-direction:column; gap:6px; margin-bottom:28px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:11px;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);
+  }
+  h1{font-size:clamp(26px,4vw,34px); font-weight:600;}
+  .meta{font-size:12.5px; color:var(--ink-dim); font-family:'IBM Plex Mono',monospace; margin-top:4px;}
+
+  section{margin-top:44px;}
+  h2{font-size:22px; font-weight:600; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid var(--line-strong);}
+  h3{font-size:16.5px; font-weight:600; margin:22px 0 8px; color:var(--ink);}
+
+  .badge{
+    display:inline-flex; align-items:center; gap:5px; font-family:'IBM Plex Mono',monospace;
+    font-size:11px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;
+    padding:3px 9px; border-radius:100px;
+  }
+  .badge.pass{background:var(--pass-soft); color:var(--pass);}
+  .badge.fail{background:var(--fail-soft); color:var(--fail);}
+  .badge.info{background:var(--info-soft); color:var(--info);}
+  .badge.mark{background:var(--accent-soft); color:var(--mark);}
+
+  .card{
+    border:1px solid var(--line); border-radius:6px; padding:18px 20px;
+    background:var(--bg); margin:14px 0;
+  }
+  .card-head{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:8px;}
+  .card-head strong{font-size:15px;}
+
+  .stat-row{display:flex; gap:28px; flex-wrap:wrap; margin:10px 0;}
+  .stat{display:flex; flex-direction:column; gap:2px; min-width:100px;}
+  .stat .v{font-family:'IBM Plex Mono',monospace; font-size:19px; font-variant-numeric:tabular-nums; font-weight:600;}
+  .stat .l{font-size:10.5px; color:var(--ink-dim); text-transform:uppercase; letter-spacing:0.05em;}
+
+  table{width:100%; border-collapse:collapse; font-size:13.5px; margin:14px 0;}
+  th,td{text-align:left; padding:7px 10px; border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums;}
+  th{font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-dim); font-weight:600;}
+  td.num{font-family:'IBM Plex Mono',monospace;}
+  .tbl-wrap{overflow-x:auto;}
+
+  code{font-family:'IBM Plex Mono',monospace; font-size:0.9em; background:var(--accent-soft); padding:1px 5px; border-radius:3px;}
+  pre{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; line-height:1.6;
+    background:var(--bg); border:1px solid var(--line); border-radius:6px;
+    padding:14px 16px; overflow-x:auto; margin:12px 0;
+  }
+  ul,ol{margin:0 0 1em; padding-left:22px; line-height:1.7; font-size:15.5px;}
+  li{margin-bottom:4px;}
+  .note{
+    border-left:3px solid var(--mark); background:var(--accent-soft);
+    padding:10px 14px; border-radius:0 4px 4px 0; font-size:14px; margin:12px 0;
+  }
+  .callout{
+    border-left:3px solid var(--fail); background:var(--fail-soft);
+    padding:12px 16px; border-radius:0 4px 4px 0; margin:14px 0;
+  }
+  .divider{height:1px; background:var(--line); margin:40px 0;}
+  .foot{margin-top:40px; padding-top:16px; border-top:1px solid var(--line); font-size:12px; color:var(--ink-dim); font-family:'IBM Plex Mono',monospace;}
+  .bar-track{height:8px; background:var(--line); border-radius:100px; overflow:hidden; margin-top:4px;}
+  .bar-fill{height:100%; background:var(--pass);}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <span class="eyebrow">FlyOpt &middot; Sağlamlık ve Doğrulama Turu</span>
+    <h1>Bulgu Sağlam mı? Bir Gecelik Stres Testi</h1>
+    <p class="lede">2026-09-21 gece – 2026-09-22 arası yürütülen sağlamlık kontrolleri, alt-graf genellik taraması, GPU altyapı geçişi ve dış işbirliği (Gemini) incelemesinin özeti.</p>
+    <div class="meta">21–22 Eylül 2026 &middot; önceki rapor: flyopt_arastirma_ozeti_2026-09-21</div>
+  </div>
+
+  <section>
+    <h2>Bu turun sorusu</h2>
+    <p>Önceki raporda iki resmi bulgu vardı: şev stabilitesi (δ=0.884, n=30) ve konsol kiriş tasarımı (δ=0.613, n=30) — ikisi de dişi FlyWire FAFB'nin <strong>tek bir sabit alt-grafında</strong> (encode/decode seçim tohumu = 9000) test edilmişti. Bu tohum hiç değiştirilmemişti. Bu turun merkezi sorusu: <em>bu bulgu dişi FlyWire'ın genel bir özelliği mi, yoksa şans eseri seçilmiş o tek alt-grafa mı özgü?</em></p>
+  </section>
+
+  <section>
+    <h2>1 · Alt-graf-tohum genelliği</h2>
+    <div class="card">
+      <div class="card-head"><strong>11 bağımsız alt-graf çekimi</strong><span class="badge pass">9/11 pozitif</span></div>
+      <p>Encode/decode seçim tohumu değiştirilerek (9000'den 9001–9010'a) 10 yeni, bağımsız 3000-nöronluk alt-graf test edildi. Resmi seed=9000 (δ=0.884, n=30) dışındakiler n=4–8 ile ön tarama.</p>
+      <div class="tbl-wrap">
+      <table>
+        <tr><th>tohum</th><th>δ</th><th>tohum</th><th>δ</th><th>tohum</th><th>δ</th></tr>
+        <tr><td>9000 (resmi, n=30)</td><td class="num">+0.884</td><td>9004</td><td class="num">&minus;0.250</td><td>9008</td><td class="num">+0.625</td></tr>
+        <tr><td>9001</td><td class="num">&minus;0.219</td><td>9005</td><td class="num">+1.000</td><td>9009</td><td class="num">+0.375</td></tr>
+        <tr><td>9002</td><td class="num">+0.250</td><td>9006</td><td class="num">+0.375</td><td>9010</td><td class="num">+1.000</td></tr>
+        <tr><td>9003</td><td class="num">+0.250</td><td>9007</td><td class="num">+0.750</td><td></td><td></td></tr>
+      </table>
+      </div>
+      <p style="margin-top:10px">Medyan δ=0.500. İlk iki alternatif tohumun (9001, 9002) zayıf/karışık çıkması başlangıçta endişe yaratmıştı — ama 8 tohumluk genişletilmiş tarama sonrasında resim netleşti: <strong>çoğu alt-graf gerçekten avantajlı yönde</strong>, sadece büyüklük değişken. Bölgesel uzmanlaşma hipotezini destekliyor.</p>
+    </div>
+
+    <h3>Mekanizma arayışı — sonuçsuz</h3>
+    <p>Yapısal özellikler (yoğunluk, modülerlik, kümeleme, ortalama derece, topluluk sayısı) δ ile korelasyon göstermedi (n=11, hepsi p&gt;0.1). Hücre-tipi bileşimi analizinde bir ipucu bulundu — <code>ascending</code> nöron oranı δ ile korele (ρ=+0.618, p=0.043) — ama çoklu karşılaştırma düzeltmesi yapılmadığı için <span class="badge mark">keşifsel</span> olarak işaretlendi, kanıtlanmış değil.</p>
+  </section>
+
+  <section>
+    <h2>2 · Genellenemeyen eksenler</h2>
+    <p>İki farklı eksende ("başka bir tür", "aynı türün başka bir bireyi/cinsiyeti") tekrar testi yapıldı — ikisi de bulguyu tekrarlamadı:</p>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>eksen</th><th>test edilen</th><th>δ</th><th>sonuç</th></tr>
+      <tr><td>tür</td><td>C. elegans (hermafrodit, 272 nöron)</td><td class="num">0.16 / 0.09 / &minus;0.25</td><td><span class="badge fail">FAIL (3 null)</span></td></tr>
+      <tr><td>cinsiyet/birey</td><td>Erkek Drosophila CNS</td><td class="num">+0.250 (T=8)</td><td><span class="badge fail">FAIL</span></td></tr>
+    </table>
+    </div>
+    <h3>Erkek CNS için iki takip testi — ikisi de negatif sonucu doğruladı</h3>
+    <ul>
+      <li><strong>Yapısal tanı:</strong> bug yok (6/6 encode, 30/30 decode doğrulanmış); ama erkek CNS alt-grafı yarı yoğunlukta (0.0085 vs 0.0193) — <em>ve</em> daha yüksek modülerlikte (Q=0.606 vs 0.357). Modülerlik tek başına yeterli değil.</li>
+      <li><strong>T=16 simetrik test:</strong> hem dişi hem erkek aynı koşumda test edildi (p-hacking'den kaçınmak için tek taraflı değil). Dişi değişmedi (0.884→0.844), erkek ZAYIFLADI (0.250→0.031). "Daha fazla düşünme süresi kurtarır" hipotezi desteklenmedi.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3 · Altyapı: GPU'ya geçiş</h2>
+    <div class="card">
+      <div class="card-head"><strong>RTX 4060, 13.8x hızlanma</strong><span class="badge info">altyapı</span></div>
+      <div class="stat-row">
+        <div class="stat"><div class="v">298s</div><div class="l">CPU, 300 epoch</div></div>
+        <div class="stat"><div class="v">21.6s</div><div class="l">CUDA, 300 epoch</div></div>
+        <div class="stat"><div class="v">13.8×</div><div class="l">hızlanma</div></div>
+      </div>
+      <p style="margin-top:10px">RateBrain/SlopeContinuousBrain'de cihaz-farkındalığı eksikliği (tensörler hep CPU'da oluşturuluyordu) bulunup düzeltildi. Saatler süren çoklu-tohum koşumları artık dakikalar sürüyor.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>4 · Dış işbirliği: Gemini'nin paralel laboratuvarı</h2>
+    <p>Kullanıcı, Gemini ile paralel bir araştırma hattı yürüttü — birkaç bulgu iddiası ve Colab notebook'u üretildi. Üçü de incelendi, ikisi metodolojik olarak <strong>tutmadı</strong>, biri (dosya disiplini) süreç düzeltmesiyle çözüldü.</p>
+
+    <h3>a) "Erkek CNS'e zaman tanı" (T=20) — doğrulanamadı</h3>
+    <p>Kontrolsüz n=8 testinde δ=0.469 (p=0.13) bulunmuştu. Ama bizim simetrik T=16 testimiz (yukarıda) tam tersini gösterdi — erkek CNS zayıfladı. En olası açıklama: küçük-örneklem gürültüsü, bu oturumda tekrar tekrar görülen bir desen.</p>
+
+    <h3>b) "Pareto/biyolojik bilgelik" korelasyonu (&minus;0.65) — çürütüldü</h3>
+    <p>10.000 rastgele senaryoda iki çıktı boyutu arasında güçlü negatif korelasyon bulunup "sineğin evrimsel içgüdüsü" olarak yorumlanmıştı. Null-model kontrolü eklenince: <strong>eğitilmemiş rastgele bir null ağ da neredeyse aynı korelasyonu gösterdi</strong> (gerçek: &minus;0.444, null: &minus;0.245). Bu, 2 boyutlu bir doğrusal okuma katmanının genel bir matematik özelliği — connectome'a özgü değil.</p>
+
+    <h3>c) "Sinek vs PSO" turnuvaları — metodolojik hata bulundu ve düzeltildi</h3>
+    <p>5 ayrı notebook (Duyusal Sinek, Evrimleşmiş Sinek, Mega/Evrensel Turnuva) sinek beynine hedef fonksiyonun <strong>gerçek matematiksel gradyanını</strong> besleyip gradyansız PSO'ya karşı yarıştırmıştı. Bu, connectome yapısından değil gradyan-enjeksiyonundan kaynaklanan bir avantaj — hangi ağ olursa olsun (gerçek, null, hatta rastgele) kazanırdı.</p>
+    <div class="callout">
+      <strong>Düzeltilmiş versiyon</strong> (aynı ajan tasarımı, PSO yerine degree_preserving_rewire null, n=8): <strong>hiçbir avantaj bulunamadı.</strong>
+      <pre>Sphere:     δ=0.094  p=0.798  FAIL
+Rastrigin:  δ=0.000  p=1.000  FAIL (tam berabere)</pre>
+      Bu, projenin daha önceki bulgusuyla (soyut/uzamsal-olmayan görevlerde connectome hiç avantaj göstermemişti) tam tutarlı.
+    </div>
+
+    <h3>Süreç notu</h3>
+    <p>Gemini'nin arka plan süreçleri, resmi <code>T=8</code> sonuç dosyasını iki kez üzerine yazdı — ikisinde de fark edilip <code>git restore</code> ile kurtarıldı. Dosya adlandırma disiplini için karşılıklı bir anlaşma sağlandı (<code>gemini_parallel_findings/</code> altında ayrı isimlerle kayıt).</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <h2>Genel resim</h2>
+    <p>Resmi bulgular (δ=0.884 şev stabilitesi, δ=0.613 kiriş tasarımı) bu turdan <strong>sağlam çıktı</strong> — tek bir şanslı alt-graf seçimi değil, dişi FlyWire FAFB'nin geniş bir kesiminde (değişken güçte) gözlenen gerçek bir örüntü. Ama kapsamı net: bu tür bir avantaj başka türe (C. elegans) veya aynı türün başka bireyine/cinsiyetine (erkek CNS) genellenmiyor, ve soyut/uzamsal-olmayan görevlerde (Sphere, Rastrigin) hâlâ hiç görünmüyor — gradyan doğrudan verilse bile.</p>
+    <p>Mekanizma sorusu (hangi yapısal özellik δ'yı belirliyor) açık kalıyor — <code>ascending</code> nöron oranı ipucu keşifsel, doğrulanması gerekiyor.</p>
+  </section>
+
+  <div class="foot">FlyOpt araştırma günlüğü &middot; EXPERIMENTS.md'deki tam kayıtlara dayanır &middot; github.com/AutoPyloter/fly_op</div>
+</div>
+</body>
+</html>

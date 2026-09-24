@@ -1,0 +1,21 @@
+# Çekirdek
+numpy>=1.26
+scipy>=1.13
+pandas>=2.2
+pyarrow>=15.0  # required for pandas.read_feather (FlyWire v783 Zenodo files)
+networkx>=3.3
+
+# Vektörize LIF simülasyonu (birincil implementasyon)
+torch>=2.2
+
+# Referans LIF implementasyonu (Faz 0 denklik testi için).
+# Windows'ta C++ derleyicisi (MSVC Build Tools) gerektirir — kurulum
+# başarısız olursa brian2 testleri `pytest.mark.skipif` ile atlanır,
+# proje torch implementasyonuna bağımlı kalmaya devam eder.
+brian2>=2.6
+
+# İstatistik (Mann-Whitney, Wilcoxon zaten scipy.stats içinde; Cliff's delta
+# elle hesaplanır, bkz. src/flyopt/experiment/stats.py)
+
+# Test / geliştirme
+pytest>=8.0

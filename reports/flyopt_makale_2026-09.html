@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Görev-Özgül Bağlantısal Avantaj</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f6f3; --paper:#ffffff; --ink:#1a1a18; --ink-dim:#5c5850;
+    --line:#e0ddd4; --line-strong:#c7c2b4; --accent:#6b3f2a; --accent-soft:#f0e6dc;
+    --pass:#2f6b4f; --pass-soft:#e2eee6; --fail:#8a3b30; --fail-soft:#f3e2de;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#14130f; --paper:#1c1a15; --ink:#e9e5db; --ink-dim:#a39c8c;
+      --line:#38342a; --line-strong:#4a4536; --accent:#d19a72; --accent-soft:#332720;
+      --pass:#6fbe95; --pass-soft:#1e3327; --fail:#e08a7a; --fail-soft:#3a2420;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14130f; --paper:#1c1a15; --ink:#e9e5db; --ink-dim:#a39c8c;
+    --line:#38342a; --line-strong:#4a4536; --accent:#d19a72; --accent-soft:#332720;
+    --pass:#6fbe95; --pass-soft:#1e3327; --fail:#e08a7a; --fail-soft:#3a2420;
+  }
+  *{box-sizing:border-box;}
+  body{background:var(--bg); color:var(--ink); font-family:'Source Serif 4', Georgia, serif; padding:0 16px; padding-block:44px 90px;}
+  .page{max-width:760px; margin:0 auto; background:var(--paper); border:1px solid var(--line); padding:clamp(28px,7vw,72px);}
+
+  .kicker{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); text-align:center; display:block;}
+  h1{font-size:clamp(24px,3.6vw,32px); font-weight:600; text-align:center; line-height:1.25; margin:12px 0 6px; text-wrap:balance;}
+  .authors{text-align:center; font-size:14px; color:var(--ink-dim); font-family:'IBM Plex Sans',sans-serif; margin-bottom:2px;}
+  .date{text-align:center; font-size:12px; color:var(--ink-dim); font-family:'IBM Plex Mono',monospace; margin-bottom:28px;}
+
+  .abstract{background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:20px 24px; margin:0 0 36px;}
+  .abstract-label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:8px;}
+  .abstract p{font-size:14.5px; line-height:1.75; margin:0;}
+
+  h2{font-size:19px; font-weight:600; margin:38px 0 12px; font-family:'IBM Plex Sans',sans-serif;}
+  h2 .num{color:var(--accent); margin-right:8px; font-family:'IBM Plex Mono',monospace; font-size:15px;}
+  h3{font-size:15.5px; font-weight:600; margin:22px 0 8px; font-family:'IBM Plex Sans',sans-serif;}
+
+  p{font-size:15.5px; line-height:1.75; margin:0 0 14px; text-align:justify; hyphens:auto;}
+  p:last-child{margin-bottom:0;}
+
+  .lede-note{font-family:'IBM Plex Sans',sans-serif; font-size:13.5px; color:var(--ink-dim); line-height:1.6; background:var(--accent-soft); border-radius:6px; padding:12px 16px; margin:0 0 36px;}
+
+  table{width:100%; border-collapse:collapse; font-family:'IBM Plex Mono',monospace; font-size:12.5px; margin:16px 0 20px;}
+  caption{font-family:'IBM Plex Sans',sans-serif; font-size:12.5px; color:var(--ink-dim); text-align:left; margin-bottom:8px; caption-side:top;}
+  th,td{text-align:left; padding:7px 10px; border-bottom:1px solid var(--line);}
+  th{font-size:10.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-dim); border-bottom:1.5px solid var(--line-strong);}
+  td.num{font-variant-numeric:tabular-nums;}
+  .yes{color:var(--pass); font-weight:600;}
+  .no{color:var(--fail); font-weight:600;}
+  .tbl-wrap{overflow-x:auto;}
+
+  ul,ol{margin:0 0 14px; padding-left:26px; font-size:15.5px; line-height:1.75;}
+  li{margin-bottom:5px;}
+
+  .fig{margin:20px 0; text-align:center;}
+  .fig svg{max-width:100%; height:auto;}
+  .fig-caption{font-family:'IBM Plex Sans',sans-serif; font-size:12.5px; color:var(--ink-dim); margin-top:8px; text-align:left;}
+
+  code{font-family:'IBM Plex Mono',monospace; font-size:0.88em; background:var(--accent-soft); padding:1px 5px; border-radius:3px;}
+
+  .refs{font-family:'IBM Plex Sans',sans-serif; font-size:13px; line-height:1.7; padding-left:0; list-style:none; counter-reset:refc;}
+  .refs li{counter-increment:refc; padding-left:28px; position:relative; margin-bottom:10px;}
+  .refs li::before{content:"[" counter(refc) "]"; position:absolute; left:0; color:var(--accent); font-family:'IBM Plex Mono',monospace; font-size:12px;}
+  .refs a{color:var(--accent);}
+
+  .divider{height:1px; background:var(--line); margin:40px 0;}
+  .foot{margin-top:44px; padding-top:16px; border-top:1px solid var(--line); font-size:11.5px; color:var(--ink-dim); font-family:'IBM Plex Mono',monospace; text-align:center;}
+  svg text{font-family:'IBM Plex Mono',monospace; fill:var(--ink-dim); font-size:9px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <span class="kicker">FlyOpt Araştırma Notu</span>
+  <h1>Görev-Özgül Bağlantısal Avantaj: Drosophila Connectome'unun Null-Model-Kontrollü İncelemesi</h1>
+  <div class="authors">FlyOpt Araştırma Günlüğü</div>
+  <div class="date">Eylül 2026</div>
+
+  <div class="abstract">
+    <span class="abstract-label">Özet</span>
+    <p>Gerçek bir biyolojik sinir ağının (Drosophila melanogaster'in FlyWire FAFB connectome'u) yapısı, aynı boyut ve derece dağılımına sahip rastgele-karıştırılmış bir null modelden hesaplama açısından üstün müdür? Bu soruyu, dişi FlyWire connectome'unun 3000-nöronluk, doğrulanmış bağlantılı bir duyusal→motor alt-grafında, çeşitlilik gösteren bir görev yelpazesinde (soyut optimizasyon, fonksiyon tahmini, tek-atışlık uzamsal regresyon, kapalı-döngü kontrol) sistematik olarak test ettik. Bulgu: evet, ama yalnızca dar bir görev sınıfında — tek-atışlık, ileri-beslemeli, fiziksel/uzamsal yön tahmini görevlerinde (şev stabilitesi, δ=0.884; konsol kiriş tasarımı, δ=0.613; ikisi de n=30, degree_preserving_rewire null'una karşı, p&lt;0.0001). Bu avantaj 11 bağımsız alt-graf örnekleminin 9'unda tekrarlanıyor (tek bir şanslı seçim değil) ve yaklaşık yarısı ağın modüler (kümesel) organizasyonuyla açıklanabiliyor. Ancak bu avantaj ne soyut/uzamsal-olmayan optimizasyon görevlerinde (Sphere, Rastrigin, Ackley, Rosenbrock, Beale — üç bağımsız denemede de FAIL), ne farklı bir türe (C. elegans), ne aynı türün farklı bir bireyine/cinsiyetine (erkek CNS) genellenıyor. Bulgular, "biyolojik ağlar genel olarak hesaplama açısından üstündür" iddiasını değil, çok daha dar ve daha savunulabilir bir iddiayı destekliyor: belirli bir connectome, evrimleştiği hesaplama sınıfına özgü bir yapısal avantaj taşıyabilir.</p>
+  </div>
+
+  <div class="lede-note">Bu belge, FlyOpt araştırma günlüğünün (<code>EXPERIMENTS.md</code>, <code>PROTOCOL.md</code>, <code>PROTOCOL_V2_TASK_SPECTRUM.md</code>) makale formatına dönüştürülmüş bir sentezidir. Tüm ham veriler ve kod <code>github.com/AutoPyloter/fly_op</code> deposunda mevcuttur.</div>
+
+  <h2><span class="num">1</span>Giriş</h2>
+  <p>Bir sinir ağının hesaplama kapasitesi, sadece boyutundan (nöron/bağlantı sayısı) mı, yoksa bağlantı topolojisinin kendisinden (kim kime bağlı) mi geliyor? Bu soru, connectome-temelli "reservoir computing" literatüründe artan bir ilgiyle inceleniyor <a href="#ref1">[1,2,3]</a>. Bu çalışmanın katkısı, tek bir connectome'u, tek bir istatistiksel çerçeveyle, sistematik olarak <em>farklı görev tipleri</em> üzerinde test etmek ve hem pozitif hem negatif sonuçları eşit titizlikle raporlamaktır — literatürdeki çoğu çalışma yalnızca "işe yaradığı" görev ailesini raporluyor.</p>
+  <p>Merkezi hipotez (H2, görev-mimari eşleşmesi): gerçek connectome'un rastgele bir ağa üstünlüğü, görev connectome'un evrimleştiği işe (yoğun duyusal girdiden az sayıda motor çıktısına sürekli süzme) ne kadar yakınsa o kadar büyür. Bu hipotez, projenin önceki fazlarında (soyut optimizasyon görevlerinde sistematik başarısızlık, PROTOCOL.md Faz 1–S1) gözlenen boşluğu açıklamak için formüle edildi.</p>
+
+  <h2><span class="num">2</span>Yöntem</h2>
+  <h3>2.1 Veri</h3>
+  <p>Birincil connectome: FlyWire FAFB v783 (dişi <em>Drosophila melanogaster</em>, 139.255 nöron, 15.091.983 yönlü bağlantı), Dorkenwald ve ark. 2024 <a href="#ref4">[4]</a>, Zenodo'daki dondurulmuş sürüm. Hücre-tipi sınıflandırması Schlegel ve ark. 2024'ten <a href="#ref5">[5]</a> (<code>flow</code>: afferent/efferent/intrinsic; <code>super_class</code>: sensory/motor/ascending/descending/vb.). Karşılaştırma connectome'ları: Cook ve ark. 2019 C. elegans hermafrodit somatik sinir sistemi <a href="#ref6">[6]</a> (272 nöron) ve erkek <em>Drosophila</em> CNS connectome'u (166.700 nöron, ayrı bir üçüncü-parti projeden temin edildi).</p>
+
+  <h3>2.2 Alt-graf inşası</h3>
+  <p>Tam connectome'dan hesaplama açısından uygulanabilir bir alt-küme çıkarmak için, önce afferent (birincil duyusal) havuzundan efferent (motor) havuza <em>doğrulanmış</em> çok-hop yönlü bağlantı yoluyla ulaşan encode/decode nöronları seçildi (rastgele seçimin bazen sıfır gerçek yol içerebileceği 2026-09-17'de keşfedildi ve düzeltildi). Bu çekirdekten gerçek yönlü kenarlar boyunca genişlik-öncelikli arama (BFS) ile 3000 düğümlü bir alt-graf oluşturuldu; alt-graf, seçilen düğümler arasındaki TÜM gerçek doğrudan sinapsleri (uydurma kısayol yok) içeren indüklenmiş bir alt-graftır.</p>
+
+  <h3>2.3 Substrat ve eğitim</h3>
+  <p><code>RateBrain</code>: türevlenebilir, sızıntılı-oran (leaky-rate) tekrarlayan bir ağ, Dale yasası korunmuş (<code>w = sign × softplus(gain)</code>), gerçek geri-yayılım ile eğitiliyor. Tek-atışlık görevlerde: duyusal girdi (sonlu-fark "ışınları") encode nöronlarına enjekte edilir, T alt-adım (tipik T=8) boyunca sinyal yayılır, decode nöronlarından doğrusal bir okuma katmanıyla yön tahmini üretilir; öğretmen-taklit (imitation) kaybıyla eğitilir.</p>
+
+  <h3>2.4 Null modeller</h3>
+  <div class="tbl-wrap">
+  <table>
+    <caption>Tablo 1 — Null model ailesi, korunan özellik artan sıklıkla</caption>
+    <tr><th>Null model</th><th>Korunan özellik</th></tr>
+    <tr><td>er_null</td><td>yalnızca düğüm/kenar sayısı (birincil değil — yetersiz bulundu, bkz. §4.4)</td></tr>
+    <tr><td>scale_free</td><td>jenerik heterojen derece dağılımı</td></tr>
+    <tr><td>scale_free_correlated</td><td>+ giriş/çıkış derece korelasyonu</td></tr>
+    <tr><td>weight_shuffle</td><td>TAM topoloji, ağırlıklar karıştırılmış</td></tr>
+    <tr><td>community_preserving</td><td>TAM derece dizisi + TAM modülerlik (Louvain Q)</td></tr>
+    <tr><td><strong>degree_preserving_rewire</strong></td><td><strong>TAM derece dizisi (birincil/resmi null)</strong></td></tr>
+  </table>
+  </div>
+  <p>İstatistik: Wilcoxon işaretli-sıra (eşleştirilmiş) + Mann-Whitney U (eşleştirilmemiş) + Cliff's δ (etki büyüklüğü). Resmi kapı kriteri: p&lt;0.05 VE |δ|&gt;0.33. Standart protokol: n=8 pilot, eşik geçilirse n=30'a genişletme.</p>
+
+  <h2><span class="num">3</span>Bulgular</h2>
+
+  <h3>3.1 Görev spektrumu: avantaj görev tipine bağlı</h3>
+  <div class="tbl-wrap">
+  <table>
+    <caption>Tablo 2 — Görev tipine göre gerçek-vs-null farkı</caption>
+    <tr><th>Görev sınıfı</th><th>Örnek</th><th>δ</th><th>Sonuç</th></tr>
+    <tr><td>Soyut optimizasyon</td><td>Rastrigin, Sphere, Ackley, Rosenbrock, Beale</td><td class="num">~0 ile &minus;0.34</td><td class="no">FAIL</td></tr>
+    <tr><td>Fonksiyon tahmini</td><td>Fly-Surrogate</td><td class="num">0.188</td><td class="no">FAIL (eşik altı)</td></tr>
+    <tr><td>Sürekli gömülü kontrol</td><td>MaleCNS + F1 sürüşü</td><td class="num">1.000<sup>&dagger;</sup></td><td class="yes">PASS</td></tr>
+    <tr><td><strong>Tek-atışlık uzamsal regresyon</strong></td><td><strong>Şev stabilitesi, kiriş tasarımı</strong></td><td class="num"><strong>0.884 / 0.613</strong></td><td class="yes"><strong>PASS (n=30)</strong></td></tr>
+    <tr><td>Çok-adımlı/kapalı-döngü versiyon</td><td>Şev stabilitesi (sürekli arama)</td><td class="num">&minus;0.156 → +0.125<sup>&Dagger;</sup></td><td class="no">FAIL</td></tr>
+  </table>
+  </div>
+  <p style="font-size:12px;color:var(--ink-dim)">&dagger; er_null'a karşı, daha sıkı degree_preserving_rewire null'una karşı test edilince tamamen kayboldu (δ=&minus;0.156) — bkz. §4.4. &Dagger; durum-sıfırlama ablasyonuyla (kalıcı hafıza kaldırılınca) kısmen düzeliyor ama eşiği geçmiyor.</p>
+  <p>Örüntü tutarlı: connectome'un avantajı, görev <strong>tek-atışlık, ileri-beslemeli, uzamsal/fiziksel yön kararı</strong> biçimine ne kadar yakınsa o kadar güçlü; soyut matematik fonksiyonlarında ve kalıcı-hafızalı çok-adımlı aramada zayıflıyor veya kayboluyor.</p>
+
+  <h3>3.2 Resmi bulgular</h3>
+  <p>İki bağımsız fiziksel/mühendislik görevinde, degree_preserving_rewire null'una karşı, n=30 ile tam istatistiksel kapıyı geçen sonuçlar elde edildi:</p>
+  <div class="fig">
+    <svg viewBox="0 0 640 170" role="img" aria-label="Şev stabilitesi ve kiriş tasarımı için gerçek ve null dağılımlarının nokta grafiği">
+      <!-- axes -->
+      <text x="10" y="20" font-family="IBM Plex Sans" font-size="12" fill="var(--ink)" font-weight="600">Şev stabilitesi (n=30)</text>
+      <text x="330" y="20" font-family="IBM Plex Sans" font-size="12" fill="var(--ink)" font-weight="600">Kiriş tasarımı (n=30)</text>
+      <line x1="10" y1="140" x2="300" y2="140" stroke="var(--line-strong)"/>
+      <line x1="330" y1="140" x2="620" y2="140" stroke="var(--line-strong)"/>
+      <text x="10" y="55" fill="var(--ink-dim)">gerçek</text>
+      <text x="10" y="95" fill="var(--ink-dim)">null</text>
+      <text x="330" y="55" fill="var(--ink-dim)">gerçek</text>
+      <text x="330" y="95" fill="var(--ink-dim)">null</text>
+      <g id="slope-real"></g>
+      <g id="slope-null"></g>
+      <g id="beam-real"></g>
+      <g id="beam-null"></g>
+      <text x="10" y="160" font-family="IBM Plex Mono" font-size="10">δ=0.884, p&lt;0.0001</text>
+      <text x="330" y="160" font-family="IBM Plex Mono" font-size="10">δ=0.613, p&lt;0.0001</text>
+    </svg>
+    <div class="fig-caption">Şekil 1 — Koyu noktalar gerçek connectome, açık noktalar degree_preserving_rewire null. Her iki görevde de gerçek connectome belirgin şekilde daha düşük hata (sola kayık dağılım) veriyor.</div>
+  </div>
+
+  <h3>3.3 Mekanizma: modülerlik boşluğun yarısını açıklıyor</h3>
+  <div class="tbl-wrap">
+  <table>
+    <caption>Tablo 3 — Null model ailesi boyunca δ (şev stabilitesi, n=30, her satır)</caption>
+    <tr><th>Null</th><th>Korunan</th><th>δ</th><th>p</th><th>Anlamlı mı</th></tr>
+    <tr><td>degree_preserving</td><td>tam derece dizisi</td><td class="num">0.884</td><td class="num">≈0.000000</td><td class="yes">EVET</td></tr>
+    <tr><td>scale_free</td><td>jenerik heterojenlik</td><td class="num">0.738</td><td class="num">≈0.000001</td><td class="yes">EVET</td></tr>
+    <tr><td>scale_free_correlated</td><td>+giriş/çıkış korelasyonu</td><td class="num">0.604</td><td class="num">0.00006</td><td class="yes">EVET</td></tr>
+    <tr><td><strong>community_preserving</strong></td><td><strong>+tam modülerlik</strong></td><td class="num"><strong>0.429</strong></td><td class="num"><strong>0.00443</strong></td><td class="yes"><strong>EVET</strong></td></tr>
+    <tr><td>weight_shuffle</td><td>tam topoloji, ağırlık hariç</td><td class="num">0.258</td><td class="num">0.0877</td><td class="no">HAYIR</td></tr>
+  </table>
+  </div>
+  <p>Ağın modüler (kümesel) organizasyonunu da koruyan bir null model (<code>community_preserving_rewire</code>) kullanıldığında, δ 0.884'ten 0.429'a düşüyor — yani modülerlik etkinin kabaca yarısını açıklıyor, ama tamamını değil. Geriye kalan boşluk henüz izole edilemedi; hücre-tipi bileşimi analizinde zayıf bir ipucu bulundu (<code>ascending</code> tipi ara-nöron oranı ile δ arasında Spearman ρ=0.618, p=0.043, n=11) ama çoklu-karşılaştırma düzeltmesi yapılmadığı için keşifsel olarak işaretlenmiştir.</p>
+
+  <h3>3.4 Bulgunun genelliği: tek bir alt-graf seçimine mi özgü?</h3>
+  <p>Tüm önceki sonuçlar, sabit bir encode/decode seçim tohumuyla (tek bir 3000-nöronluk alt-graf) elde edilmişti. Bu, ölçülen avantajın o tek seçime mi özgü olduğu, yoksa dişi FlyWire'ın daha genel bir özelliği mi olduğu sorusunu doğuruyor. 10 ek, bağımsız alt-graf tohumuyla yapılan tarama, 11 toplam örneklemin 9'unun (%82) pozitif yönde çıktığını gösterdi (medyan δ=0.500, aralık &minus;0.250 ile 1.000 arası) — bulgu tek bir şanslı seçime özgü değil, ama büyüklüğü alt-graftan alt-grafa önemli ölçüde değişiyor.</p>
+
+  <h3>3.5 Genellenemeyen eksenler</h3>
+  <p>Avantaj iki bağımsız eksende tekrar test edildi ve ikisinde de tekrarlanmadı:</p>
+  <ul>
+    <li><strong>Tür:</strong> C. elegans hermafrodit somatik sinir sistemi, yapısal olarak FlyWire'a çarpıcı derecede benzer olmasına rağmen (Q=0.381 vs 0.357), üç ayrı null modelin hiçbirine karşı anlamlı fark göstermedi (δ=0.16/0.09/&minus;0.25, hepsi FAIL).</li>
+    <li><strong>Cinsiyet/birey:</strong> Erkek <em>Drosophila</em> CNS connectome'u, aynı resmi metodolojiyle test edildiğinde δ=0.250 (FAIL) verdi. İki takip testi bu negatif sonucu doğruladı: (a) yapısal tanı — pipeline hatası yok, ama erkek CNS alt-grafı belirgin şekilde daha seyrek (yoğunluk 0.0085 vs 0.0193) VE daha modüler (Q=0.606 vs 0.357), yani modülerlik tek başına yeterli bir açıklama değil; (b) T-parametresi (sinyal yayılım süresi) simetrik olarak (hem dişi hem erkek aynı koşumda) artırıldığında dişi değişmedi (0.884→0.844) ama erkek zayıfladı (0.250→0.031) — "daha fazla düşünme süresi telafi eder" hipotezi desteklenmedi.</li>
+  </ul>
+
+  <h3>3.6 İki metodolojik ders</h3>
+  <p><strong>er_null yetersizliği.</strong> Projenin iki en güçlü erken bulgusu (malecns δ=1.000; CX-modulated δ=&minus;0.562) yalnızca gevşek <code>er_null</code>'a (yalnızca düğüm/kenar sayısını koruyan) karşı test edilmişti. Daha sıkı <code>degree_preserving_rewire</code>'a karşı test edilince ikisi de tamamen çöktü (sırasıyla δ=&minus;0.156 ve δ=+0.125) — heterojen derece dağılımının tek başına (kim-kime-bağlı bilgisi olmadan) gerçek ağdan farklı davranış üretebildiği anlaşıldı. Bu, projenin birincil null modelinin neden <code>degree_preserving_rewire</code> olarak sabitlendiğinin nedenidir.</p>
+  <p><strong>Gradyan-enjeksiyonu ile null-model karşılaştırmasının karıştırılmaması.</strong> Bağımsız bir paralel değerlendirmede, hedef fonksiyonun gerçek matematiksel gradyanının doğrudan ağa beslenip klasik parçacık-sürüsü optimizasyonuna (PSO) karşı yarıştırıldığı bir dizi deney incelendi. Bu tasarım, connectome kimliğinden bağımsız olarak neredeyse her ağın PSO'yu yenmesini sağlar (birinci-derece vs sıfırıncı-derece yöntem karşılaştırması). Aynı ajan tasarımı, PSO yerine degree_preserving_rewire null'una karşı tekrarlandığında hiçbir avantaj bulunamadı (Sphere δ=0.094; Rastrigin δ=0.000, tam berabere) — beş klasik optimizasyon arazisinde (Sphere/Rastrigin/Ackley/Rosenbrock/Beale) yapılan bağımsız bir üçüncü kontrolde ise PSO, denenen 18 varyantın en iyisini bile geride bıraktı. Bu, §3.1'deki "soyut görevlerde avantaj yok" bulgusunu üçüncü, bağımsız bir yöntemle doğruladı.</p>
+
+  <h2><span class="num">4</span>Tartışma</h2>
+  <p>Bulguların bütünü, "biyolojik sinir ağları genel olarak hesaplama açısından üstündür" gibi geniş bir iddiayı değil, çok daha dar ve isabetli bir iddiayı destekliyor: <strong>belirli bir connectome, evrimleştiği spesifik hesaplama sınıfına yapısal olarak uyarlanmış olabilir</strong>, ve bu uyarlanmışlık başka görev sınıflarına, başka türlere, hatta aynı türün başka bir bireyine otomatik olarak taşınmıyor. Bu, sinek uçuş davranışıyla da (düz rota yerine kesikli, "balistik" sakkadik dönüşler — anlık, tek-atışlık karar biçimi) niteliksel olarak tutarlı bir tablo çiziyor, ancak bu bağlantı şu an spekülatif bir hipotezdir, doğrudan test edilmemiştir.</p>
+  <p>Mekanizma sorusu kısmen çözüldü: ağın modüler organizasyonu avantajın yaklaşık yarısını taşıyor. Geri kalan yarı, muhtemelen motif dağılımı, kümeler-arası bağlantı deseni veya belirli hücre tiplerinin (örn. ascending nöronlar) oranıyla ilgili — ama bu şu an kanıtlanmamış, keşifsel bir ipucudur.</p>
+
+  <h2><span class="num">5</span>Sınırlamalar</h2>
+  <ul>
+    <li>Tüm resmi bulgular tek bir dişi örnekten (FlyWire FAFB) geliyor; alt-graf-tohum taraması (n=11) genelliği destekliyor ama küçük bir örneklem.</li>
+    <li><code>ascending</code> nöron oranı ipucu (§3.3) çoklu-karşılaştırma düzeltmesi olmadan raporlanmıştır, doğrulanmamıştır.</li>
+    <li><code>RateBrain</code> mimarisi (sızıntılı-oran, Dale yasası) biyolojik olarak makul ama basitleştirilmiş bir soyutlama — gerçek sinaptik dinamikleri (spike zamanlaması, kısa-vadeli plastisite) modellemiyor.</li>
+    <li>Erkek CNS ve C. elegans karşılaştırmaları farklı veri kaynaklarından/işlem hatlarından geliyor; doğrudan karşılaştırılabilirlik tam garanti edilemez (bkz. yapısal tanı, §3.5).</li>
+    <li>Mekanizmanın kalan yarısı açıklanamadı; nedensel değil korelasyonel kanıtlarla çalışılıyor.</li>
+  </ul>
+
+  <h2><span class="num">6</span>Sonuç</h2>
+  <p>Dişi <em>Drosophila</em> FlyWire connectome'unun belirli bir duyusal→motor alt-grafı, tek-atışlık uzamsal/fiziksel yön tahmini görevlerinde, aynı derece dizisine sahip rastgele bir ağa karşı sağlam, tekrarlanabilir bir hesaplama avantajı gösteriyor (n=30, çoklu bağımsız görev, çoklu bağımsız alt-graf). Bu avantajın yaklaşık yarısı ağın modüler organizasyonuyla açıklanabiliyor. Avantaj; soyut optimizasyon görevlerine, çok-adımlı kapalı-döngü kontrole, farklı bir türe veya aynı türün farklı bir bireyine genellenmiyor — bulgu geniş değil ama dar kapsamında sağlam.</p>
+
+  <div class="divider"></div>
+
+  <h2 style="margin-top:0"><span class="num">§</span>Kaynaklar</h2>
+  <ol class="refs">
+    <li id="ref1">Suárez, L.E. ve ark. (2024). Conn2res: A toolbox for connectome-based reservoir computing. <em>Nature Communications</em>. <a href="https://www.nature.com/articles/s41467-024-44900-4" target="_blank" rel="noopener">nature.com/articles/s41467-024-44900-4</a></li>
+    <li id="ref2">Costi, S., Hadjiivanov, A., Dold, D., Hale, J., Izzo, D. (2025). FlyWire connectome as a reservoir for chaotic time-series prediction. <em>Biomimetics</em>. <a href="https://doi.org/10.3390/biomimetics10050341" target="_blank" rel="noopener">doi.org/10.3390/biomimetics10050341</a></li>
+    <li id="ref3">Multifunctionality in a Connectome-Based Reservoir Computer (2023). <em>IEEE</em>.</li>
+    <li id="ref4">Dorkenwald, S. ve ark. (2024). Neuronal wiring diagram of an adult brain. FlyWire FAFB v783, Zenodo DOI 10.5281/zenodo.10676866.</li>
+    <li id="ref5">Schlegel, P. ve ark. (2024). Whole-brain annotation and multi-connectome cell typing of Drosophila. <em>Nature</em>. github.com/flyconnectome/flywire_annotations</li>
+    <li id="ref6">Cook, S.J. ve ark. (2019). Whole-animal connectomes of both Caenorhabditis elegans sexes. <em>Nature</em>.</li>
+  </ol>
+
+  <div class="foot">FlyOpt Araştırma Günlüğü · github.com/AutoPyloter/fly_op · EXPERIMENTS.md / PROTOCOL_V2_TASK_SPECTRUM.md kayıtlarına dayanır</div>
+</div>
+
+<script>
+function jitterDots(gId, values, cx0, cx1, cy, color){
+  const g = document.getElementById(gId);
+  const lo = Math.min(...values), hi = Math.max(...values);
+  const pad = (hi-lo)*0.1 || 0.01;
+  values.forEach(v => {
+    const x = cx0 + (v-lo+pad)/(hi-lo+2*pad) * (cx1-cx0);
+    const y = cy + (Math.random()-0.5)*14;
+    const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 3);
+    c.setAttribute("fill", color); c.setAttribute("opacity", 0.8);
+    g.appendChild(c);
+  });
+}
+const slopeReal = [0.12232471257448196,0.09671783447265625,0.11261148005723953,0.09703012555837631,0.14409475028514862,0.11833788454532623,0.12757617235183716,0.0931473895907402,0.12397334724664688,0.12267985194921494,0.23973241448402405,0.14348779618740082,0.10856840759515762,0.1262911707162857,0.09328940510749817,0.10325286537408829,0.14010442793369293,0.09847502410411835,0.11336325109004974,0.1482471376657486,0.13249942660331726,0.09453639388084412,0.11329381167888641,0.1256440132856369,0.11624316871166229,0.11397120356559753,0.0996965542435646,0.15047906339168549,0.10277199000120163,0.12472012639045715];
+const slopeNull = [0.17190754413604736,0.16757655143737793,0.16416920721530914,0.19295886158943176,0.1991266906261444,0.19265706837177277,0.1715264916419983,0.18002849817276,0.1481773853302002,0.19212909042835236,0.17688964307308197,0.18833889067173004,0.13852879405021667,0.18675729632377625,0.15394411981105804,0.1514735370874405,0.18745151162147522,0.13911418616771698,0.15303350985050201,0.1844567060470581,0.1743803322315216,0.14004585146903992,0.16151361167430878,0.1704215109348297,0.1887441873550415,0.15172317624092102,0.13591596484184265,0.19334369897842407,0.19236838817596436,0.18560372292995453];
+const beamReal = [0.11104709655046463,0.11893535405397415,0.13346649706363678,0.11107530444860458,0.10761600732803345,0.1091214194893837,0.14426250755786896,0.1204703077673912,0.1001884713768959,0.11573730409145355,0.12404556572437286,0.13901503384113312,0.11025938391685486,0.1176125705242157,0.140168234705925,0.123993419110775,0.11188050359487534,0.1061587929725647,0.07907600700855255,0.11964641511440277,0.16750702261924744,0.180312842130661,0.10656330734491348,0.12856432795524597,0.14959098398685455,0.13538914918899536,0.11241069436073303,0.21743780374526978,0.09377193450927734,0.08121940493583679];
+const beamNull = [0.17005418241024017,0.193699449300766,0.26966074109077454,0.1865551918745041,0.09998482465744019,0.10811933875083923,0.5477740168571472,0.16690082848072052,0.2428521364927292,0.13007426261901855,0.22761380672454834,0.13372361660003662,0.18630088865756989,0.1409192532300949,0.09335827082395554,0.17842304706573486,0.26869669556617737,0.08178117871284485,0.14724193513393402,0.15732154250144958,0.34197142720222473,0.24712516367435455,0.21373111009597778,0.17749910056591034,0.21952024102210999,0.2522052824497223,0.11214499175548553,0.2851952314376831,0.13537068665027618,0.22656960785388947];
+
+jitterDots("slope-real", slopeReal, 40, 290, 45, "var(--accent)");
+jitterDots("slope-null", slopeNull, 40, 290, 85, "var(--ink-dim)");
+jitterDots("beam-real", beamReal, 360, 610, 45, "var(--accent)");
+jitterDots("beam-null", beamNull, 360, 610, 85, "var(--ink-dim)");
+</script>
+</body>
+</html>

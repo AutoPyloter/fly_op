@@ -1,0 +1,16 @@
+{"seed": 0, "substrate": "real_connectome", "test_acc": 0.7400000095367432}
+{"seed": 0, "substrate": "degree_preserving_null", "test_acc": 0.6100000143051147}
+{"seed": 1, "substrate": "real_connectome", "test_acc": 0.429999977350235}
+{"seed": 1, "substrate": "degree_preserving_null", "test_acc": 0.429999977350235}
+{"seed": 2, "substrate": "real_connectome", "test_acc": 0.3700000047683716}
+{"seed": 2, "substrate": "degree_preserving_null", "test_acc": 0.38999998569488525}
+{"seed": 3, "substrate": "real_connectome", "test_acc": 0.4399999976158142}
+{"seed": 3, "substrate": "degree_preserving_null", "test_acc": 0.6499999761581421}
+{"seed": 4, "substrate": "real_connectome", "test_acc": 0.5799999833106995}
+{"seed": 4, "substrate": "degree_preserving_null", "test_acc": 0.4099999964237213}
+{"seed": 5, "substrate": "real_connectome", "test_acc": 0.5899999737739563}
+{"seed": 5, "substrate": "degree_preserving_null", "test_acc": 0.5}
+{"seed": 6, "substrate": "real_connectome", "test_acc": 0.5299999713897705}
+{"seed": 6, "substrate": "degree_preserving_null", "test_acc": 0.5}
+{"seed": 7, "substrate": "real_connectome", "test_acc": 0.5899999737739563}
+{"seed": 7, "substrate": "degree_preserving_null", "test_acc": 0.5399999618530273}

@@ -1,0 +1,34 @@
+{
+  "baseline": {
+    "real_median": 0.10999979823827744,
+    "null_median": 0.18003909289836884,
+    "wilcoxon_p": 0.0078125,
+    "mannwhitney_p": 0.0001554001554001554,
+    "cliffs_delta": 1.0,
+    "gate_pass": true
+  },
+  "8bit": {
+    "real_median": 0.2524762451648712,
+    "null_median": 0.21329215168952942,
+    "wilcoxon_p": 0.3828125,
+    "mannwhitney_p": 0.3822843822843822,
+    "cliffs_delta": -0.28125,
+    "gate_pass": false
+  },
+  "4bit": {
+    "real_median": 0.25291287153959274,
+    "null_median": 0.2476782575249672,
+    "wilcoxon_p": 0.7421875,
+    "mannwhitney_p": 1.0,
+    "cliffs_delta": 0.0,
+    "gate_pass": false
+  },
+  "2bit": {
+    "real_median": 0.22162579745054245,
+    "null_median": 0.23308274149894714,
+    "wilcoxon_p": 0.0390625,
+    "mannwhitney_p": 0.13038073038073036,
+    "cliffs_delta": 0.46875,
+    "gate_pass": false
+  }
+}

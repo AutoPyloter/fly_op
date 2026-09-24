@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>FlyOpt Araştırma Özeti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f5f2;
+    --paper:#ffffff;
+    --ink:#1c1a16;
+    --ink-dim:#6b6558;
+    --line:#e2ddd1;
+    --line-strong:#c9c2b2;
+    --accent:#7a4a2b;
+    --accent-soft:#f0e4d8;
+    --pass:#2f6b4f;
+    --pass-soft:#e2eee6;
+    --fail:#8a3b30;
+    --fail-soft:#f3e2de;
+    --mark:#c98a2c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#16140f;
+      --paper:#1e1b15;
+      --ink:#ece7dc;
+      --ink-dim:#a89f8c;
+      --line:#3a3527;
+      --line-strong:#4d4632;
+      --accent:#d9a06b;
+      --accent-soft:#3a2c1c;
+      --pass:#6fbe95;
+      --pass-soft:#1e3327;
+      --fail:#e08a7a;
+      --fail-soft:#3a2420;
+      --mark:#e0b45f;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#16140f;
+    --paper:#1e1b15;
+    --ink:#ece7dc;
+    --ink-dim:#a89f8c;
+    --line:#3a3527;
+    --line-strong:#4d4632;
+    --accent:#d9a06b;
+    --accent-soft:#3a2c1c;
+    --pass:#6fbe95;
+    --pass-soft:#1e3327;
+    --fail:#e08a7a;
+    --fail-soft:#3a2420;
+    --mark:#e0b45f;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    padding:0 16px;
+    padding-block:40px 80px;
+  }
+  .sheet{
+    max-width:760px; margin:0 auto; background:var(--paper);
+    border:1px solid var(--line); border-radius:4px;
+    padding:clamp(24px,6vw,64px);
+  }
+
+  h1,h2,h3{font-family:'Newsreader', Georgia, serif; text-wrap:balance; margin:0;}
+  p{margin:0 0 1em; line-height:1.7; font-size:15.5px;}
+  p:last-child{margin-bottom:0;}
+  .lede{font-size:17px; line-height:1.7; color:var(--ink-dim);}
+
+  .masthead{display:flex; flex-direction:column; gap:6px; margin-bottom:6px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:11px;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);
+  }
+  h1.title{font-size:clamp(28px,5vw,38px); font-weight:600; line-height:1.15; margin-top:2px;}
+  .subtitle{font-family:'Newsreader', serif; font-style:italic; font-size:18px; color:var(--ink-dim); margin-top:4px;}
+  .byline{
+    display:flex; flex-wrap:wrap; gap:4px 14px; margin-top:16px;
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--ink-dim);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:10px 0;
+  }
+
+  .abstract{
+    margin:28px 0 8px; padding:18px 20px; background:var(--accent-soft);
+    border-left:3px solid var(--accent); border-radius:2px;
+  }
+  .abstract .eyebrow{margin-bottom:8px;}
+  .abstract p{font-size:14.5px; line-height:1.65; color:var(--ink);}
+
+  section{margin-top:40px;}
+  h2.sec{
+    font-size:22px; font-weight:600; padding-bottom:8px;
+    border-bottom:1.5px solid var(--ink); margin-bottom:16px;
+  }
+  h2.sec .num{font-family:'IBM Plex Mono', monospace; font-size:15px; color:var(--ink-dim); font-weight:400; margin-right:10px;}
+  h3.subsec{font-size:16.5px; font-weight:600; margin:24px 0 10px; color:var(--ink);}
+
+  table{width:100%; border-collapse:collapse; margin:16px 0 20px; font-size:13.5px;}
+  th,td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-dim); font-weight:500; border-bottom:1.5px solid var(--line-strong);}
+  td.num, th.num{font-family:'IBM Plex Mono', monospace; font-variant-numeric:tabular-nums; white-space:nowrap;}
+  tr.hl td{background:var(--accent-soft); font-weight:600;}
+  .table-scroll{overflow-x:auto; margin:16px 0 20px;}
+  .table-scroll table{margin:0;}
+
+  .tag{
+    display:inline-flex; align-items:center; gap:4px; font-family:'IBM Plex Mono', monospace;
+    font-size:11px; padding:2px 8px; border-radius:100px; font-weight:600;
+  }
+  .tag.pass{background:var(--pass-soft); color:var(--pass);}
+  .tag.fail{background:var(--fail-soft); color:var(--fail);}
+
+  .callout{
+    margin:18px 0; padding:16px 18px; border:1px solid var(--line-strong); border-radius:3px;
+    background:color-mix(in srgb, var(--bg) 55%, var(--paper));
+  }
+  .callout.warn{border-color:var(--mark); background:color-mix(in srgb, var(--mark) 8%, var(--paper));}
+  .callout .eyebrow{margin-bottom:6px;}
+  .callout p{font-size:14px; margin-bottom:0;}
+
+  .stat-row{display:flex; flex-wrap:wrap; gap:18px; margin:18px 0 22px;}
+  .stat{flex:1 1 140px; padding:14px 16px; border:1px solid var(--line); border-radius:3px;}
+  .stat .v{font-family:'IBM Plex Mono', monospace; font-size:22px; font-weight:600; line-height:1.1;}
+  .stat .l{font-size:11.5px; color:var(--ink-dim); margin-top:4px;}
+
+  ol.steps, ul.plain{padding-left:22px; margin:12px 0 20px;}
+  ol.steps li, ul.plain li{margin-bottom:8px; line-height:1.65; font-size:14.5px;}
+
+  .figcap{font-size:12px; color:var(--ink-dim); margin-top:-10px; margin-bottom:20px; font-style:italic;}
+
+  code{font-family:'IBM Plex Mono', monospace; font-size:0.9em; background:var(--accent-soft); padding:1px 5px; border-radius:3px;}
+
+  footer{margin-top:48px; padding-top:18px; border-top:1px solid var(--line);}
+  footer p{font-size:12px; color:var(--ink-dim); line-height:1.6;}
+  footer a{color:var(--accent);}
+
+  @media (max-width:520px){
+    table{font-size:12px;}
+    th,td{padding:6px 6px;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <span class="eyebrow">FlyOpt Araştırma Özeti · dahili taslak</span>
+    <h1 class="title">Connectome mimarisi, tek dar bir görev sınıfında ölçülebilir bir avantaj taşıyor</h1>
+    <p class="subtitle">FlyWire Drosophila connectome'unun black-box optimizasyonda genel bir avantaj sağlamadığını, ama şev-stabilitesi tarzı tek-atış uzamsal regresyon görevlerinde modülerlikle kısmen açıklanan sağlam bir avantaj taşıdığını gösteren sistematik bir null-model taraması.</p>
+    <div class="byline">
+      <span>2026-09-17 – 2026-09-21</span>
+      <span>139.000 nöron, FlyWire v783</span>
+      <span>kod: github.com/AutoPyloter/fly_op (özel)</span>
+    </div>
+  </div>
+
+  <div class="abstract">
+    <span class="eyebrow">Özet</span>
+    <p>Gerçek FlyWire connectome'unun seyrek rekürren dinamiğinin, aynı istatistiksel özelliklere sahip null modellerden ölçülebilir biçimde daha iyi bir arama/tahmin politikası üretip üretmediğini sistematik olarak test ettik. Genel-amaçlı optimizasyonda (Rastrigin, PSO varyantları, kesikli kontrol görevleri) hiçbir avantaj bulunamadı — H0 (null hipotez) geçerliliğini korudu. Tek bir görev ailesinde — şev stabilitesi analizinde kritik kayma yüzeyine doğru yön tahmini, tek-atış toplu regresyon çerçevesinde — connectome, beş farklı null modelinin dördüne karşı istatistiksel olarak anlamlı bir avantaj gösterdi (n=30, Mann-Whitney U, Cliff's δ=0.26–0.88). Bu avantajın yaklaşık yarısı ağın modülerliğiyle (Louvain Q≈0.36) açıklanabiliyor; kalan boşluk henüz izole edilemedi. Bulgu C. elegans'ın somatik sinir sistemine (yapısal olarak çarpıcı derecede benzer bir ağ) genellenmedi. Ayrıca, daha zayıf bir null model (Erdős–Rényi) kullanılarak elde edilmiş iki önceki "pozitif" bulgunun (bir sürüş-simülasyonu görevi ve bir arama-modülasyonu mimarisi) daha sıkı null modellere karşı tamamen çöktüğü gösterildi — bu, alandaki benzer iddiaların da yeniden gözden geçirilmesi gerektiğine işaret eden ayrı bir metodolojik bulgudur.</p>
+  </div>
+
+  <section>
+    <h2 class="sec"><span class="num">1</span>Motivasyon ve hipotezler</h2>
+    <p>Reservoir computing / echo-state network literatürü, rastgele seyrek rekürren ağların birçok hesaplama görevini gördüğünü zaten gösteriyor. Bu projenin tek bilimsel katkısı, <em>gerçek</em> bir biyolojik connectome'un — burada, tam yetişkin <em>Drosophila melanogaster</em> beyninin FlyWire tarafından çıkarılmış ~139.000 nöronluk haritası — bunun ötesinde bir şey katıp katmadığını göstermek ya da gösterememektir.</p>
+    <table>
+      <tr><th style="width:8%">H1</th><td>Gerçek connectome topolojisi, aynı istatistiksel özelliklere (seyreklik, boyut, derece dağılımı, E/İ oranı) sahip rastgele graflardan ölçülebilir şekilde daha iyi bir proposal dağılımı / arama politikası üretir.</td></tr>
+      <tr><th>H0</th><td>Gözlenen her performans farkı, connectome'un <em>spesifik</em> bağlantı kimliğinden değil, yukarıdaki genel istatistiksel özelliklerden kaynaklanır.</td></tr>
+    </table>
+    <p>Ön tescilli falsifikasyon kriteri: degree-preserving rewired null model ile gerçek connectome arasında n=30 tohumda Mann-Whitney U testinde p&lt;0.05 <strong>ve</strong> Cliff's δ&gt;0.33 bulunamazsa, H1 ilgili görev sınıfı için reddedilir.</p>
+  </section>
+
+  <section>
+    <h2 class="sec"><span class="num">2</span>Yöntem</h2>
+    <h3 class="subsec">2.1 Substrate</h3>
+    <p>Gerçek graftan BFS ile bağlantısı doğrulanmış 3.000 düğümlük alt-graflar örneklendi (afferent→efferent yol garantisi, ~2026-09-17'de bulunan bir sızıntı sonrası zorunlu kılındı). Mimari: türevlenebilir "leaky-rate" rekürren ağ (<code>h_{t+1}=(1-a)h_t+a·act(W h_t+b+x)</code>), Dale yasası <code>w=sign·softplus(gain)</code> ile korunuyor, gerçek backpropagation ile eğitiliyor — orijinal projenin spiking-LIF motorundan farklı, daha hızlı bir varyant.</p>
+    <h3 class="subsec">2.2 Görev</h3>
+    <p>Şev stabilitesi (Fellenius yöntemi): rastgele bir şev geometrisinde, aday bir kayma-dairesi parametresinden en kritik (en düşük faktör-güvenliği) yapılandırmaya doğru yön tahmini. Ağ, birkaç "duyusal" nörona enjekte edilen yerel yoklama-ışınlarından (ray-casting) bu yönü, ~30 "motor" nörondan doğrusal bir okuma ile tahmin ediyor. Eğitim: binlerce rastgele geometri/nokta çiftinde, gerçek backprop + Adam — <strong>tek-atış toplu regresyon</strong>, iteratif arama değil.</p>
+    <h3 class="subsec">2.3 Null model ailesi</h3>
+    <div class="table-scroll"><table>
+      <tr><th>Null</th><th>Koruduğu</th><th>Bozduğu</th></tr>
+      <tr><td><code>er_null</code></td><td>kenar sayısı, ağırlık dağılımı</td><td>her şey — derece, modülerlik, kimlik</td></tr>
+      <tr><td><code>scale_free_null</code></td><td>jenerik heterojen derece (bağımsız örneklenmiş)</td><td>fly'ın kendi derece dizisi, modülerlik</td></tr>
+      <tr><td><code>scale_free_correlated_null</code></td><td>+ giriş/çıkış derecesi korelasyonu</td><td>fly'ın kendi derece dizisi, modülerlik</td></tr>
+      <tr><td><code>degree_preserving_rewire</code></td><td>fly'ın TAM derece dizisi (Maslov–Sneppen)</td><td>kim-kime-bağlı, modülerlik</td></tr>
+      <tr><td><code>community_preserving_rewire</code></td><td>TAM derece dizisi + TAM modülerlik (gerçek Louvain kümeleri)</td><td>sadece kümeler-içi kimlik</td></tr>
+      <tr><td><code>weight_shuffle</code></td><td>TAM topoloji (kim-kime-bağlı, birebir)</td><td>sadece ağırlık değerleri</td></tr>
+    </table></div>
+    <p>İstatistik: Mann-Whitney U (ön-kayıtlı resmi test, eşleşmemiş) ve Wilcoxon işaretli-sıra (eşleşmiş, oturum konvansiyonu) birlikte raporlanıyor; etki büyüklüğü Cliff's δ. n=30 (30 bağımsız tohum) protokolün resmi eşiği; n=8 pilot ölçek.</p>
+  </section>
+
+  <section>
+    <h2 class="sec"><span class="num">3</span>Sonuçlar</h2>
+
+    <h3 class="subsec">3.1 Geniş spektrum: genel-amaçlı optimizasyonda H0 geçerli</h3>
+    <p>Soyut/genel görevlerin hiçbirinde connectome bir avantaj göstermedi:</p>
+    <div class="table-scroll"><table>
+      <tr><th>Görev sınıfı</th><th class="num">δ</th><th>Kapı</th></tr>
+      <tr><td>Soyut optimizasyon (Rastrigin; Fly-Proposer, PSO×3, sinaptik plastisite, tiny-recursive — 5 mimari denemesi)</td><td class="num">~0 ile −0.34</td><td><span class="tag fail">FAIL (hepsi)</span></td></tr>
+      <tr><td>Fonksiyon değeri tahmini (Fly-Surrogate)</td><td class="num">0.188</td><td><span class="tag fail">FAIL</span></td></tr>
+      <tr><td>Kesikli kapalı-döngü kontrol (cartpole, n=16, gradyan-kırpmalı)</td><td class="num">0.133</td><td><span class="tag fail">FAIL</span></td></tr>
+      <tr><td>Alternatif sürü-organizasyonları (chemotaxis, lek, ring-lbest PSO)</td><td class="num">−0.06 ile 0.25</td><td><span class="tag fail">FAIL (hepsi)</span></td></tr>
+      <tr><td>Anatomik devreler (mantar gövdesi, koku lobu, görsel hiyerarşi)</td><td class="num">≤0.22 (n=16)</td><td><span class="tag fail">FAIL (hepsi)</span></td></tr>
+    </table></div>
+
+    <h3 class="subsec">3.2 Tek istisna: şev stabilitesi — beş null'un dördünde sağlam</h3>
+    <p>Aynı görev, aynı mimari, beş farklı null modeline karşı — hepsi n=30'da:</p>
+    <div class="table-scroll"><table>
+      <tr><th>Null</th><th class="num">δ</th><th class="num">p (Mann-Whitney)</th><th>Kapı</th></tr>
+      <tr class="hl"><td>degree_preserving_rewire <span style="font-weight:400;color:var(--ink-dim)">(protokolün resmi kriteri)</span></td><td class="num">0.884</td><td class="num">≈0.000000</td><td><span class="tag pass">PASS</span></td></tr>
+      <tr><td>scale_free_null</td><td class="num">0.738</td><td class="num">≈0.000001</td><td><span class="tag pass">PASS</span></td></tr>
+      <tr><td>scale_free_correlated_null</td><td class="num">0.604</td><td class="num">0.00006</td><td><span class="tag pass">PASS</span></td></tr>
+      <tr><td>community_preserving_rewire</td><td class="num">0.429</td><td class="num">0.00443</td><td><span class="tag pass">PASS</span></td></tr>
+      <tr><td>weight_shuffle</td><td class="num">0.258</td><td class="num">0.088</td><td><span class="tag fail">FAIL</span></td></tr>
+    </table></div>
+    <p>Sonuç, protokolün <strong>tam ön-kayıtlı kriterine</strong> (degree_preserving_rewire, n=30, Mann-Whitney) göre resmen geçiyor — bu, projenin kuruluşundan beri Bölüm 1'in H1'ine dair bulunan ilk ve tek pozitif sonuç.</p>
+
+    <h3 class="subsec">3.3 Metodolojik uyarı: zayıf bir null model, sahte pozitiflere yol açtı</h3>
+    <div class="callout warn">
+      <span class="eyebrow" style="color:var(--mark)">önemli</span>
+      <p>Araştırmanın bir bölümü hız kaygısıyla sadece <code>er_null</code>'a karşı test yaptı. Bu şekilde elde edilmiş iki çarpıcı "pozitif" sonuç — bir sürüş-simülasyonu görevi (δ=1.000) ve bir arama-modülasyonu mimarisi (δ=−0.562) — <code>degree_preserving_rewire</code>'a karşı test edildiğinde <strong>tamamen çöktü</strong> (sırasıyla δ=−0.156/−0.312 ve δ=+0.125). Kök neden: FlyWire alt-graflarının heterojen derece dağılımı (hub nöronlar) <code>er_null</code>'da tamamen kayboluyor — bu tek başına, gerçek bağlantı özgüllüğü olmadan, gözlenen farkın çoğunu açıklıyor. Bu bulgudan sonra hiçbir yeni sonuç sadece <code>er_null</code>'a karşı rapor edilmedi.</p>
+    </div>
+
+    <h3 class="subsec">3.4 Mekanizma: modülerlik boşluğun yaklaşık yarısını açıklıyor</h3>
+    <p>3.2'deki tablo bir mekanizma hikâyesi de anlatıyor. Gerçek alt-graf yüksek modülerliğe sahip (Louvain Q=0.357, ortalama kümeleme katsayısı=0.276) — <code>degree_preserving_rewire</code> bile (en güçlü null) bunu neredeyse sıfıra indiriyor (Q=0.069). Sadece derece dizisini <em>ve</em> modülerliği birlikte koruyan yeni bir null (<code>community_preserving_rewire</code>) inşa edildiğinde, etki YARIYA indi (0.884→0.429) ama TAMAMEN kapanmadı.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="v">0.884 → 0.429</div><div class="l">modülerlik eklenince δ'nin düşüşü</div></div>
+      <div class="stat"><div class="v">~%50</div><div class="l">modülerliğin açıkladığı pay</div></div>
+      <div class="stat"><div class="v">p=0.004</div><div class="l">kalan boşluğun anlamlılığı (n=30)</div></div>
+    </div>
+    <p>Alternatif bir hipotez — giriş/çıkış derecesi korelasyonu (gerçekte r=0.70) — doğrudan test edilip <strong>yanlışlandı</strong>: bu korelasyonu taklit eden sentetik bir graf (r=0.67) modülerlik olmadan neredeyse hiç iyileşme göstermedi (δ=0.604, sadece heterojenlikten biraz farklı). Kalan boşluk (community_preserving'in 0.429'u ile weight_shuffle'ın 0.258'i arasındaki fark) henüz izole edilemedi — muhtemelen daha ince bir yapısal özellikte (motif dağılımı, hiyerarşik alt-kümeler, ya da fly'ın tam kendine özgü wiring'i) saklı.</p>
+
+    <h3 class="subsec">3.5 Sınırlama: bulgu C. elegans'a genellenmedi</h3>
+    <p>Aynı görev ve mimari, <em>C. elegans</em>'ın somatik sinir sistemine (272 nöron, duyusal→motor) uygulandı — yapısal olarak FlyWire'a çarpıcı derecede benzer bir ağ (Q=0.381, kümeleme=0.329, bağımsız evrimleşmiş). <strong>Hiçbir null modelde anlamlı fark bulunamadı</strong> (δ=0.16/0.09/−0.25, n=8, üçü de FAIL). Mimari parametreleri C. elegans ölçeğine göre kasıtlı olarak yeniden ayarlanmadı (negatif sonucu hiperparametre kovalayarak değiştirmemek için) — bu yüzden sonuç kesin değil, ama bulgunun kapsamı şimdilik FlyWire'a/bu göreve özgü kabul edilmeli.</p>
+  </section>
+
+  <section>
+    <h2 class="sec"><span class="num">4</span>Tartışma</h2>
+    <ol class="steps">
+      <li><strong>H0 genel-amaçlı optimizasyon için geçerliliğini koruyor.</strong> Sinek beyni koku, görme ve lokomosyon için evrimleşti; Rastrigin'e veya kesikli kontrol görevlerine dair bilinen bir tümevarımsal önyargı taşıması için bir mekanizma yok — ve bulgular bunu doğruluyor.</li>
+      <li><strong>Dar ama gerçek bir H1 istisnası var.</strong> Uzamsal, tek-atış toplu-regresyon çerçevesinde çalışan görevlerde (şev stabilitesi burada test edilen tek örnek) connectome ölçülebilir bir avantaj taşıyor — beş null modelin dördüne karşı, n=30'da.</li>
+      <li><strong>Avantaj, ağırlık değerlerinden ya da "hangi belirli nöronun kime bağlı olduğundan" değil, derece dizisinin genel şeklinden (özellikle modülerlik bileşeninden) geliyor</strong> — ama modülerlik tek başına yeterli değil, ~yarısını açıklıyor.</li>
+      <li><strong>Metodoloji dersi, bulgunun kendisi kadar değerli olabilir:</strong> er_null gibi zayıf null modeller sistematik olarak şişirilmiş etki büyüklükleri üretiyor; alandaki benzer "connectome avantajı" iddiaları da aynı mercekle yeniden değerlendirilmeyi hak ediyor.</li>
+      <li><strong>Genellenebilirlik henüz kanıtlanmadı.</strong> Tek bir tür (Drosophila), tek bir görev ailesi (şev stabilitesi) test edildi. C. elegans'a ilk deneme genellenmedi.</li>
+    </ol>
+    <h3 class="subsec">Sınırlamalar</h3>
+    <ul class="plain">
+      <li>Şev stabilitesi tek-atış regresyonu, gerçek bir mühendislik iş akışını değil, araştırma amaçlı basitleştirilmiş bir modeli temsil ediyor.</li>
+      <li>C. elegans karşılaştırması ölçek-uyarlanmış hiperparametrelerle tekrarlanmadı.</li>
+      <li>Kalan mekanistik boşluk (community_preserving sonrası) açıklanamadı.</li>
+      <li>malecns (gömülü F1-sürüş kontrolü) üçüncü null modeline (weight_shuffle) karşı test edildi ama bu üç null'un ötesinde (ör. community_preserving) test edilmedi — negatif sonucu zaten net olduğu için düşük öncelikli bırakıldı.</li>
+    </ul>
+    <h3 class="subsec">Olası sonraki adımlar</h3>
+    <ul class="plain">
+      <li>Kalan mekanistik boşluğu izole etmek için motif dağılımı ya da hiyerarşik/iç-içe modülerlik testi.</li>
+      <li>C. elegans karşılaştırmasını, sonucu önceden belirlemeyen bir kuralla (ör. T iç-adım sayısını graf çapıyla ölçeklendirme) ön-kayıtlı biçimde tekrarlamak.</li>
+      <li>Bulguyu ikinci bir gerçek mühendislik görevine (ör. yüzey/gerilim tahmini gibi bir FEA vekil-modeli) genişletmek — görev-genellenebilirliğini tür-genellenebilirliğinden ayırmak için.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Tam deneysel türetim, her koşumun beklenti kaydı ve ham sonuçlar <code>EXPERIMENTS.md</code> ve <code>PROTOCOL_V2_TASK_SPECTRUM.md</code> dosyalarında (repo kökü). İnteraktif null-model karşılaştırma panosu: <a href="https://claude.ai/artifact/2pE791tBWxsfVPLRL8CpSb">şevin-kadrosu</a>. Kod ve tüm sonuç dosyaları: <a href="https://github.com/AutoPyloter/fly_op">github.com/AutoPyloter/fly_op</a> (özel repo).</p>
+  </footer>
+
+</div>
+</body>
+</html>

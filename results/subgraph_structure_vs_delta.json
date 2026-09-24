@@ -1,0 +1,112 @@
+[
+  {
+    "seed": 9000,
+    "density": 0.01926753362231855,
+    "modularity_Q": 0.3564736906714285,
+    "avg_clustering": 0.27590398309898406,
+    "mean_degree": 102.49666666666667,
+    "n_communities": 9,
+    "edges": 173350,
+    "delta": 0.884
+  },
+  {
+    "seed": 9001,
+    "density": 0.013348004890519061,
+    "modularity_Q": 0.5004300831972401,
+    "avg_clustering": 0.304008735954716,
+    "mean_degree": 69.838,
+    "n_communities": 8,
+    "edges": 120092,
+    "delta": -0.219
+  },
+  {
+    "seed": 9002,
+    "density": 0.023158274980549072,
+    "modularity_Q": 0.3017963105041922,
+    "avg_clustering": 0.508654345388743,
+    "mean_degree": 104.73733333333334,
+    "n_communities": 11,
+    "edges": 208355,
+    "delta": 0.25
+  },
+  {
+    "seed": 9003,
+    "density": 0.018849394242525287,
+    "modularity_Q": 0.37331886588418856,
+    "avg_clustering": 0.2907220240517324,
+    "mean_degree": 99.58,
+    "n_communities": 11,
+    "edges": 169588,
+    "delta": 0.25
+  },
+  {
+    "seed": 9004,
+    "density": 0.02364654884961654,
+    "modularity_Q": 0.27841510141296183,
+    "avg_clustering": 0.49220268513578647,
+    "mean_degree": 107.81466666666667,
+    "n_communities": 12,
+    "edges": 212748,
+    "delta": -0.25
+  },
+  {
+    "seed": 9005,
+    "density": 0.018986328776258752,
+    "modularity_Q": 0.35933181073213644,
+    "avg_clustering": 0.28063500428550725,
+    "mean_degree": 100.96533333333333,
+    "n_communities": 8,
+    "edges": 170820,
+    "delta": 1.0
+  },
+  {
+    "seed": 9006,
+    "density": 0.02410692453039902,
+    "modularity_Q": 0.2997930713449949,
+    "avg_clustering": 0.4750210081089653,
+    "mean_degree": 110.468,
+    "n_communities": 12,
+    "edges": 216890,
+    "delta": 0.375
+  },
+  {
+    "seed": 9007,
+    "density": 0.014715349560964767,
+    "modularity_Q": 0.46419182158353034,
+    "avg_clustering": 0.3003022379195387,
+    "mean_degree": 77.824,
+    "n_communities": 8,
+    "edges": 132394,
+    "delta": 0.75
+  },
+  {
+    "seed": 9008,
+    "density": 0.023934867177948203,
+    "modularity_Q": 0.28285324129097017,
+    "avg_clustering": 0.4830404058258466,
+    "mean_degree": 109.18333333333334,
+    "n_communities": 10,
+    "edges": 215342,
+    "delta": 0.625
+  },
+  {
+    "seed": 9009,
+    "density": 0.016296987884850504,
+    "modularity_Q": 0.38178389290514647,
+    "avg_clustering": 0.26600285185748823,
+    "mean_degree": 87.42133333333334,
+    "n_communities": 9,
+    "edges": 146624,
+    "delta": 0.375
+  },
+  {
+    "seed": 9010,
+    "density": 0.01698588418361676,
+    "modularity_Q": 0.4828601329358441,
+    "avg_clustering": 0.3846800994643792,
+    "mean_degree": 86.34666666666666,
+    "n_communities": 9,
+    "edges": 152822,
+    "delta": 1.0
+  }
+]

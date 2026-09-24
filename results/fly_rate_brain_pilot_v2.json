@@ -1,0 +1,12 @@
+{
+  "results": {
+    "real_connectome": 0.4866824746131897,
+    "er_null": 0.4839309751987457
+  },
+  "diff_pct": -0.5685727005414265,
+  "subgraph_size": 3000,
+  "epochs": 400,
+  "n_samples": 300,
+  "n_encode": 4,
+  "n_decode": 30
+}

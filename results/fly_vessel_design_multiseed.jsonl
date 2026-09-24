@@ -1,0 +1,8 @@
+{"seed": 0, "real_test_mse": 0.274629682302475, "null_test_mse": 0.287312388420105}
+{"seed": 1, "real_test_mse": 0.14326302707195282, "null_test_mse": 0.14314749836921692}
+{"seed": 2, "real_test_mse": 0.1947675347328186, "null_test_mse": 0.18630225956439972}
+{"seed": 3, "real_test_mse": 0.14526738226413727, "null_test_mse": 0.15045922994613647}
+{"seed": 4, "real_test_mse": 0.18614788353443146, "null_test_mse": 0.18731804192066193}
+{"seed": 5, "real_test_mse": 0.18529047071933746, "null_test_mse": 0.17466579377651215}
+{"seed": 6, "real_test_mse": 0.15225546061992645, "null_test_mse": 0.14003777503967285}
+{"seed": 7, "real_test_mse": 0.17767664790153503, "null_test_mse": 0.1943580061197281}

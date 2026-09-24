@@ -1,0 +1,8 @@
+{"seed": 0, "n_train_examples": 6, "real_test_mse": 0.18441063165664673, "null_test_mse": 0.20892207324504852}
+{"seed": 1, "n_train_examples": 6, "real_test_mse": 0.21701955795288086, "null_test_mse": 0.286763072013855}
+{"seed": 2, "n_train_examples": 6, "real_test_mse": 0.15386630594730377, "null_test_mse": 0.20339719951152802}
+{"seed": 3, "n_train_examples": 6, "real_test_mse": 0.17269590497016907, "null_test_mse": 0.17742103338241577}
+{"seed": 4, "n_train_examples": 6, "real_test_mse": 0.21086588501930237, "null_test_mse": 0.24624240398406982}
+{"seed": 5, "n_train_examples": 6, "real_test_mse": 0.15976685285568237, "null_test_mse": 0.20073126256465912}
+{"seed": 6, "n_train_examples": 6, "real_test_mse": 0.17311294376850128, "null_test_mse": 0.25019046664237976}
+{"seed": 7, "n_train_examples": 6, "real_test_mse": 0.16072645783424377, "null_test_mse": 0.1306142508983612}

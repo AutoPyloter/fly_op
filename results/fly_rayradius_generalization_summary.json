@@ -1,0 +1,26 @@
+{
+  "0.1": {
+    "real_median": 0.14545325189828873,
+    "null_median": 0.1738372966647148,
+    "wilcoxon_p": 0.0546875,
+    "mannwhitney_p": 0.10489510489510488,
+    "cliffs_delta": 0.5,
+    "gate_pass": false
+  },
+  "1.0": {
+    "real_median": 0.11041285842657089,
+    "null_median": 0.17784149199724197,
+    "wilcoxon_p": 0.0078125,
+    "mannwhitney_p": 0.0001554001554001554,
+    "cliffs_delta": 1.0,
+    "gate_pass": true
+  },
+  "5.0": {
+    "real_median": 0.13876815885305405,
+    "null_median": 0.19988537579774857,
+    "wilcoxon_p": 0.0078125,
+    "mannwhitney_p": 0.0010878010878010878,
+    "cliffs_delta": 0.90625,
+    "gate_pass": true
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "community_preserving": {
+    "real_median": 0.1457468345761299,
+    "null_median": 0.1646781638264656,
+    "wilcoxon_p": 0.3125,
+    "mannwhitney_p": 0.3822843822843822,
+    "cliffs_delta": 0.28125,
+    "gate_pass": false
+  },
+  "weight_shuffle": {
+    "real_median": 0.1457468345761299,
+    "null_median": 0.15667371451854706,
+    "wilcoxon_p": 0.1484375,
+    "mannwhitney_p": 0.2786324786324786,
+    "cliffs_delta": 0.34375,
+    "gate_pass": false
+  }
+}

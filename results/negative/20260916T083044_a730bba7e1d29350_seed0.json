@@ -1,0 +1,163 @@
+{
+  "run_id": "20260916T083044_a730bba7e1d29350_seed0",
+  "config": {
+    "phase": "faz_s1",
+    "smoke": true,
+    "best_hparams": {
+      "flywire": [
+        1.0,
+        1.0
+      ],
+      "er_null": [
+        1.0,
+        1.0
+      ],
+      "degree_preserving_null": [
+        1.0,
+        0.5
+      ],
+      "weight_shuffle_null": [
+        2.0,
+        0.5
+      ]
+    },
+    "main_budget": 50
+  },
+  "config_hash": "a730bba7e1d29350",
+  "git_commit": "818d07ab876ec3cc1f5036d66bcf6413a21a8980-dirty",
+  "seed": 0,
+  "started_at": "2026-09-16T08:30:44.655938+00:00",
+  "env": {
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "metrics": {
+    "analysis": {
+      "gate": {
+        "test": "wilcoxon_signed_rank",
+        "p_value": 0.5,
+        "effect_size": 0.5,
+        "passes_falsification_gate": false,
+        "flywire_mean": 151.8671886676219,
+        "degree_preserving_null_mean": 141.06096264981417
+      },
+      "secondary": {
+        "flywire_vs_er_null": {
+          "p_value": 0.5,
+          "effect_size": 0.5,
+          "holm_reject": false
+        },
+        "flywire_vs_weight_shuffle_null": {
+          "p_value": 1.0,
+          "effect_size": -0.5,
+          "holm_reject": false
+        }
+      },
+      "medians": {
+        "flywire": 151.8671886676219,
+        "degree_preserving_null": 141.06096264981417,
+        "er_null": 130.86695473569415,
+        "weight_shuffle_null": 159.85919106175572
+      }
+    },
+    "raw_results": [
+      {
+        "kind": "flywire",
+        "seed": 1,
+        "ray_scale": 1.0,
+        "decode_scale": 1.0,
+        "rastrigin_best_fx": 142.49538080332394,
+        "sphere_best_fx": 72.01735304984597,
+        "null_gen_time_s": 0.46942663192749023,
+        "calib_time_s": 33.91472506523132,
+        "rastrigin_time_s": 24.288906574249268,
+        "sphere_time_s": 56.70513391494751
+      },
+      {
+        "kind": "flywire",
+        "seed": 0,
+        "ray_scale": 1.0,
+        "decode_scale": 1.0,
+        "rastrigin_best_fx": 161.23899653191984,
+        "sphere_best_fx": 103.99439172291012,
+        "null_gen_time_s": 0.4719264507293701,
+        "calib_time_s": 34.135976791381836,
+        "rastrigin_time_s": 23.86053228378296,
+        "sphere_time_s": 57.4539110660553
+      },
+      {
+        "kind": "er_null",
+        "seed": 0,
+        "ray_scale": 1.0,
+        "decode_scale": 1.0,
+        "rastrigin_best_fx": 151.8305403124088,
+        "sphere_best_fx": 71.12129434600462,
+        "null_gen_time_s": 19.192926168441772,
+        "calib_time_s": 47.9360249042511,
+        "rastrigin_time_s": 23.54991126060486,
+        "sphere_time_s": 45.836530447006226
+      },
+      {
+        "kind": "er_null",
+        "seed": 1,
+        "ray_scale": 1.0,
+        "decode_scale": 1.0,
+        "rastrigin_best_fx": 109.90336915897952,
+        "sphere_best_fx": 66.66531230784155,
+        "null_gen_time_s": 19.151398420333862,
+        "calib_time_s": 48.770766258239746,
+        "rastrigin_time_s": 24.12910771369934,
+        "sphere_time_s": 45.935831785202026
+      },
+      {
+        "kind": "weight_shuffle_null",
+        "seed": 0,
+        "ray_scale": 2.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 154.76381834659344,
+        "sphere_best_fx": 79.80500405137553,
+        "null_gen_time_s": 1.459730863571167,
+        "calib_time_s": 31.35192084312439,
+        "rastrigin_time_s": 15.080081462860107,
+        "sphere_time_s": 36.1974778175354
+      },
+      {
+        "kind": "weight_shuffle_null",
+        "seed": 1,
+        "ray_scale": 2.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 164.954563776918,
+        "sphere_best_fx": 68.86318945273939,
+        "null_gen_time_s": 1.2115936279296875,
+        "calib_time_s": 31.59219980239868,
+        "rastrigin_time_s": 14.916459083557129,
+        "sphere_time_s": 37.00409913063049
+      },
+      {
+        "kind": "degree_preserving_null",
+        "seed": 0,
+        "ray_scale": 1.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 161.16362890507762,
+        "sphere_best_fx": 89.66779502302944,
+        "null_gen_time_s": 160.99001169204712,
+        "calib_time_s": 17.41289234161377,
+        "rastrigin_time_s": 8.654486417770386,
+        "sphere_time_s": 21.64533281326294
+      },
+      {
+        "kind": "degree_preserving_null",
+        "seed": 1,
+        "ray_scale": 1.0,
+        "decode_scale": 0.5,
+        "rastrigin_best_fx": 120.95829639455073,
+        "sphere_best_fx": 70.73084113697101,
+        "null_gen_time_s": 163.06377267837524,
+        "calib_time_s": 18.572686195373535,
+        "rastrigin_time_s": 8.171238660812378,
+        "sphere_time_s": 20.83194375038147
+      }
+    ]
+  },
+  "finished_at": "2026-09-16T08:30:44.690328+00:00"
+}

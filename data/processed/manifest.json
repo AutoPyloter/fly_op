@@ -1,0 +1,12 @@
+{
+  "n_neurons": 139255,
+  "n_edges": 15091983,
+  "density": 0.0007782600042411144,
+  "frac_excitatory": 0.6759972711931349,
+  "frac_inhibitory": 0.31502639043481384,
+  "n_neurons_no_outgoing_sign": 1250,
+  "out_degree_mean": 108.37659689059639,
+  "out_degree_max": 9783,
+  "in_degree_mean": 108.37659689059639,
+  "in_degree_max": 10356
+}

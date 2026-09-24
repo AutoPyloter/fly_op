@@ -1,0 +1,16 @@
+{"seed": 0, "substrate": "real_connectome", "eval_fx": 16.680722427368163, "final_train_loss": 32.319091796875}
+{"seed": 0, "substrate": "er_null", "eval_fx": 16.42059769630432, "final_train_loss": 46.23601150512695}
+{"seed": 1, "substrate": "real_connectome", "eval_fx": 23.180232945394597, "final_train_loss": 37.31660461425781}
+{"seed": 1, "substrate": "er_null", "eval_fx": 25.785707141805375, "final_train_loss": 37.604583740234375}
+{"seed": 2, "substrate": "real_connectome", "eval_fx": 25.749725382725604, "final_train_loss": 41.815956115722656}
+{"seed": 2, "substrate": "er_null", "eval_fx": 22.9794485822983, "final_train_loss": 46.76454162597656}
+{"seed": 3, "substrate": "real_connectome", "eval_fx": 25.870567750930785, "final_train_loss": 48.61460876464844}
+{"seed": 3, "substrate": "er_null", "eval_fx": 23.079018006229717, "final_train_loss": 53.21839904785156}
+{"seed": 4, "substrate": "real_connectome", "eval_fx": 15.728379726409912, "final_train_loss": 25.970701217651367}
+{"seed": 4, "substrate": "er_null", "eval_fx": 17.213998757740004, "final_train_loss": 43.34330368041992}
+{"seed": 5, "substrate": "real_connectome", "eval_fx": 32.11066381052002, "final_train_loss": 31.163156509399414}
+{"seed": 5, "substrate": "er_null", "eval_fx": 33.05547013377554, "final_train_loss": 30.391069412231445}
+{"seed": 6, "substrate": "real_connectome", "eval_fx": 26.657928562164308, "final_train_loss": 40.025672912597656}
+{"seed": 6, "substrate": "er_null", "eval_fx": 19.093325188499666, "final_train_loss": 50.56253433227539}
+{"seed": 7, "substrate": "real_connectome", "eval_fx": 24.870335103217258, "final_train_loss": 45.00761795043945}
+{"seed": 7, "substrate": "er_null", "eval_fx": 21.358789223156794, "final_train_loss": 36.329673767089844}

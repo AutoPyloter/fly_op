@@ -1,0 +1,8 @@
+{"seed": 0, "substrate": "real_connectome", "test_mse": 0.10087702423334122}
+{"seed": 0, "substrate": "degree_preserving_null", "test_mse": 0.2487175315618515}
+{"seed": 1, "substrate": "real_connectome", "test_mse": 0.09243753552436829}
+{"seed": 1, "substrate": "degree_preserving_null", "test_mse": 0.14934231340885162}
+{"seed": 2, "substrate": "real_connectome", "test_mse": 0.1199708953499794}
+{"seed": 2, "substrate": "degree_preserving_null", "test_mse": 0.17477914690971375}
+{"seed": 3, "substrate": "real_connectome", "test_mse": 0.0905645564198494}
+{"seed": 3, "substrate": "degree_preserving_null", "test_mse": 0.135317862033844}
