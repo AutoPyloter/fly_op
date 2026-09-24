@@ -4262,3 +4262,19 @@ aciklanamamis FAIL (vessel delta=-0.031)**.
 Sirada: besinci gorev (kiris sehimi/servis-edilebilirlik,
 `fly_deflection_multiseed.py`, ayni kalibrasyon dersi ONCEDEN
 uygulanmis haliyle) test ediliyor.
+
+---
+
+## 2026-09-24 — Besinci fiziksel gorev: kiris sehimi (servis-edilebilirlik) -- MUKEMMEL PASS
+
+Kalibrasyon dersi (kutu daraltma + referans-kesit oranli yuk turetme)
+ONCEDEN uygulanarak tasarlanan besinci gorev, ilk denemede tam ayrisma
+verdi:
+
+```
+n=8: real medyan=0.0292  null medyan=0.2820  MW p=0.000155  Wilcoxon p=0.00781  delta=1.000  PASS (mukemmel ayrisma, n=30'a genisletiliyor)
+```
+
+Gercek agin hatasi (0.024-0.114) ile null'unki (0.22-0.49) arasinda
+HIC ortusme yok. Bu, sev-stabilitesi disindaki EN GUCLU pilot sonuc.
+n=30'a genisletiliyor.
