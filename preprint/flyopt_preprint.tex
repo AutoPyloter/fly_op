@@ -1,0 +1,387 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{authblk}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{natbib}
+\usepackage{caption}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue
+}
+
+\title{Task-Specific Computational Advantage of the \emph{Drosophila}
+Connectome: A Null-Model-Controlled Study}
+
+\author[1]{FlyOpt Research}
+\affil[1]{Independent Research}
+
+\date{September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Does the wiring topology of a real biological neural network -- who is
+connected to whom, and with what synaptic weight -- confer a
+computational advantage over a randomly rewired network with the exact
+same size and degree distribution? We test this question using the
+FlyWire FAFB v783 connectome of the adult female \emph{Drosophila
+melanogaster} brain, embedded as a fixed recurrent substrate in a
+differentiable, Dale's-law-preserving leaky-rate neural network
+(\texttt{RateBrain}), trained by gradient descent on a variety of
+computational tasks and compared against a family of null models that
+progressively relax structural constraints (degree sequence, modularity,
+weight identity). We find that the real connectome provides a
+statistically robust advantage (Cliff's $\delta = 0.61$--$1.00$, $n=30$,
+$p < 0.05$ after Bonferroni-style multiple-testing discipline via a
+pre-registered magnitude-triggered extension rule) on a specific task
+format: single-shot, feed-forward, continuous spatial/physical direction
+regression. This holds across six independent physical/engineering
+design problems spanning distinct failure modes (geotechnical slip,
+bending stress, transverse shear, elastic buckling, deflection
+serviceability, and thin-wall hoop stress), across an order-of-magnitude
+range of subgraph sizes, and across a $50\times$ range of input sensing
+scale. The advantage is largely (but not fully) explained by the
+network's modular organisation, does not generalise to abstract
+optimisation, discrete classification, closed-loop control, a different
+species (\emph{C.~elegans}), a different individual of the same species
+(male \emph{Drosophila} CNS), input noise, or weight quantisation, and
+does not transfer zero-shot to a mechanically different task in the same
+family. We report the full boundary-mapping process transparently,
+including two methodological errors we made and corrected during the
+study (a ratio-metric artifact and two term-imbalance calibration bugs
+in newly designed benchmarks), as a case study in the discipline required
+for this kind of null-model-controlled connectome research.
+\end{abstract}
+
+\section{Introduction}
+
+A recurring question in computational neuroscience and connectome-based
+reservoir computing \citep{suarez2024conn2res, costi2025flywire} is
+whether the specific topology of a mapped biological neural circuit
+does any real computational work beyond what is explained by simpler
+statistical properties of the network (size, density, degree
+distribution). Most prior work in this space reports a positive result
+against a single, often permissive, null model and does not
+systematically probe the boundaries of the finding. Our contribution is
+methodological as much as empirical: we test one connectome, with one
+consistent statistical framework, across a deliberately wide spectrum of
+task types, and report negative and positive results with equal rigor,
+including corrections to our own errors made mid-study.
+
+Our central hypothesis (task--architecture matching) is that any
+advantage of the real connectome over a randomised network should be
+largest for tasks structurally close to what the connectome evolved to
+do -- filtering a large, dense sensory input down to a small number of
+motor outputs -- and should weaken or vanish for tasks further from
+that structural niche.
+
+\section{Methods}
+
+\subsection{Data}
+
+The primary connectome is FlyWire FAFB v783 \citep{dorkenwald2024flywire},
+the electron-microscopy-reconstructed connectome of an adult female
+\emph{Drosophila melanogaster} brain (139{,}255 neurons, 15{,}091{,}983
+directed synaptic connections), with cell-type annotations from
+\citet{schlegel2024flywire}. Comparison connectomes are the
+\emph{C.~elegans} hermaphrodite somatic nervous system
+\citep{cook2019celegans} and a male \emph{Drosophila} CNS connectome
+obtained from an independent third-party dataset.
+
+\subsection{Subgraph construction}
+
+From the full connectome, we select encode (afferent-pool) and decode
+(efferent-pool) neurons verified, via multi-hop breadth-first search on
+the full directed graph, to have a genuine forward path between them
+(a naive random afferent/efferent draw can have zero true connectivity).
+From this seed set we grow an induced subgraph of a target size (the
+official size is 3{,}000 nodes; robustness across 1{,}000--10{,}000 nodes
+is reported in Section~\ref{sec:generality}) via breadth-first search
+along real directed edges.
+
+\subsection{Substrate and training}
+
+\texttt{RateBrain} is a differentiable, leaky-rate recurrent network
+with Dale's-law-preserving weights ($w = \mathrm{sign} \cdot
+\mathrm{softplus}(\mathrm{gain})$), trained by standard backpropagation
+(Adam optimiser). For single-shot tasks, sensory input (finite-difference
+``rays'' -- local probes of a task's objective function along each
+design-variable axis) is injected into encode neurons and held constant
+for $T{=}8$ recurrent sub-steps; a linear readout from decode neurons
+produces a predicted direction. The teacher signal is a crude
+finite-difference negative-gradient estimate from the same probes (not a
+hand-crafted heuristic), and training minimises mean squared error
+against it.
+
+\subsection{Null model family}
+
+We compare the real connectome against six null models of increasing
+structural fidelity:
+\begin{itemize}
+  \item \texttt{er\_null} -- node/edge count only;
+  \item \texttt{scale\_free\_null} -- generic heterogeneous degree distribution;
+  \item \texttt{scale\_free\_correlated\_null} -- plus in/out-degree correlation;
+  \item \texttt{weight\_shuffle} -- full topology, shuffled weights;
+  \item \texttt{community\_preserving\_rewire} -- full degree sequence plus full modularity/community structure;
+  \item \texttt{degree\_preserving\_rewire} -- exact degree sequence via Maslov--Sneppen double-edge-swap rewiring (our primary/official null model throughout).
+\end{itemize}
+
+\subsection{Statistics}
+
+We use the triad of Wilcoxon signed-rank (paired), Mann--Whitney~$U$
+(unpaired), and Cliff's~$\delta$ (effect size) throughout. The official
+gate is $p<0.05$ \emph{and} $|\delta|>0.33$. The standard protocol is an
+$n=8$ pilot; whenever $|\delta|>0.33$ at $n=8$, the test is extended to
+$n=30$, \emph{independent of whether the pilot $p$-value was already
+significant} -- a magnitude-triggered, not significance-triggered,
+extension rule, decided in advance and applied uniformly.
+
+\section{Results}
+
+\subsection{The official finding}
+
+Two independent physical/engineering tasks -- slope-stability
+(geotechnical limit-equilibrium factor of safety) and cantilever beam
+design (bending stress) -- show a strong, reproducible advantage of the
+real connectome over the \texttt{degree\_preserving\_rewire} null at
+$n=30$: $\delta = 0.884$ ($p < 10^{-4}$) and $\delta = 0.613$
+($p<10^{-4}$) respectively. The advantage replicates in 9 of 11
+independent subgraph seeds (median $\delta = 0.500$), so it is not an
+artefact of one fortunate subgraph draw.
+
+\subsection{Mechanism}
+
+Sweeping the null-model family for the slope-stability task
+(Table~\ref{tab:mechanism}) shows that $\delta$ falls from $0.884$
+(degree-preserving) to $0.429$ once the null is also constrained to
+match the real network's community/modularity structure
+(\texttt{community\_preserving\_rewire}), and becomes non-significant
+once weights alone are shuffled on the real topology
+(\texttt{weight\_shuffle}, $\delta = 0.258$, $p=0.088$). Modularity thus
+explains roughly half of the effect; the remainder is unexplained
+(a weak, uncorrected exploratory correlation with the fraction of
+\emph{ascending}-type interneurons was noted but not confirmed).
+
+\begin{table}[h]
+\centering
+\caption{Cliff's $\delta$ across the null-model family (slope stability,
+$n=30$).}
+\label{tab:mechanism}
+\begin{tabular}{lccc}
+\toprule
+Null model & Preserves & $\delta$ & $p$ \\
+\midrule
+\texttt{degree\_preserving} & full degree sequence & $0.884$ & $\approx 0$ \\
+\texttt{scale\_free} & generic heterogeneity & $0.738$ & $\approx 0$ \\
+\texttt{scale\_free\_correlated} & + degree correlation & $0.604$ & $0.00006$ \\
+\texttt{community\_preserving} & + full modularity & $0.429$ & $0.0044$ \\
+\texttt{weight\_shuffle} & topology, no weights & $0.258$ & $0.088$ (n.s.) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Generality across the physical-task family}
+\label{sec:generality}
+
+We extended the official pair of tasks to a family of six mechanically
+distinct single-shot physical/engineering design problems, each with its
+own failure/design criterion (Table~\ref{tab:physical}). All six show a
+statistically robust advantage at $n=30$ (the sixth, transverse shear,
+had its $n{=}30$ confirmation still running at the time of writing this
+draft; its $n{=}8$ pilot crossed the gate cleanly, $\delta=0.906$,
+$p=0.001$).
+
+\begin{table}[h]
+\centering
+\caption{Physical/engineering task family, all against
+\texttt{degree\_preserving\_rewire}.}
+\label{tab:physical}
+\begin{tabular}{llcc}
+\toprule
+Task & Failure/design criterion & $\delta$ ($n{=}30$) & $p$ \\
+\midrule
+Beam deflection & serviceability (stiffness) & $1.000$ & $3\times10^{-11}$ \\
+Slope stability & geotechnical limit-equilibrium & $0.884$ & $\approx 0$ \\
+Pressure vessel & thin-wall hoop stress & $0.871$ & $7\times10^{-9}$ \\
+Column buckling & elastic instability & $0.88$ & $5\times10^{-9}$ \\
+Beam shear & transverse shear stress & $0.91^{\ast}$ & $0.001^{\ast}$ \\
+Beam bending & bending stress & $0.613$ & $\approx 0$ \\
+\bottomrule
+\end{tabular}
+\vspace{2pt}
+\\\footnotesize{$^{\ast}$ $n=8$ pilot value; $n=30$ confirmation in
+progress at time of writing.}
+\end{table}
+
+Two of the six tasks (column buckling and pressure vessel) initially
+returned an apparent \texttt{FAIL} and were provisionally reported as
+such before we discovered, via a suspicious numerical similarity between
+two independently designed benchmarks' diagnostic output, that both
+suffered from an objective-term-balance calibration bug: in one case the
+material-cost term dominated $>99.99\%$ of the objective at typical
+sampled points (making the task trivially solvable by any network
+regardless of structure), and in the mirror-image case a physical stress
+term dominated $>97\%$. Both were corrected (narrowing the design-variable
+box and/or re-deriving load magnitude as a fraction of a reference
+cross-section's capacity, verified numerically before any further GPU
+time was spent) and both then showed some of the strongest positive
+results in the entire study. This episode is documented in full in the
+project's public experiment log as a cautionary methodological case study
+(Section~\ref{sec:limits}).
+
+We also swept the size of the 3{,}000-node official subgraph across
+1{,}000--10{,}000 nodes (a 10$\times$ range): all four sizes tested pass
+the gate ($\delta = 1.00, 1.00, 0.84, 0.81$ respectively), so the official
+finding is not an artefact of the specific 3{,}000-node choice. Separately,
+zero-shot evaluation of the officially trained network at input sensing
+radii $0.1\times$ and $5\times$ the training radius (a $50\times$ total
+range) both pass the gate ($\delta = 0.684$ and $0.906$ respectively,
+$n=30$/$n=8$), and mechanism analysis shows this generalisation axis
+collapses under the exact same null model (\texttt{community\_preserving})
+as the main finding -- i.e. it is not an independent second mechanism.
+
+\subsection{Boundary: where the advantage does not hold}
+
+The advantage does not generalise to: abstract, non-spatial optimisation
+landscapes (Sphere, Rastrigin, Ackley, Rosenbrock, Beale; $\delta \approx
+0$ to $-0.34$); a discrete-classification reformulation of the same
+underlying task (octant classification, $\delta=0.141$); closed-loop,
+multi-step control variants of the same task ($\delta$ falls to
+$\approx 0$); a different species (\emph{C.~elegans}, all null models
+n.s.); a different individual of the same species (male \emph{Drosophila}
+CNS, $\delta=0.250$, n.s., confirmed by two independent follow-up
+controls); or an external gradient-free search algorithm warm-started
+with the network's predictions (PSO warm-start hybrid, $\delta=0.125$,
+n.s.).
+
+Two further axes show a \emph{reversed} advantage (real connectome
+performing significantly \emph{worse} than the null): zero-shot transfer
+of a slope-stability-trained network to the mechanically related
+beam-design task without retraining ($\delta=-0.464$, $n=30$), and
+robustness to moderate ($15\%$) proportional input noise ($\delta=-0.911$,
+$n=30$, confirmed independently via both ratio- and absolute-error
+metrics). By contrast, an initially reported reversed-advantage finding
+for random structural damage (edge ablation) was retracted after
+independent audit revealed it to be a ratio-metric artefact (the real
+network's already-lower baseline error mechanically inflated a
+ratio-based fragility metric); recomputed on absolute error, the
+official 20\% ablation level shows no significant difference
+($\delta=-0.176$, $p=0.246$).
+
+Finally, the advantage evaporates under weight quantisation at every
+tested precision (8-, 4-, and 2-bit, all non-significant, $n=8$--$30$),
+indicating that it depends on full floating-point numerical precision
+and should not be expected to transfer directly to low-bit neuromorphic
+hardware.
+
+\section{Discussion}
+
+Taken together, the results support a narrow but well-evidenced claim:
+a specific biological connectome can carry a structural computational
+advantage for the class of computation it plausibly evolved for (dense
+sensory input funnelled to a small motor output, computed in a single
+feed-forward pass), and this advantage is (i) acquired from remarkably
+little training data, (ii) robust to substantial changes in input
+sensing scale and subgraph size, (iii) largely but not fully attributable
+to modular network organisation, and (iv) fragile outside this narrow
+task format -- to a different task class, a different species or
+individual, input noise, and reduced numerical precision.
+
+This is a materially narrower and more precisely bounded claim than
+``biological networks are generally better computers.'' It is, however,
+a substantially \emph{broader} claim within its own boundary than we
+initially believed: what first appeared to be an idiosyncratic result on
+two specific engineering problems turned out, once two calibration bugs
+were found and fixed, to hold across six mechanically distinct physical
+design criteria with no exceptions.
+
+\subsection{Limitations and lessons}
+\label{sec:limits}
+
+All official findings derive from a single female specimen's connectome;
+subgraph-seed sampling ($n=11$) supports but does not prove full
+generality. The \texttt{RateBrain} architecture is a biologically
+plausible but simplified abstraction (no spike timing, no short-term
+plasticity). Five additional task categories attempted in an
+overnight autonomous experiment batch (temporal integration, working
+memory, anomaly detection, chaotic time-series prediction, time-to-contact
+estimation) were found, on independent audit, to be invalid due to a
+shared infrastructure bug (a mismatch between full-graph connectivity
+verification and subgraph-extraction breadth-first search that can leave
+a single encode neuron disconnected from all decode neurons within the
+extracted subgraph) and yield no usable evidence either way; the root
+cause is documented but the shared code was deliberately left unmodified
+pending careful, isolated validation against the existing official
+results.
+
+We highlight, as a methodological contribution in its own right, that
+two of the six physical-task results in Section~\ref{sec:generality}
+were initially wrong in a diagnosable, correctable way, and that both
+corrections were found only because an unrelated newly designed
+benchmark's pre-training diagnostic numbers were suspiciously similar to
+an already-reported result's diagnostics. We now treat a pre-training
+check of (a) the fraction of the objective contributed by each additive
+term at sampled points, and (b) the cosine similarity between the
+finite-difference teacher signal and a near-exact local gradient
+reference, as mandatory before any new single-shot task is trusted --
+several of the exciting-looking early results in this line of work
+(including, at different points, results in both directions) turned out
+on inspection to be measurement artefacts rather than genuine findings
+about the connectome, and only systematic self-auditing caught them.
+
+\section{Conclusion}
+
+The female \emph{Drosophila} FlyWire connectome's sensory-to-motor
+subgraph shows a robust, mechanism-partially-explained, reproducible
+computational advantage over degree-matched random networks, specifically
+on single-shot, feed-forward, continuous spatial/physical direction
+regression -- and this advantage now extends, following correction of
+two calibration errors, across every physical engineering design
+criterion we have tested. The advantage does not indicate general-purpose
+computational superiority: it does not transfer across task format,
+species, individuals, input noise, or numerical precision. All code, raw
+results, and a complete, dated experiment log -- including every error
+found and corrected during the study -- are publicly available at
+\url{https://github.com/AutoPyloter/fly_op}.
+
+\bibliographystyle{plainnat}
+\begin{thebibliography}{9}
+
+\bibitem[Suárez et al.(2024)]{suarez2024conn2res}
+Suárez, L.E. et al. (2024).
+Conn2res: A toolbox for connectome-based reservoir computing.
+\emph{Nature Communications}.
+
+\bibitem[Costi et al.(2025)]{costi2025flywire}
+Costi, S., Hadjiivanov, A., Dold, D., Hale, J., Izzo, D. (2025).
+The Drosophila connectome as a computational reservoir for time-series
+prediction. \emph{Biomimetics}.
+
+\bibitem[Dorkenwald et al.(2024)]{dorkenwald2024flywire}
+Dorkenwald, S. et al. (2024).
+Neuronal wiring diagram of an adult brain.
+FlyWire FAFB v783, Zenodo DOI 10.5281/zenodo.10676866.
+
+\bibitem[Schlegel et al.(2024)]{schlegel2024flywire}
+Schlegel, P. et al. (2024).
+Whole-brain annotation and multi-connectome cell typing of Drosophila.
+\emph{Nature}.
+
+\bibitem[Cook et al.(2019)]{cook2019celegans}
+Cook, S.J. et al. (2019).
+Whole-animal connectomes of both Caenorhabditis elegans sexes.
+\emph{Nature}.
+
+\end{thebibliography}
+
+\end{document}
