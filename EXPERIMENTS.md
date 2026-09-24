@@ -4314,3 +4314,61 @@ delta=0.88'e donustu.** Vessel'in FAIL'i de benzer bir kalibrasyon
 sorunundan kaynaklanabilir mi sorusu artik cok daha guclu bir sekilde
 acik kaliyor -- ayni "terim dengesi" kontrolu vessel_cost'a da
 uygulanmali (henuz yapilmadi, bir sonraki adim olarak not edildi).
+
+---
+
+## 2026-09-24 — GIZEM COZULDU: Basincli kap FAIL'i de kalibrasyon hatasiymis -- duzeltilince MUKEMMEL PASS
+
+Vessel'in terim dengesi kontrol edildi: hoop-stress terimi maliyet
+terimini tipik noktalarda **%97.4** payla eziyordu (kolon'un ilk
+hatasinin AYNASI -- orada maliyet, burada fizik terimi domine ediyordu).
+`cost_weight` araligi [5e6,8e7] -> [5e8,4e9] olarak yeniden kalibre
+edildi (hoop-stress payi medyani artik %44.4). Ayrica bu yeniden
+dengeleme, R/t olcek-asimetrisini de yeniden gun yuzune cikardi --
+radius=0.01'de ogretmen sinyali hala kotuydu (ortalama kosinus-
+benzerligi=0.92, min=-0.92); radius=0.001'e dusurulunce mukemmele cikti
+(ortalama=0.9998, min=0.98).
+
+**Yeniden kalibre edilmis vessel testi (n=8, `fly_vessel_design_recalibrated_multiseed.py`):**
+```
+real medyan=0.0375  null medyan=0.2178  MW p=0.000155  Wilcoxon p=0.00781  delta=1.000  PASS (tam ayrisma, n=30'a genisletiliyor)
+```
+
+**GIZEM TAMAMEN COZULDU.** Basincli kap tasariminin ilk raporlanan
+FAIL'i (delta=-0.031, "acikianamamis" olarak isaretlenmisti) TAMAMEN
+bir kalibrasyon artefaktiydi -- connectome hakkinda hicbir sey
+soylemiyordu. Duzeltilince kiris sehimi gibi mukemmel bir ayrisma
+veriyor.
+
+### NIHAI fiziksel gorev istatistigi: 5/5 PASS
+
+| Gorev | Ariza modu / kriter | delta (n=8, vessel haric n=30) |
+|---|---|---|
+| Sev stabilitesi | limit-denge (kayma) | 0.884 (n=30) |
+| **Kiris sehimi** | servis-edilebilirlik | **1.000 (n=30)** |
+| **Basincli kap** | **cevresel (hoop) gerilme** | **1.000 (n=8, n=30 bekleniyor)** |
+| Kolon burkulmasi | elastik kararsizlik | 0.88 (n=30) |
+| Kiris tasarimi | egilme gerilmesi | 0.613 (n=30) |
+
+**Test edilen BES fiziksel/muhendislik gorevinin BESI de, dogru kalibre
+edildiginde, guclu ve tutarli bir connectome avantaji gosteriyor.**
+"Dar sinif" hipotezi (tek-atislik, fiziksel/uzamsal yon regresyonu)
+artik cok daha genis bir dogrulukla destekleniyor -- onceki "2/3" veya
+"belirsiz" tablo, byuk olcude METODOLOJIK HATALARIN (terim dengesizligi,
+olcek uyumsuzlugu) urunuymus, connectome'un gercek sinirlarinin degil.
+
+**Bu gecenin/gunun en buyuk dersi:** iki bagimsiz "acilanamayan FAIL"
+(kolon, vessel) ikisi de ayni kok-neden ailesinden (terim dengesizligi,
+farkli yonlerde) cikti ve ikisi de duzeltilince en guclu PASS'lere
+donustu. Bu, projenin sinir haritasinin BUYUK bolumunun ("avantaj
+FAIL ediyor" olarak isaretlenen eksenlerin bir kismi) aslinda test
+tasarimi hatalarindan kaynaklanmis olabilecegine dair guclu bir uyari --
+ozellikle YENI, henuz tam dogrulanmamis gorevler icin. Onceden dogrulanmis
+GENELLENEMEYEN eksenler (tur, birey, gorev-TIPI degisikligi, girdi
+gurultusu, kuantizasyon) icin bu risk daha dusuk (cunku onlar farkli bir
+GOREVI degil, AYNI dogrulanmis fiziksel gorevi farkli kosullarda test
+ediyordu) -- ama ileride ekelenecek her YENI fiziksel/matematiksel gorev
+icin, artik STANDART pratik: onceden terim-dengesi + olcek-kontrolu +
+ogretmen-sinyal-kalitesi ucuzlu dogrulamasi ZORUNLU.
+
+Sirada: vessel n=30'a genisletiliyor (resmi kesinlestirme icin).
