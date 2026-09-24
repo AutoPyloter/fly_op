@@ -4278,3 +4278,39 @@ n=8: real medyan=0.0292  null medyan=0.2820  MW p=0.000155  Wilcoxon p=0.00781  
 Gercek agin hatasi (0.024-0.114) ile null'unki (0.22-0.49) arasinda
 HIC ortusme yok. Bu, sev-stabilitesi disindaki EN GUCLU pilot sonuc.
 n=30'a genisletiliyor.
+
+### RESMI: Kiris sehimi n=30'da MUKEMMEL PASS -- projenin EN GUCLU sonucu
+
+```
+n=30: real medyan=0.0349  null medyan=0.3372  MW p=3.02e-11  Wilcoxon p=1.86e-09  delta=1.000  PASS (tam ayrisma)
+```
+
+**30 tohumun HEPSINDE gercek agin hatasi (0.016-0.114) ile null'unki
+(0.19-0.49) arasinda SIFIR ortusme.** Bu, ana sev-stabilitesi bulgusunu
+(delta=0.884) bile gecen, PROJENIN SIMDIYE KADARKI EN GUCLU, EN TEMIZ
+sonucu.
+
+### Fiziksel gorev istatistigi: 4 PASS / 1 aciklanamamis FAIL (5 gorev)
+
+| Gorev | Ariza modu / kriter | delta (n=30) | Durum |
+|---|---|---|---|
+| Sev stabilitesi | limit-denge (kayma) | 0.884 | PASS |
+| **Kiris sehimi** | **servis-edilebilirlik (sehim)** | **1.000** | **PASS (mukemmel)** |
+| Kolon burkulmasi | elastik kararsizlik | 0.88 | PASS |
+| Kiris tasarimi | egilme gerilmesi (mukavemet) | 0.613 | PASS |
+| Basincli kap | cevresel (hoop) gerilme | -0.031 | FAIL (aciklanamadi) |
+
+**Dogru kalibre edildiginde (terim dengesi + olcek simetrisi
+korunarak), avantaj tek-atislik fiziksel/uzamsal regresyon gorevlerinin
+BUYUK COGUNLUGUNDA (5 gorevden 4'unde) tutarli ve guclu sekilde ortaya
+cikiyor.** Vessel artik "3'te 1 FAIL" degil, "5'te 1, giderek daha
+belirgin bir istisna" gibi goruunuyor -- kendi basina aciklanmamis
+kalsa da, genel oruntu ("dar sinif" = tek-atislik fiziksel yon
+regresyonu) daha once dusunulenden cok daha GENIS ve SAGLAM cikti.
+
+Bu gecenin/gunun en onemli metodolojik dersi: **kolon burkulmasinin ilk
+FAIL'i (delta=0.172) tam bir kalibrasyon hatasiydi, duzeltilince
+delta=0.88'e donustu.** Vessel'in FAIL'i de benzer bir kalibrasyon
+sorunundan kaynaklanabilir mi sorusu artik cok daha guclu bir sekilde
+acik kaliyor -- ayni "terim dengesi" kontrolu vessel_cost'a da
+uygulanmali (henuz yapilmadi, bir sonraki adim olarak not edildi).

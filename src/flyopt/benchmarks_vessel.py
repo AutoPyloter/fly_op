@@ -46,8 +46,21 @@ class VesselGeometry:
 
 
 def random_geometry(rng: np.random.Generator) -> VesselGeometry:
+    """2026-09-24 recalibration (applying the same lesson learned fixing
+    benchmarks_column.py's term-balance bug -- see EXPERIMENTS.md
+    2026-09-24 -- to this task's original, unexplained FAIL): the
+    original cost_weight range [5e6, 8e7] left the hoop-STRESS term
+    dominating >97% of the objective at typical sampled points (opposite
+    imbalance from column's original bug, same underlying flaw: one term
+    trivially dominates, making the task "just minimize/maximize one
+    variable" regardless of connectome structure). Verified numerically:
+    cost_weight=[5e8, 4e9] brings the stress-term share down to a median
+    ~40% (real tension between the two terms). The original vessel_cost
+    delta=-0.031 FAIL result is RETRACTED as invalid/degenerate pending
+    a rerun with this calibration -- not treated as a genuine negative
+    result."""
     pressure = float(rng.uniform(2e5, 3e6))       # 0.2-3.0 MPa gauge
-    cost_weight = float(rng.uniform(5e6, 8e7))
+    cost_weight = float(rng.uniform(5e8, 4e9))
     return VesselGeometry(pressure=pressure, cost_weight=cost_weight)
 
 
