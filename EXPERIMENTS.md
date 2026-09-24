@@ -4371,4 +4371,34 @@ ediyordu) -- ama ileride ekelenecek her YENI fiziksel/matematiksel gorev
 icin, artik STANDART pratik: onceden terim-dengesi + olcek-kontrolu +
 ogretmen-sinyal-kalitesi ucuzlu dogrulamasi ZORUNLU.
 
-Sirada: vessel n=30'a genisletiliyor (resmi kesinlestirme icin).
+### RESMI: Basincli kap n=30'da dogrulandi -- 5/5 fiziksel gorev artik TAM RESMI PASS
+
+```
+n=30: real medyan=0.0288  null medyan=0.1580  MW p=7.12e-09  Wilcoxon p=1.86e-09  delta=0.871  PASS
+```
+
+n=8'deki mukemmel delta=1.000'den biraz dustu (bazi null tohumlari
+dusuk cikti) ama hala cok guclu ve tam anlamda resmi. **NIHAI, TAM
+DOGRULANMIS fiziksel gorev tablosu:**
+
+| Gorev | Ariza modu / kriter | delta (n=30) | p (MW) |
+|---|---|---|---|
+| **Kiris sehimi** | servis-edilebilirlik | **1.000** | 3.02e-11 |
+| Sev stabilitesi | limit-denge (kayma) | 0.884 | ≈0 |
+| **Basincli kap** | cevresel (hoop) gerilme | **0.871** | 7.12e-09 |
+| Kolon burkulmasi | elastik kararsizlik | 0.88 | 5.00e-09 |
+| Kiris tasarimi | egilme gerilmesi | 0.613 | ≈0 |
+
+**Test edilen BES fiziksel/muhendislik gorevinin BESI de resmi kapiyi
+(n=30, p<0.05, |delta|>0.33) geciyor.** Sifir istisna. Bu, projenin en
+onemli metodolojik ve bilimsel donusu: onceki "dar, kirilgan, bazen
+aciklanamayan FAIL'ler iceren" tablo, buyuk olcude iki bagimsiz
+kalibrasyon hatasinin (terim dengesizligi, iki zit yonde) urunuymus.
+Dogru kalibre edildiginde, "tek-atislik fiziksel/uzamsal yon
+regresyonu" sinifi COK DAHA GENIS ve SAGLAM bir sekilde destekleniyor.
+
+Bu, ozetin/makalenin/README'nin ana anlatisinin guncellenmesini
+gerektiriyor -- "dar sinif, 2/3 ya da 2/4 fiziksel gorevde calisiyor"
+yerine artik "tek-atislik fiziksel/uzamsal regresyon sinifinin
+TAMAMINDA (test edilen 5/5) tutarli ve genellikle cok guclu bir
+connectome avantaji" denilebilir.

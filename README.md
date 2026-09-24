@@ -9,11 +9,11 @@
 <img alt="Status" src="https://img.shields.io/badge/durum-aktif%20ara%C5%9Ft%C4%B1rma-2f6b4f">
 </p>
 
-**Kısa cevap: Evet, ama çok dar bir alanda — ve bu README o alanın tam haritasını, nasıl çizildiğini ve hâlâ neyin bilinmediğini şeffaf şekilde anlatıyor.**
+**Kısa cevap: Evet — belirli bir görev FORMATI (tek-atışlık, fiziksel/uzamsal yön regresyonu) içinde şaşırtıcı derecede güçlü ve tutarlı, ama o formatın dışına (farklı görev tipi, tür, birey, donanım hassasiyeti) taşınmıyor. Bu README o sınırın tam haritasını, nasıl çizildiğini ve hâlâ neyin bilinmediğini şeffaf şekilde anlatıyor.**
 
 Bu depo, gerçek ve tam olarak haritalanmış bir *Drosophila melanogaster* (meyve sineği) beyin bağlantı haritasını (connectome), aynı istatistiksel özelliklere (nöron sayısı, kenar sayısı, derece dağılımı, modülerlik...) sahip **rastgele karıştırılmış** kontrol ağlarına karşı, çok çeşitli hesaplama görevlerinde sistematik olarak test eden bir araştırma projesidir. Amaç: gerçek biyolojik bağlantı yapısının kendisi, sadece "bir sürü nöron ve bağlantı olması"nın ötesinde, ölçülebilir bir hesaplama avantajı sağlıyor mu?
 
-Bulgu tek cümlede: **evet, ama yalnızca çok dar, spesifik bir görev sınıfında** (tek-atışlık, fiziksel/uzamsal yön tahmini) — ve bu avantajın nerede durduğu, nerede kaybolduğu, hangi yapısal özellikten geldiği ve nerede henüz açıklanamadığı bu belgede ayrıntılı olarak belgeleniyor.
+Bulgu tek cümlede: **evet, belirli bir görev FORMATINDA** (tek-atışlık, fiziksel/uzamsal yön regresyonu) — ve bu format içinde test edilen **5 farklı mühendislik probleminin 5'i de** (şev stabilitesi, kiriş tasarımı, kiriş sehimi, kolon burkulması, basınçlı kap tasarımı — beşi de mekanik olarak farklı arıza modları) güçlü bir connectome avantajı gösteriyor. Bu avantajın nerede durduğu (başka görev formatları, türler, bireyler, donanım hassasiyeti), hangi yapısal özellikten geldiği (ağın modülerliği) ve bu sonuca varana kadar yakalanıp düzeltilen metodolojik hatalar bu belgede ayrıntılı olarak belgeleniyor.
 
 > **Terminoloji notu:** Bu proje "sinekten esinlenen algoritma" (fly-inspired algorithm) DEĞİLDİR. Gerçek, ölçülmüş connectome topolojisi doğrudan bir hesaplama substratı olarak kullanılıyor — nöronlar arası gerçek sinaptik bağlantılar, gerçek ağırlıklarla. Kullanılan doğru terimler: *connectome-driven computation*, *connectome-constrained recurrent substrate*, *biological wiring as a fixed architecture*.
 
@@ -95,7 +95,7 @@ graph LR
 | <img src="https://img.shields.io/badge/-PASS-2f6b4f"> | Alt-graf boyutu (1000/3000/6000/10000 nöron) | 8/boyut | **1.00/1.00/0.84/0.81** | 4 boyutun DÖRDÜ de PASS |
 | <img src="https://img.shields.io/badge/-PASS-2f6b4f"> | Dördüncü fiziksel görev (kolon burkulması) | 30 | **0.88** | İlk raporlanan FAIL bir kalibrasyon hatasıydı, düzeltilince ana bulguyla eşdeğer güçte PASS — bkz. §10 |
 | <img src="https://img.shields.io/badge/-PASS-2f6b4f"> | Beşinci fiziksel görev (kiriş sehimi) | 30 | **1.000** | **Projenin en güçlü sonucu** — 30 tohumun hepsinde gerçek/null hatası hiç örtüşmüyor |
-| <img src="https://img.shields.io/badge/-PASS-2f6b4f"> | Üçüncü fiziksel görev (basınçlı kap tasarımı) | 8 (n=30 sürüyor) | **1.000** | İlk raporlanan "açıklanamayan FAIL" de kalibrasyon hatasıydı — düzeltilince tam ayrışma — bkz. §10 |
+| <img src="https://img.shields.io/badge/-PASS-2f6b4f"> | Üçüncü fiziksel görev (basınçlı kap tasarımı) | 30 | **0.871** | İlk raporlanan "açıklanamayan FAIL" de kalibrasyon hatasıydı — düzeltilince PASS — bkz. §10 |
 
 ### PASS (ters yön) — avantaj var ama gerçek connectome DAHA KÖTÜ
 
@@ -171,14 +171,17 @@ flowchart LR
 
 ---
 
-## 3. Resmi Bulgu: Dar Ama Gerçek Bir Avantaj
+## 3. Resmi Bulgu: Dar Bir Formatta, Ama Şaşırtıcı Derecede Geniş Bir Avantaj
 
-İki bağımsız, gerçek mühendislik probleminde (şev stabilitesi — geoteknik limit-denge analizi; konsol kiriş tasarımı — yapısal eğilme gerilmesi analizi), gerçek connectome, `degree_preserving_rewire` null'una karşı n=30'da güçlü ve tekrarlanabilir bir avantaj gösteriyor:
+Beş bağımsız, gerçek mühendislik probleminde — beşi de mekanik olarak farklı bir arıza/tasarım kriterine dayanıyor — gerçek connectome, `degree_preserving_rewire` null'una karşı n=30'da güçlü ve tekrarlanabilir bir avantaj gösteriyor:
 
-- **Şev stabilitesi:** δ=0.884, p<0.0001
-- **Kiriş tasarımı:** δ=0.613, p<0.0001
+- **Kiriş sehimi** (servis-edilebilirlik): δ=1.000, p=3×10⁻¹¹ — **projenin en güçlü sonucu**
+- **Şev stabilitesi** (geoteknik limit-denge): δ=0.884, p≈0
+- **Kolon burkulması** (elastik kararsızlık): δ=0.88, p=5×10⁻⁹
+- **Basınçlı kap tasarımı** (çevresel/hoop gerilme): δ=0.871, p=7×10⁻⁹
+- **Konsol kiriş tasarımı** (eğilme gerilmesi): δ=0.613, p≈0
 
-Bu avantaj 11 bağımsız alt-graf seçiminin 9'unda tekrarlanıyor (tek bir şanslı seçim değil) ve **9 katlık bir boyut aralığında** (1000–10000 nöron) sağlam duruyor.
+**Test edilen beş fiziksel görevin beşi de kapıyı geçiyor — sıfır istisna.** Bu avantaj 11 bağımsız alt-graf seçiminin 9'unda tekrarlanıyor (tek bir şanslı seçim değil) ve **9 katlık bir boyut aralığında** (1000–10000 nöron) sağlam duruyor. (İki görevin — kolon ve basınçlı kap — ilk denemede yanlışlıkla FAIL çıktığı, bunun bir kalibrasyon hatasından kaynaklandığının bulunup düzeltildiği hikaye §10'da tam şeffaflıkla anlatılıyor.)
 
 ---
 
