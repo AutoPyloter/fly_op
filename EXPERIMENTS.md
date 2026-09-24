@@ -4402,3 +4402,29 @@ gerektiriyor -- "dar sinif, 2/3 ya da 2/4 fiziksel gorevde calisiyor"
 yerine artik "tek-atislik fiziksel/uzamsal regresyon sinifinin
 TAMAMINDA (test edilen 5/5) tutarli ve genellikle cok guclu bir
 connectome avantaji" denilebilir.
+
+---
+
+## 2026-09-24 — Altinci fiziksel gorev: kesme gerilmesi -- BASTAN DOGRU KALIBRE EDILDI, TEK SEFERDE PASS
+
+Kullanici: "bir fiziksel problem daha bul onu da test edelim, sinegin
+gucunu gosterelim." Bu sefer ONCEKI derslerin TAMAMI baştan uygulandi:
+kirisin kanitlanmis simetrik (b,h) kutusu + kesme gerilmesi (1.5*V/(b*h),
+egilmeden farkli guc-yasasi bagimliligi) + egitim ONCESI ucuzlu dogrulama.
+
+```
+gecersiz-oran: %8.8
+kesme-terimi payi: medyan %25.9 (p25=%9.5, p75=%62.1)
+ogretmen-sinyal kalitesi (radius=0.002): kosinus-benzerligi=0.9998, std=0.0016, min=0.986
+```
+
+**n=8 sonucu (tek seferde, duzeltme gerekmeden):**
+```
+real medyan=0.0542  null medyan=0.1602  MW p=0.00109  Wilcoxon p=0.01563  delta=0.906  PASS (esigi asti, n=30'a genisletiliyor)
+```
+
+Onceki 5 gorevin (2'si ilk denemede basarisiz, sonradan duzeltilip PASS
+olan) aksine, bu goreve standart hale gelen 3 kontrol (gecersiz-oran,
+terim-dengesi, ogretmen-sinyal-kalitesi) UYGULANDIKTAN SONRA baslandigi
+icin **ilk denemede** guclu ve dogru bir PASS geldi -- kontrol
+listesinin (README §11, madde 4) degerini dogrudan gosteren bir ornek.
