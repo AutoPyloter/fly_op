@@ -7,6 +7,7 @@
 <img alt="Experiments" src="https://img.shields.io/badge/deney%20script%27i-90%2B-6b3f2a">
 <img alt="Official n=30" src="https://img.shields.io/badge/resmi%20bulgu-n%3D30%2C%20%CE%B4%3D0.884-2f6b4f">
 <img alt="Status" src="https://img.shields.io/badge/durum-aktif%20ara%C5%9Ft%C4%B1rma-2f6b4f">
+<a href="https://doi.org/10.5281/zenodo.22937249"><img alt="DOI" src="https://zenodo.org/badge/1378320061.svg"></a>
 </p>
 
 **Kısa cevap: Evet — belirli bir görev FORMATI (tek-atışlık, fiziksel/uzamsal yön regresyonu) içinde şaşırtıcı derecede güçlü ve tutarlı, ama o formatın dışına (farklı görev tipi, tür, birey, donanım hassasiyeti) taşınmıyor. Bu README o sınırın tam haritasını, nasıl çizildiğini ve hâlâ neyin bilinmediğini şeffaf şekilde anlatıyor.**
@@ -384,6 +385,8 @@ GPU'lu koşumlar için `.venv-gpu-test` (torch+cu121) ayrı bir sanal ortamdır 
 - Dorkenwald, S. ve ark. (2024). Neuronal wiring diagram of an adult brain. FlyWire FAFB v783, Zenodo DOI 10.5281/zenodo.10676866.
 - Schlegel, P. ve ark. (2024). Whole-brain annotation and multi-connectome cell typing of Drosophila. *Nature*. [github.com/flyconnectome/flywire_annotations](https://github.com/flyconnectome/flywire_annotations)
 - Cook, S.J. ve ark. (2019). Whole-animal connectomes of both Caenorhabditis elegans sexes. *Nature*.
+
+**Bu çalışmayı alıntılamak için:** FlyOpt Research (2026). *Task-Specific Computational Advantage of the Drosophila Connectome: A Null-Model-Controlled Study* (v1.0). Zenodo. [doi.org/10.5281/zenodo.22937249](https://doi.org/10.5281/zenodo.22937249)
 
 ---
 
