@@ -4461,3 +4461,50 @@ gerek kalmadan ilk denemede dogru sonuc alinabildigini gosteriyor --
 yani onceki 5 gorevin 2'sindeki (kolon, kap) baslangictaki FAIL'ler
 connectome'un degil, deney tasariminin sorunuydu; bu artik bagimsiz
 bir sekilde kanitlanmis oldu.
+
+---
+
+## 2026-09-24 — Faz 3 takip-deneyleri notebook'u hazirlandi (Colab, kullanicinin GPU kotasi izin verirse)
+
+Kullanici: "colab deneylerine devam edelim... erkekten umudumuzu kestik ama
+belki umut vardir, belki kalibrasyon hatasi... yeni bir fiziksel deneyi
+olabilir... geride kalan varsa vesaire." `notebooks/flyopt_phase3_followups.ipynb`
+hazirlandi (34 hucre, 4 bagimsiz bolum), `notebooks/flyopt_colab_verification_suite.ipynb`'nin
+devami olarak. HENUZ CALISTIRILMADI -- asagidaki plan/kalibrasyon bilgisi,
+sonuc DEGIL.
+
+**Bolum A -- YEDINCI fiziksel gorev (YENI): temel tasima gucu.** Terzaghi
+genel-kesme tasima gucu denklemi (serit temel), `x=(B,Df)`. Kolon/kesme'nin
+"kullanim-orani + maliyet" yapisi proaktif olarak uygulandi.
+`src/flyopt/benchmarks_bearing.py` olarak repoya eklendi. Egitim-oncesi 3
+standart kontrol BU OTURUMDA (CPU, GPU beklemeden) zaten yapildi ve TEMIZ
+cikti: gecersiz-oran %0.0 (4000 ornek, cost_weight=[0.05,0.5] kutusunda),
+kullanim-terimi payi medyan %36 (p25=%18, p75=%61), ogretmen-sinyal kosinus-
+benzerligi (RAY_RADIUS=0.01, gercek `_rays`/`_teacher_delta` fonksiyonlariyla,
+n=500) = 1.0000 +/- 0.0000. Notebook n=8 pilotunu calistirip esik asilirsa
+n=30'a genisletecek.
+
+**Bolum B -- erkek CNS 5 acidan yeniden denetleniyor:** alt-graf-tohum
+saglamligi (10 tohum, sadece 9000 denenmisti), null-model-ailesi taramasi
+(sadece degree_preserving denenmisti), yogunluk-seyreltme kontrolu (disi
+alt-grafini erkek CNS yogunluguna seyreltip AYNI seyreltilmis-graf-kendi-
+null'una karsi test -- 2026-09-21'de "test edilmedi, spekulatif" olarak
+birakilan hipotez), erkek CNS'te DIGER 6 fiziksel gorev (sadece sev
+denenmisti), daha buyuk erkek CNS alt-graf boyutu (3000/6000/10000). T-derinligi
+(T=16) hipotezi TEKRAR EDILMIYOR -- zaten test edilip DESTEKLENMEDI (delta
+0.250->0.031, EXPERIMENTS.md 2026-09-21).
+
+**Bolum C -- 5 gecersiz gorevin baglanti-dogrulama duzeltmesi.** Kok neden
+(README §10) icin `build_subgraph_bfs_verified` yazildi: normal builder'i
+cagirip HER encode noronunun decode kumesine ALT-GRAF ICINDE (sadece tam
+grafta degil) ulasip ulasmadigini BFS ile dogruluyor, kopuk varsa alt-graf
+buyuklugunu 1.5x artirip tekrar deniyor. Once hatanin buyuklugu olculecek,
+sonra resmi sev/kiris sonuclariyla (delta=0.884/0.613) REGRESYON testi
+yapilacak -- SADECE o temizse (REGRESSION_OK) 5 gorev (anomali tespiti,
+calisma bellegi, carpisma-zamani, Mackey-Glass, path integration) her
+scriptin kendi orijinal ornekleme/egitim mantigi DEGISTIRILMEDEN, sadece
+`build_subgraph_bfs` cagrisi metin-yamasiyla degistirilerek yeniden
+denenecek.
+
+Sonuclar geldiginde (zip olarak indirilip bu oturuma geri verilecek)
+EXPERIMENTS.md/README.md'ye islenecek.
